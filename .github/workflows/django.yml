@@ -14,7 +14,7 @@ jobs:
       max-parallel: 4
       matrix:
         python-version: [3.12]
-        
+
     services:
       postgres:
         image: postgres:14
@@ -33,7 +33,7 @@ jobs:
     env:
       DATABASES_NAME: myPlatform
       DATABASES_USER: postgres
-      DATABASES_PASSWORD: postgres
+      DATABASES_PASSWORD: test
       DATABASES_HOST: 127.0.0.1
       DATABASES_PORT: 5432
       CLOUDINARY_URL: cloudinary://142397427937341:42u7PzeR1o9kPWeIk2lrcxWUrHw@dzvcouxm2
