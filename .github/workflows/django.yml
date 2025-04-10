@@ -15,11 +15,11 @@ jobs:
       matrix:
         python-version: [3.12]
     env:
-      DATABASES_NAME=myPlatform
-      DATABASES_USER=postgres
-      DATABASES_PASSWORD=postgres
-      DATABASES_HOST=127.0.0.1
-      DATABASES_PORT=5432
+      DATABASES_NAME: myPlatform
+      DATABASES_USER: postgres
+      DATABASES_PASSWORD: postgres
+      DATABASES_HOST: 127.0.0.1
+      DATABASES_PORT: 5432
       
     steps:
     - uses: actions/checkout@v4
