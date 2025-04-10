@@ -20,6 +20,7 @@ jobs:
       DATABASES_PASSWORD: postgres
       DATABASES_HOST: 127.0.0.1
       DATABASES_PORT: 5432
+      CLOUDINARY_URL: cloudinary://142397427937341:42u7PzeR1o9kPWeIk2lrcxWUrHw@dzvcouxm2
       
     steps:
     - uses: actions/checkout@v4
