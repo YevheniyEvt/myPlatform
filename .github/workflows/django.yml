@@ -31,8 +31,8 @@ jobs:
           --health-retries 5
 
     env:
-      DATABASES_NAME: myPlatform
-      DATABASES_USER: postgres
+      DATABASES_NAME: testdb
+      DATABASES_USER: test
       DATABASES_PASSWORD: test
       DATABASES_HOST: 127.0.0.1
       DATABASES_PORT: 5432
