@@ -1,0 +1,352 @@
+{% extends 'base.html' %}
+
+
+{% block main %}
+
+<div class="grid m-4 border border-blue-300  rounded-lg shadow-xs dark:border-gray-700  md:grid-cols-2 bg-white dark:bg-gray-800">
+    <figure class="flex flex-col items-center justify-center p-8 bg-white border-b border-white rounded-t-lg md:rounded-t-none md:rounded-ss-lg md:border-e dark:bg-gray-800 dark:border-gray-700">
+        <div class="w-full  p-4 bg-white border border-blue-300 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700"> 
+
+            <div class="flex items-center justify-between mb-4">
+                <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">My tasks </h5>
+           </div>
+           <div class="flow-root">
+                <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                    <div class="relative bg-gray-50 rounded-lg dark:bg-gray-700  p-4 h-80">
+                        <div class="overflow-scroll max-h-full ">    
+
+                            {% for obj in my_tasks %}
+                            <li class="py-3 sm:py-4 ">
+                                <div class="flex items-center ">
+                                    <div class="flex-1 min-w-0 ms-4 w">
+                                        {% if date <= obj.task.deadline %}
+                                            {% if obj.revised is None %}
+                                                <a href="{% url 'tasks:detail_task' task_id=obj.id %}"   class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline ">
+                                                    <h2><b>{{obj.task.title}}</b></h2>
+                                                </a>
+                                            {% else %}
+                                                <a href="{% url 'tasks:detail_task' task_id=obj.id %}"   class="font-medium text-blue-400 underline dark:text-blue-500 hover:no-underline ">
+                                                    <h2>{{obj.task.title}}</h2>
+                                                </a>
+                                            {% endif %}
+                                        {% elif date > obj.task.deadline %}
+                                            {% if obj.revised is None %}
+                                                <a href="{% url 'tasks:detail_task' task_id=obj.id %}"   class="font-medium text-red-600 underline dark:text-red-500 hover:no-underline ">
+                                                    <h2><b>{{obj.task.title}}</b></h2>
+                                                </a>
+                                            {% else %}
+                                                <a href="{% url 'tasks:detail_task' task_id=obj.id %}"   class="font-medium text-red-400 underline dark:text-red-500 hover:no-underline ">
+                                                    <h2>{{obj.task.title}}</h2>
+                                                </a>
+                                            {% endif %}
+                                                
+                                        {% endif %}
+                                        
+                                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                            
+                                        </p>
+                                    </div>
+                                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white ">
+                                        {{obj.task.deadline|date:"F j, Y"}}
+                                    </div>
+                                </div>
+                            </li>
+                            {% endfor %}
+                    
+                        </div>
+                    </div>
+                </ul>
+           </div>
+           <div class="flex items-center justify-between mb-4">
+            <a href="{% url 'tasks:my_tasks' %}" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+                View all
+            </a>
+            </div>
+        </div>
+    </figure>
+    <figure class="flex flex-col items-center justify-center p-8 bg-white border-b border-white md:rounded-se-lg dark:bg-gray-800 dark:border-gray-700">
+        <div class="w-full  p-4 bg-white border border-blue-300  rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+            <div class="flex items-center justify-between mb-4">
+                <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">My note</h5>
+           </div>
+           <div class="flow-root">
+                <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                    <div class="relative bg-gray-50 rounded-lg dark:bg-gray-700 p-4 h-80">
+                        <div class="overflow-scroll max-h-full">
+
+                            {% for note in notes %}
+                            <li class="py-3 sm:py-4">
+                                <div class="flex items-center">
+                                    <div class="flex-1 min-w-0 ms-4">
+
+                                                <a href="{% url 'notebook:notes_list_view' %}"   class="font-medium text-primary-600 underline dark:text-primary-500 hover:no-underline ">
+                                                    <h2>{{note.text|truncatewords:8}}</h2>
+                                                </a>
+                                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                                                    {{ note.date|date:"F j, Y" }}
+                                                </p>
+                                       
+                                        
+                                    </div>
+
+                                </div>
+                            </li>
+                            {% endfor %}
+                            <!-- <li class="py-3 sm:py-4">
+                                <div class="flex items-center">
+                                    <div class="flex-1 min-w-0 ms-4">
+                                        {% if date <= obj.task.deadline %}
+                                            {% if obj.revised is None %}
+                                                <a href="{% url 'tasks:detail_location_task' task_id=obj.task.id %}"   class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline ">
+                                                    <h2><b>{{obj.task.title}}</b></h2>
+                                                </a>
+                                            {% else %}
+                                                <a href="{% url 'tasks:detail_location_task' task_id=obj.task.id %}"   class="font-medium text-blue-400 underline dark:text-blue-500 hover:no-underline ">
+                                                    <h2>{{obj.task.title}}</h2>
+                                                </a>
+                                            {% endif %}
+                                        {% elif date > obj.task.deadline %}
+                                            {% if obj.revised is None %}
+                                                <a href="{% url 'tasks:detail_location_task' task_id=obj.task.id %}"   class="font-medium text-red-600 underline dark:text-red-500 hover:no-underline ">
+                                                    <h2><b>{{obj.task.title}}</b></h2>
+                                                </a>
+                                            {% else %}
+                                                <a href="{% url 'tasks:detail_location_task' task_id=obj.task.id %}"   class="font-medium text-red-400 underline dark:text-red-500 hover:no-underline ">
+                                                    <h2>{{obj.task.title}}</h2>
+                                                </a>
+                                            {% endif %}
+                                                
+                                        {% endif %}
+                                       
+                                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                            
+                                        </p>
+                                    </div>
+                                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                        {{obj.task.deadline|date:"F j, Y"  }}
+                                    </div>
+                                </div>
+                            </li> -->
+
+                        </div>
+                    </div>
+                </ul>
+           </div>
+           <div class="flex items-center justify-between mb-4">
+            <a href="{% url 'notebook:notes_list_view' %}" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+                View all
+            </a>
+            </div>
+        </div>
+    </figure>
+</div>
+
+<div class="flex items-center justify-center mb-4">
+    <h1 class="text-xl font-bold leading-none text-gray-900 dark:text-white"><a class=" hover:underline dark:text-blue-500" href="{% url 'notebook:topic_list' %}" >Notebook</a></h1>
+</div>
+
+<section class="bg-white dark:bg-gray-900 border border-blue-300 m-4">
+    <div class="py-4 px-4 mx-auto max-w-screen-xl lg:py-6 lg:px-6">
+         
+           
+        <div class="flex flex-col items-center justify-between p-4 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
+            
+            <div class="w-full md:w-1/2 ">
+                <form class="flex items-center" method="get">
+                <label for="simple-search" class="sr-only">Search</label>
+                <div class="relative w-full">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                    </svg>
+                    </div>
+                    <input value="{{search}}" name="search" type="text" id="simple-search" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-blue-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" >
+                </div>
+                </form>
+            </div>
+        </div>
+          
+       
+        
+        <div class="grid gap-8 lg:grid-cols-4 ">
+            
+            {% for section in sections_query %}
+            <article class="p-6 bg-white rounded-lg border border-blue-300  shadow-md dark:bg-gray-800 dark:border-gray-700 ">
+                <div class="flex justify-between items-center mb-5 text-gray-500">
+                    
+                    <span class="text-sm">Topic: {{section.topic.name}}</span>
+                    
+                    
+                </div>
+                <h2  class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    <a class=" hover:underline dark:text-blue-500" href="{% url 'notebook:show_cod' section.id %}" >{{section.title}}</a>
+                </h2>
+                <p class="mb-5 font-light text-gray-500 dark:text-gray-400">{{section.description}}</p>
+
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-4">
+                        <span class="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                            created by {{section.owner}}
+                        </span>
+                        <span class="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                            {{section.add_date|date:"F j, Y"}}
+                        </span>
+                    </div>
+
+                </div>
+            </article>
+            {% endfor %}
+            
+        </div>  
+    </div>
+</section>
+
+
+<div class="m-4 grid mb-8 border border-blue-300  rounded-lg shadow-xs dark:border-gray-700 md:mb-12 md:grid-cols-3 bg-white dark:bg-gray-800">
+
+    <figure class="flex flex-col items-center justify-center p-8 bg-white border-b border-white md:rounded-se-lg dark:bg-gray-800 dark:border-gray-700">
+        <div >
+            <div class="flex items-center justify-between mb-4">
+                <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">News</h5>
+           </div>
+           <div class="flow-root">
+                <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                    <div class=" bg-gray-50 rounded-lg dark:bg-gray-700 h-80">
+                        <div class="overflow-scroll max-h-full">
+                            {% for one_new in news %}
+                            <li class="py-1 sm:py-1">
+                                <div class="flex items-center">
+                                    <div class="flex-1 min-w-0 ms-4">
+                                        {% if one_new.revised_user %}
+                                        <a href="{% url 'comunication:detail_article' one_new.id %}" class="font-medium text-blue-400 underline dark:text-blue-500 hover:no-underline ">
+                                            <h2>{{ one_new.title }}</h2>
+                                        </a>
+                                        {% else %}
+                                        <a href="{% url 'comunication:detail_article' one_new.id %}" class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">
+                                            <h2><b>{{ one_new.title }}</b></h2>
+                                        </a>
+                                        {% endif %}
+                                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                            {{ one_new.owner }}
+                                        </p>
+                                    </div>
+                                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                        {{ one_new.pub_date|date:"d.m.Y" }}
+                                    </div>
+                                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                        <!-- {{ one_new.pub_date }} -->
+                                    </div>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </ul>
+           </div>
+           <div class="flex items-center justify-between mb-4">
+            <a href="{% url 'comunication:list_article' %}" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+                View all
+            </a>
+            </div>
+        </div>
+    </figure>
+    
+    <figure class="flex flex-col items-center justify-center p-8 bg-white border-b border-white rounded-t-lg md:rounded-t-none md:rounded-ss-lg md:border-e dark:bg-gray-800 dark:border-gray-700">
+        <div>
+            <div class="flex items-center justify-between mb-4">
+                <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Competitions</h5>
+           </div>
+           <div class="flow-root">
+                <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                    <div class="relative bg-gray-50 rounded-lg dark:bg-gray-700 p-4 h-80">
+                            <div class="overflow-scroll max-h-full">
+                                {% for competition in competitions %}
+                                <li class="py-1 sm:py-1">
+
+                                    
+                                    <div class="flex items-center">
+                                        <div class="flex-1 min-w-0 ms-4">
+                                            {% if competition.revised_user %}
+                                            <a href="{% url 'comunication:detail_article' competition.id %}" class="font-medium text-blue-400 underline dark:text-blue-500 hover:no-underline">
+                                                <h2>{{ competition.title }}</h2>
+                                            </a>
+                                            {% else %}
+                                            <a href="{% url 'comunication:detail_article' competition.id %}" class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">
+                                                <h2><b>{{ competition.title }}</b></h2>
+                                            </a>
+                                            {% endif %}
+                                            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                                {{ competition.owner }}
+                                            </p>
+                                        </div>
+                                        <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                            {{ competition.pub_date|date:"d.m.Y" }}
+                                        </div>
+                                    </div>
+                                    
+                                </li>
+                                {% endfor %}
+                        </div>
+                    </div>
+                </ul>
+           </div>
+           <div class="flex items-center justify-between mb-4">
+            <a href="{% url 'comunication:competition_list' %}" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+                View all
+            </a>
+            </div>
+        </div>
+    </figure>
+
+    <figure class="flex flex-col items-center justify-center p-8 bg-white border-b border-gray-200 md:rounded-se-lg dark:bg-gray-800 dark:border-gray-700">
+        <div class="w-full max-w-md p-4 bg-white border border-blue-300  rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+            <div class="flex items-center justify-between mb-4">
+                <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Global News</h5>
+           </div>
+           <div class="flow-root">
+                <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+
+                            {% for news in global_news %}
+                            <li class="py-3 sm:py-4">
+                                <div class="flex items-center">
+                                    <div class="flex-1 min-w-0 ms-4">
+                                        {% if news.revised_user %}
+                                        <a href="{% url 'comunication:detail_article' news.id %}" class="font-medium text-blue-400 underline dark:text-blue-500 hover:no-underline">
+                                            <h2>{{ news.title }}</h2>
+                                        </a>
+                                        {% else %}
+                                        <a href="{% url 'comunication:detail_article' news.id %}" class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">
+                                            <h2><b>{{ news.title }}</b></h2>
+                                        </a>
+                                        {% endif %}
+                                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                            {{ news.owner }}
+                                        </p>
+                                    </div>
+                                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                        {{ news.pub_date|date:"d.m.Y" }}
+                                    </div>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        <!-- </div>
+                    </div> -->
+                </ul>
+           </div>
+           <div class="flex items-center justify-between mb-4">
+            <a href="{% url 'comunication:global_news_list' %}" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+                View all
+            </a>
+            </div>
+        </div>
+    </figure>
+</div>
+
+
+
+
+{% endblock main %}
+
+
+
+

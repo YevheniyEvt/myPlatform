@@ -1,0 +1,55 @@
+
+{% extends 'base.html' %}
+
+
+{% block articles %}
+
+<section class="max-w-screen-xl flex-wrap items-center justify-between mx-auto bg-white py-8 antialiased dark:bg-gray-900 md:py-16 ">
+    <div class="mx-auto max-w-screen-lg px-4 2xl:px-0">
+      <div class="lg:flex lg:items-center lg:justify-between lg:gap-4">
+        <h2 class="shrink-0 text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl"></h2>
+  
+        <form action="" method="get" class="mt-4 w-full gap-4 sm:flex sm:items-center sm:justify-end lg:mt-0">
+          <label for="simple-search" class="sr-only">Search</label>
+          <div class="relative w-full flex-1 lg:max-w-sm">
+            <div class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3">
+              <svg class="h-4 w-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                
+              </svg>
+            </div>
+            <input value="{{search}}" name="search" type="text" id="simple-search" class="block w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2.5 ps-9 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" placeholder="Search article" required />
+          </div>
+          </form>
+      </div>
+
+      <div class="mt-6 flow-root">
+        <div class="-my-6 divide-y divide-gray-200 dark:divide-gray-800">
+
+        {% for object in articles %}
+          <div class="space-y-4 py-6 md:py-8">
+            <div class="grid gap-4">
+              <div>
+                <span class="inline-block rounded bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-300 md:mb-0"> 3 answers </span>
+              </div>
+  
+              <a href="{% url 'comunication:detail_article' object.id %}" class="text-xl font-semibold text-gray-900 hover:underline dark:text-white">{{ object.title }}</a>
+            </div>
+            <p class="text-base font-normal text-gray-500 dark:text-gray-400">{{ object.content }}</p>
+            <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                {{ object.pub_date }}
+              <a href="#" class="text-gray-900 hover:underline dark:text-white">{{ object.owner }}</a>
+            </p>
+          </div>
+          {% endfor %}
+          
+        </div>
+      </div>
+  
+      <div class="mt-6 flex items-center justify-center lg:justify-start">
+        <button type="button" class="w-full rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700 sm:w-auto">View more questions</button>
+      </div>
+    </div>
+  </section>
+  
+
+  {% endblock articles %}

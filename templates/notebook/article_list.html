@@ -1,0 +1,51 @@
+
+<section class="max-w-screen-xl flex-wrap items-center justify-between mx-auto bg-white py-8 antialiased dark:bg-gray-900 md:py-16 ">
+    <div class="mx-auto max-w-screen-lg px-4 2xl:px-0">
+        <form class="mb-6" action="{% url 'notebook:show_articles' section_object.id %}" method="post">
+            {% csrf_token %}
+            <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                <textarea  rows="6" name="content"
+                    class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+                    placeholder="Write an Article" required></textarea>
+            </div>
+            <button type="submit" class="w-full inline-flex justify-center rounded-lg bg-green-700 px-3 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-blue-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Add</button>
+        </form>
+        {% for article in article_queryset %}
+        <div class="mt-6 flow-root">
+            <div class="-my-6 divide-y divide-gray-200 dark:divide-gray-800">
+
+                <button id="dropdownComment{{article.id}}Button" data-dropdown-toggle="dropdownComment{{article.id}}"
+                        class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:text-gray-400 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                        type="button">
+                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                        <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                    </svg>
+                </button>
+                <!-- Dropdown menu -->
+                <div id="dropdownComment{{article.id}}"
+                    class="hidden z-10 w-20 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                        aria-labelledby="dropdownMenuIconHorizontalButton">
+                            <form action="{% url 'notebook:article_delete' article.id  %}" method="post" class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full ">
+                                {% csrf_token %}
+                                <input type="submit" value="Delete" >
+                            </form>
+                    </ul>
+                </div>
+
+                <div class="space-y-4 py-4 md:py-4">
+                    <div class="grid gap-4">
+                        
+                            <p class="text-base font-normal text-gray-500 dark:text-gray-400">{{article.content}}</p>
+                        
+                    </div>
+                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                        {{article.add_date}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+        

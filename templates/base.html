@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+        <!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+
+    <title>myPlatform</title>
+
+
+
+</head>
+<body class="">
+
+    
+    {% if request.user.is_authenticated %}
+    {% include 'navbar.html' %}
+    
+
+
+
+
+    {% block articles %}
+    {% endblock articles %}
+
+    {% block main %}
+    {% endblock main %}
+
+    {% block tasks %}
+    {% endblock tasks %}
+
+    
+    {% block task_creation %}
+    {% endblock task_creation %}
+
+    {% block notes %}
+    {% endblock notes %}
+
+    {% block topic %}
+    {% endblock topic %}
+
+    {% block topic_detail %}
+    {% endblock topic_detail %}
+    
+    {% endif %}
+    
+    {% block login %}
+    {% endblock login %}
+    
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
+    <!-- Prism.js JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    
+
+</body>
+</html>

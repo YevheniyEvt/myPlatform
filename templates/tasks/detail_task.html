@@ -1,0 +1,277 @@
+{% extends 'base.html' %}
+
+{% block tasks %}
+
+
+<main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
+
+  <!-- {% if task_for_my_location %}
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      
+      <article class="">
+
+          <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">{{ object.title }}</h1>
+          
+          <p class="lead">{{ object.content }}</p>
+
+          {% for task in task_users %}
+          <div class="mt-6 flow-root sm:mt-8">
+            <div class="grid grid-cols-8 gap-4 items-center py-6">
+
+              <dl class="text-base">
+                <dt class="text-center font-medium text-gray-500 dark:text-gray-400">Name</dt>
+                <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">
+                  <a href="{% url 'tasks:detail_task' task.task.id %}" class="hover:underline">{{ task.user.get_full_name }}</a>
+                </dd>
+              </dl>
+  
+              <dl class="text-center">
+                <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Start date</dt>
+                <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ task.task.start_date}}</dd>
+              </dl>
+              <dl class="text-center">
+                <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Deadline</dt>
+                <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ task.task.deadline}}</dd>
+              </dl>
+  
+              <dl class="text-center">
+                <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Completed</dt>
+                {% if not task.completed %}
+                -
+                {% else %}
+                <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ task.completed}}</dd>
+                {% endif %}
+              </dl>
+              <dl class="text-center">
+                <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Completed date</dt>
+                {% if task.completed_date is None %}
+                -
+                {% else %}
+                <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ task.completed_date}}</dd>
+                {% endif %}
+              </dl>
+  
+              <dl class="text-center">
+                <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Not Accepted</dt>
+                {% if task.not_accepted%}
+                Yes
+                {% else %}
+                <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">No</dd>
+                {% endif %}
+              </dl>
+            
+              <dl class="text-center">
+                <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Revised</dt>
+                {% if task.revised is None %}
+                -
+                {% else %}
+                <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ task.revised}}</dd>
+                {% endif %}
+              </dl>
+            
+            </div>
+          </div>
+
+          {% endfor %}
+
+
+
+          
+      </article>
+  </div>
+  {% endif %} -->
+
+
+
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      
+    <article class="">
+      {% if task_current_user %}
+
+      {% if task_current_user.completed or task_current_user.not_accepted  %}
+      <form action="{% url 'tasks:open_task' task_current_user.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="w-full inline-flex justify-center rounded-lg bg-indigo-700 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-300 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">Open</button>
+    
+      </form>
+      {% else %}
+      <form action="{% url 'tasks:complete_task' task_current_user.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="w-full inline-flex justify-center rounded-lg bg-green-700 px-3 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-blue-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Complete</button>
+    
+      </form>
+      {% endif %}
+      
+      <button id="dropdownTask{{task_current_user.id}}Button" data-dropdown-toggle="dropdownTask{{task_current_user.id}}" class="w-full inline-flex justify-center rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700" type="button">
+        Details
+        </button>
+        <div id="dropdownTask{{task_current_user.id}}" class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+          <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+              aria-labelledby="dropdownMenuIconHorizontalButton">
+              {% if task_current_user.creator %}
+              <li>
+                <button id="QuickModalButton" data-modal-target="QuickModal" data-modal-toggle="QuickModal" class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full " type="button">
+                  Edit
+                </button>
+              </li>
+
+              <li>
+                <form action="{% url 'tasks:delete_task' task_current_user.task.id %}" method="post">
+                  {% csrf_token %}
+                <button type="submit" class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full " >
+                  Delete
+                </button>
+              </form>
+              </li>
+              {% endif %}
+              <li>
+                <form action="{% url 'tasks:not_accept_task' task_current_user.id %}" method="post">
+                  {% csrf_token %}
+                <button type="submit" class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full " >
+                  Not accept
+                </button>
+              </form>
+              </li>
+          </ul>
+          
+          </div>
+
+      {% endif %}
+
+        <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="{{ task_current_user.task.deadline }}"
+          title="{{ task_current_user.task.deadline }}">{{ task_current_user.task.deadline }}</time>
+        </p>
+        {% if task_current_user.completed %}
+        <dd class="me-2 mt-1.5 inline-flex items-center rounded bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-300">
+          <svg class="me-1 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.5 4h-13m13 16h-13M8 20v-3.333a2 2 0 0 1 .4-1.2L10 12.6a1 1 0 0 0 0-1.2L8.4 8.533a2 2 0 0 1-.4-1.2V4h8v3.333a2 2 0 0 1-.4 1.2L13.957 11.4a1 1 0 0 0 0 1.2l1.643 2.867a2 2 0 0 1 .4 1.2V20H8Z" />
+          </svg>
+          completed
+        </dd>
+        {% elif task_current_user.not_accepted %}
+        <dd class="me-2 mt-1.5 inline-flex items-center rounded bg-white-100 px-2.5 py-0.5 text-xs font-medium text-white-800 dark:bg-white-900 dark:text-white-300">
+          <svg class="me-1 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.5 4h-13m13 16h-13M8 20v-3.333a2 2 0 0 1 .4-1.2L10 12.6a1 1 0 0 0 0-1.2L8.4 8.533a2 2 0 0 1-.4-1.2V4h8v3.333a2 2 0 0 1-.4 1.2L13.957 11.4a1 1 0 0 0 0 1.2l1.643 2.867a2 2 0 0 1 .4 1.2V20H8Z" />
+          </svg>
+          Not accepted
+        </dd>
+        {% elif date > task_current_user.task.deadline %}
+        <dd class="me-2 mt-1.5 inline-flex items-center rounded bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800 dark:bg-red-900 dark:text-red-300">
+          <svg class="me-1 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.5 4h-13m13 16h-13M8 20v-3.333a2 2 0 0 1 .4-1.2L10 12.6a1 1 0 0 0 0-1.2L8.4 8.533a2 2 0 0 1-.4-1.2V4h8v3.333a2 2 0 0 1-.4 1.2L13.957 11.4a1 1 0 0 0 0 1.2l1.643 2.867a2 2 0 0 1 .4 1.2V20H8Z" />
+          </svg>
+          Passed
+        </dd>
+        {% elif date <= task_current_user.task.deadline %}
+        <dd class="me-2 mt-1.5 inline-flex items-center rounded bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+          <svg class="me-1 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.5 4h-13m13 16h-13M8 20v-3.333a2 2 0 0 1 .4-1.2L10 12.6a1 1 0 0 0 0-1.2L8.4 8.533a2 2 0 0 1-.4-1.2V4h8v3.333a2 2 0 0 1-.4 1.2L13.957 11.4a1 1 0 0 0 0 1.2l1.643 2.867a2 2 0 0 1 .4 1.2V20H8Z" />
+          </svg>
+          In progress
+        </dd>
+        {% endif %}
+        <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">{{ task_current_user.task.title }}</h1>
+        
+        <p class="lead">{{ task_current_user.task.content }}</p>
+        <!-- <figure><img src="https://flowbite.s3.amazonaws.com/typography-plugin/typography-image-1.png" alt="">
+            <figcaption>Digital art by Anonymous</figcaption>
+        </figure> -->
+
+
+       <div>
+        <p class="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 dark:text-white">Creator:</p>
+          <p class="text-sm text-gray-600">{{ task_current_user.task.task_creator.get_full_name}}</p>
+          <p class="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 dark:text-white">Recipient:</p>
+          <p class="text-sm text-gray-600">{{ task_current_user.user.get_full_name}}</p>
+       </div>
+
+        <div>
+          <p class="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 dark:text-white">
+            History:
+          </p>
+          {% for action in task_history %}
+          {% if action.revised %}
+          <p class="p-1 text-sm text-gray-600">
+            User {{action.user.get_full_name}} revised task at {{action.data_time_action}}
+          </p>
+          {% elif action.complete %}
+          <p class="p-1 text-sm text-gray-600">
+            User {{action.user.get_full_name}} complete task at {{action.data_time_action}}
+          </p>
+          {% elif action.reopen %}
+          <p class="p-1 text-sm text-gray-600">
+            User {{action.user.get_full_name}} open task at {{action.data_time_action}}
+          </p>
+          {% endif %}
+          {% endfor %}
+        </div>
+        
+
+        {% if task_current_user.user == current_user %}
+        {% include 'tasks/coments.html' %}
+        {% endif %}
+    </article>
+</div>
+  
+</main>
+
+<!-- Main modal -->
+<div id="QuickModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+  <div class="relative p-4 w-full  h-full md:h-auto mx-auto  max-w-screen-xl">
+      <!-- Modal content -->
+      <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+          <!-- Modal header -->
+          <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
+              <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                  Quick task
+              </h3>
+              <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="QuickModal">
+                  <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                  <span class="sr-only">Close modal</span>
+              </button>
+          </div>
+          <!-- Modal body -->
+          <form action="{% url 'tasks:update_task' object.id %}" method="post">
+              {% csrf_token %}
+              <div class="grid gap-4 mb-4 sm:grid-cols-1">
+                  <div id="1date-range-picker" date-rangepicker class="flex items-center">
+                      <div class="relative">
+                      <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                              <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                          </svg>
+                      </div>
+                      <input value="{{task_current_user.task.start_date|date:"m/d/Y" }}" id="1datepicker-range-start" name="start_date" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start">
+                      </div>
+                      <span class="mx-4 text-gray-500">to</span>
+                      <div class="relative">
+                      <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                              <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                          </svg>
+                      </div>
+                      <input value="{{ task_current_user.task.deadline|date:"m/d/Y"  }}"  id="1datepicker-range-end" name="deadline" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
+                  </div>
+                  </div>
+                  <div>
+                      <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
+                      <input value="{{task_current_user.task.title}}" type="text" name="title" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
+                  </div>
+                  <div class="sm:col-span-2">
+                      <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Task</label>
+                      <textarea id="description" name="content" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Write product description here">{{task_current_user.task.content}}</textarea>                    
+                  </div>
+
+              
+              <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  <svg class="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                  Add new task
+              </button>
+          </form>
+      </div>
+  </div>
+</div>
+{% endblock tasks %}  
+
+
+

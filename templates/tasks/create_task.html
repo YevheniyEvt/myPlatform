@@ -1,0 +1,345 @@
+{% extends 'base.html' %}
+
+
+<!-- <h1>Create task</h1>
+<form action="{% url 'tasks:create_task' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="enter">
+</form> -->
+
+
+
+{% block task_creation %}
+<!-- Modal toggle -->
+ <div>
+
+<div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <button id="QuickModalButton" data-modal-target="QuickModal" data-modal-toggle="QuickModal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+        Quick task
+    </button>
+    <button id="DistributionModalButton" data-modal-target="DistributionModal" data-modal-toggle="DistributionModal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+        Distribution task
+        </button>
+</div>
+
+<!-- Main modal -->
+    <div id="QuickModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+    <div class="relative p-4 w-full  h-full md:h-auto mx-auto  max-w-screen-xl">
+        <!-- Modal content -->
+        <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+            <!-- Modal header -->
+            <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                    Quick task
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="QuickModal">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <form action="{% url 'tasks:create_task' %}" method="post">
+                {% csrf_token %}
+                <div class="grid gap-4 mb-4 sm:grid-cols-1">
+                    <div id="1date-range-picker" date-rangepicker class="flex items-center">
+                        <div class="relative">
+                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                            </svg>
+                        </div>
+                        <input id="1datepicker-range-start" name="start_date" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start">
+                        </div>
+                        <span class="mx-4 text-gray-500">to</span>
+                        <div class="relative">
+                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                            </svg>
+                        </div>
+                        <input id="1datepicker-range-end" name="deadline" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
+                    </div>
+                    </div>
+                    <div>
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
+                        <input type="text" name="title" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Task</label>
+                        <textarea id="description" name="content" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Write product description here"></textarea>                    
+                    </div>
+                    <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Recipients</label>
+                    <div class="grid gap-4 mb-4 grid-cols-7">
+                        
+                        {% if locations == 'users' %}
+                        <select name="recipients" id="order-type" class="block w-full min-w-[8rem] rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
+                          <option value="{{ current_employee.id }}">{{ current_employee.user.get_full_name }} </option>
+                            {% for recipient in recipients %}
+                            <option value="{{ recipient.id }}">{{ recipient.user.get_full_name }} </option>
+                            {% endfor %}
+                          </select>
+
+                        {% elif locations == 'stores' %}                        
+                        <select name="recipients" id="order-type" class="block w-full min-w-[8rem] rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
+                          <option value="{{ current_employee.id }}">{{ current_employee.user.get_full_name }} </option>
+                          {% for position in positions %}
+                          <option value="{{ position }}">{{ position }} </option>
+                          {% endfor %}
+                        </select>
+                        
+                        {% elif locations == 'districts' %}
+                        <select name="recipients" id="order-type" class="block w-full min-w-[8rem] rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
+                          <option value="{{ current_employee.id }}">{{ current_employee.user.get_full_name }} </option>
+                          {% for position in positions %}
+                            <option value="{{ position }}">{{ position }} </option>
+                            {% endfor %}
+                          </select>
+                        {% endif %}
+                          
+                    </div>
+
+
+                    
+                <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <svg class="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                    Add new task
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<div>
+    <!-- Main modal -->
+    <div id="DistributionModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+        <div class="relative p-4 w-full  h-full md:h-auto mx-auto  max-w-screen-xl">
+            <!-- Modal content -->
+            <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+                <!-- Modal header -->
+                <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                        Distribution task
+                    </h3>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="DistributionModal">
+                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <form action="{% url 'tasks:create_task' %}" method="post">
+                    {% csrf_token %}
+                    <div class="grid gap-4 mb-4 sm:grid-cols-1">
+                        <div id="date-range-picker" date-rangepicker class="flex items-center">
+                            <div class="relative">
+                            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                                </svg>
+                            </div>
+                            <input id="datepicker-range-start" name="start_date" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start">
+                            </div>
+                            <span class="mx-4 text-gray-500">to</span>
+                            <div class="relative">
+                            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                                </svg>
+                            </div>
+                            <input id="datepicker-range-end" name="deadline" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
+                        </div>
+                        </div>
+                        <div>
+                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
+                            <input type="text" name="title" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Task</label>
+                            <textarea id="description" name="content" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Write product description here"></textarea>                    
+                        </div>
+                        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Users</label>
+                        <div class="grid gap-4 mb-4 grid-cols-7">
+                            {% if locations == 'users' %}
+                            {% for recipient in recipients %}
+                            <div class="flex items-center w-40 ps-4 border border-gray-200 rounded-sm dark:border-gray-700">
+                                <input id="bordered-checkbox-{{recipient.user.id}}" type="checkbox" value="{{recipient.user.id}}" name="recipients" class="h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="bordered-checkbox-{{recipient.user.id}}" class=" py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{recipient.user.get_full_name}}</label>
+                            </div>
+                            {% endfor %}
+                            {% elif locations == 'stores' %}
+                            {% for recipient in recipients %}
+                            <div class="flex items-center w-40 ps-4 border border-gray-200 rounded-sm dark:border-gray-700">
+                                <input id="bordered-checkbox-{{recipient.id}}" type="checkbox" value="{{recipient.id}}" name="recipients" class="h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="bordered-checkbox-{{recipient.id}}" class=" py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{recipient.short_name}}</label>
+                            </div>
+                            {% endfor %}
+                            {% elif locations == 'districts' %}
+                            {% for recipient in recipients %}
+                            <div class="flex items-center w-40 ps-4 border border-gray-200 rounded-sm dark:border-gray-700">
+                                <input id="bordered-checkbox-{{recipient.id}}" type="checkbox" value="{{recipient.id}}" name="recipients" class="h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="bordered-checkbox-{{recipient.id}}" class=" py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{recipient.name}}</label>
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+    
+    
+                        
+                    <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <svg class="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                        Add new task
+                    </button>
+                </form>
+            </div>
+        </div>
+</div>
+    
+    </div>
+    
+<section class="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
+          
+    <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
+      <div class="mx-auto max-w-5xl">
+        {%if errors%}
+          <p class="text-xl font-semibold text-red-900 dark:text-red sm:text-2xl">{{errors}}</p>
+          {% endif %}
+        <div class="gap-4 sm:flex sm:items-center sm:justify-between">
+          
+          <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">My created tasks</h2>
+          
+          <div class="mt-6 gap-4 space-y-4 sm:mt-0 sm:flex sm:items-center sm:justify-end sm:space-y-0">
+            <div>
+              <label for="order-type" class="sr-only mb-2 block text-sm font-medium text-gray-900 dark:text-white">Select order type</label>
+              <select id="order-type" class="block w-full min-w-[8rem] rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
+                <option selected>All orders</option>
+                <option value="pre-order">Pre-order</option>
+                <option value="transit">In transit</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
+  
+            <span class="inline-block text-gray-500 dark:text-gray-400"> from </span>
+  
+            <div>
+              <label for="duration" class="sr-only mb-2 block text-sm font-medium text-gray-900 dark:text-white">Select duration</label>
+              <select id="duration" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
+                <option selected>this week</option>
+                <option value="this month">this month</option>
+                <option value="last 3 months">the last 3 months</option>
+                <option value="lats 6 months">the last 6 months</option>
+                <option value="this year">this year</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-6 flow-root sm:mt-8">
+          <div class="divide-y divide-gray-200 dark:divide-gray-700">
+  
+              {% for object in tasks %}
+              <div class="grid grid-cols-6 gap-4 items-center py-6">
+                  <dl class="text-base">
+                    <dt class="text-center font-medium text-gray-500 dark:text-gray-400">Title</dt>
+                    <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">
+                      {% if object.task in task_for_my_location %}
+                      <a href="{% url 'tasks:detail_location_task' object.task.id %}" class="hover:underline">{{ object.task.title }}</a>
+                      {% else %}
+                      <a href="{% url 'tasks:detail_task' object.id %}" class="hover:underline">{{ object.task.title }}</a>
+                      {% endif %}
+                    </dd>
+                  </dl>
+
+                  <dl class="text-center">
+                    <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Location</dt>
+                    <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ object.task.location }}</dd>
+                  </dl>
+                
+                  <dl class="text-center">
+                    <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Start date:</dt>
+                    <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ object.task.start_date }}</dd>
+                  </dl>
+                
+                  <dl class="text-center">
+                    <dt class="text-base font-medium text-gray-500 dark:text-gray-400">End date:</dt>
+                    <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ object.task.deadline }}</dd>
+                  </dl>
+                
+                  <button id="dropdownTask{{object.id}}Button" data-dropdown-toggle="dropdownTask{{object.id}}" class="w-full inline-flex justify-center rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700" type="button">
+                    Details
+                    </button>
+                    <div id="dropdownTask{{object.id}}" class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                      <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                          aria-labelledby="dropdownMenuIconHorizontalButton">
+                          {% if object.task in task_for_my_location %}
+                            <li>
+                              <a href="{% url 'tasks:detail_location_task' object.task.id %}"
+                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-center">Detail</a>
+                            </li>
+                            {% else %}
+                            <li>
+                              <a href="{% url 'tasks:detail_task' object.id %}"
+                                    class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-center">Detail</a>
+                            </li>
+                            {% endif %}
+                            {% if object.task.task_creator == current_user %}
+                            <li>
+                              <form action="{% url 'tasks:delete_task' object.task.id %}" method="post">
+                                {% csrf_token %}
+                              <button type="submit" class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full " >
+                                Delete
+                              </button>
+                            </form>
+                            </li>
+                            {% endif %}
+    
+                      </ul>
+                      
+                      </div>
+              </div>
+              {% endfor %}
+  
+  
+        <nav class="mt-6 flex items-center justify-center sm:mt-8" aria-label="Page navigation example">
+          <ul class="flex h-8 items-center -space-x-px text-sm">
+            <li>
+              <a href="#" class="ms-0 flex h-8 items-center justify-center rounded-s-lg border border-e-0 border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                <span class="sr-only">Previous</span>
+                <svg class="h-4 w-4 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 19-7-7 7-7" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+            </li>
+            <li>
+              <a href="#" class="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
+            </li>
+            <li>
+              <a href="#" aria-current="page" class="z-10 flex h-8 items-center justify-center border border-primary-300 bg-primary-50 px-3 leading-tight text-primary-600 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
+            </li>
+            <li>
+              <a href="#" class="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">...</a>
+            </li>
+            <li>
+              <a href="#" class="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">100</a>
+            </li>
+            <li>
+              <a href="#" class="flex h-8 items-center justify-center rounded-e-lg border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                <span class="sr-only">Next</span>
+                <svg class="h-4 w-4 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7" />
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    
+      </div>
+  </section>
+
+{% endblock task_creation %}

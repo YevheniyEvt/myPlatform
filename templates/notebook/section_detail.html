@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+
+
+{% block topic_detail %}
+
+
+
+<section class="bg-white dark:bg-gray-900">
+  <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+    <div class="mx-auto max-w-screen-sm text-center  mb-8">
+        <h2 class="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white"><a href="{% url 'notebook:topic_detail' section_object.topic.id %}">{{section_object.title}}</a></h2>
+        <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">{{section_object.description}}</p>
+        <div class="flex justify-between items-center mb-5 text-gray-500">
+          <span class="text-sm">Section added: {{section_object.add_date|date:"F j, Y"}}</span>
+        </div>
+      </div> 
+        
+   
+    
+
+    <form action="#" class="w-full space-y-6 lg:space-y-8 p-2">
+      <div class="space-y-6 sm:space-y-8">
+        <ol class="flex flex-col gap-4 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800 sm:justify-center md:flex-row md:items-center lg:gap-6">
+          
+          {% url 'notebook:show_cod' section_object.id as cod_url %}
+          {% if cod_url in request.get_full_path %}
+          <li class="flex items-center gap-2 md:flex-1 md:flex-col md:gap-1.5 lg:flex-none">
+            <svg class="h-5 w-5 text-indigo-700 dark:text-indigo-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">    
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            <p class="text-sm font-medium leading-tight text-indigo-700 dark:text-indigo-500">
+              <a href="{% url 'notebook:show_cod' section_object.id %}">Code</a> 
+            </p>
+          </li>
+          {% else %}
+          <li class="flex items-center gap-2 md:flex-1 md:flex-col md:gap-1.5 lg:flex-none">
+            <svg class="h-5 w-5 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            <p class="text-sm font-medium leading-tight text-gray-500 dark:text-gray-400">
+              <a href="{% url 'notebook:show_cod' section_object.id %}">Code</a>
+            </p>
+          </li>
+          {% endif %}
+
+          <div class="hidden h-px w-8 shrink-0 bg-gray-200 dark:bg-gray-700 md:block xl:w-16"></div>
+
+          {% url 'notebook:show_articles' section_object.id as article_url %}
+          {% if article_url in request.get_full_path %}
+          <li class="flex items-center gap-2 md:flex-1 md:flex-col md:gap-1.5 lg:flex-none">
+            <svg class="h-5 w-5 text-indigo-700 dark:text-indigo-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">    
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            <p class="text-sm font-medium leading-tight text-indigo-700 dark:text-indigo-500">
+              <a href="{% url 'notebook:show_articles' section_object.id %}">Article</a> 
+            </p>
+          </li>
+          {% else %}
+          <li class="flex items-center gap-2 md:flex-1 md:flex-col md:gap-1.5 lg:flex-none">
+            <svg class="h-5 w-5 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            <p class="text-sm font-medium leading-tight text-gray-500 dark:text-gray-400">
+              <a href="{% url 'notebook:show_articles' section_object.id %}">Article</a>
+            </p>
+          </li>
+          {% endif %}
+
+          <div class="hidden h-px w-8 shrink-0 bg-gray-200 dark:bg-gray-700 md:block xl:w-16"></div>
+
+          {% url 'notebook:show_images' section_object.id as image_url %}
+          {% if image_url in request.get_full_path %}
+          <li class="flex items-center gap-2 md:flex-1 md:flex-col md:gap-1.5 lg:flex-none">
+            <svg class="h-5 w-5 text-indigo-700 dark:text-indigo-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">    
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            <p class="text-sm font-medium leading-tight text-indigo-700 dark:text-indigo-500">
+              <a href="{% url 'notebook:show_images' section_object.id %}">Image</a> 
+            </p>
+          </li>
+          {% else %}
+          <li class="flex items-center gap-2 md:flex-1 md:flex-col md:gap-1.5 lg:flex-none">
+            <svg class="h-5 w-5 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            <p class="text-sm font-medium leading-tight text-gray-500 dark:text-gray-400">
+              <a href="{% url 'notebook:show_images' section_object.id %}">Image</a>
+            </p>
+          </li>
+          {% endif %}
+
+          <div class="hidden h-px w-8 shrink-0 bg-gray-200 dark:bg-gray-700 md:block xl:w-16"></div>
+
+          {% url 'notebook:show_links' section_object.id as links_url %}
+          {% if links_url in request.get_full_path %}
+          <li class="flex items-center gap-2 md:flex-1 md:flex-col md:gap-1.5 lg:flex-none">
+            <svg class="h-5 w-5 text-indigo-700 dark:text-indigo-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">    
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            <p class="text-sm font-medium leading-tight text-indigo-700 dark:text-indigo-500">
+              <a href="{% url 'notebook:show_links' section_object.id %}">Links</a> 
+            </p>
+          </li>
+          {% else %}
+          <li class="flex items-center gap-2 md:flex-1 md:flex-col md:gap-1.5 lg:flex-none">
+            <svg class="h-5 w-5 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            <p class="text-sm font-medium leading-tight text-gray-500 dark:text-gray-400">
+              <a href="{% url 'notebook:show_links' section_object.id %}">Links</a>
+            </p>
+          </li>
+          {% endif %}
+
+          <div class="hidden h-px w-8 shrink-0 bg-gray-200 dark:bg-gray-700 md:block xl:w-16"></div>
+    
+        </ol>
+      </div>
+    </form>
+
+    <div class="w-full md:w-1/2 p-2">
+      <form class="flex items-center" method="get">
+        <label for="simple-search" class="sr-only">Search</label>
+        <div class="relative w-full">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <input value="{{search}}" name="search" type="text" id="simple-search" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" >
+        </div>
+      </form>
+    </div>
+    
+    <div class="grid p-2 gap-8 lg:grid-cols-1 ">
+      <article class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+        
+        
+        {% if cod_url in request.get_full_path  %}
+        {% include 'notebook/code_list.html' %}
+        {% endif %}
+
+        {% if article_url in request.get_full_path %}
+        {% include 'notebook/article_list.html' %}
+        {% endif %}
+
+        {% if image_url in request.get_full_path %}
+        {% include 'notebook/image_list.html' %}
+        {% endif %}
+
+        {% if links_url in request.get_full_path %}
+        {% include 'notebook/links_list.html' %}
+        {% endif %}
+
+        
+      </article>   
+    </div>  
+  </div>
+    
+</section>
+
+
+
+
+
+
+
+{% endblock topic_detail %}

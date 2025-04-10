@@ -1,0 +1,259 @@
+
+
+
+<nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <a href="{% url 'home' %}" class="flex items-center space-x-3 rtl:space-x-reverse">
+          <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
+          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">myPlatform</span>
+      </a>
+      <!-- <form action="{% url 'home' %}" method="GET" class="hidden md:block md:pl-2">
+        <label for="topbar-search" class="sr-only">Search</label>
+        <div class="relative md:w-64 md:w-96">
+          <div
+            class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
+          >
+            <svg
+              class="w-5 h-5 text-gray-500 dark:text-gray-400"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+              ></path>
+            </svg>
+          </div>
+          <input
+            type="text"
+            name="search"
+            id="topbar-search"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            placeholder="Search"
+          />
+        </div>
+      </form> -->
+      <button data-collapse-toggle="navbar-dropdown" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-dropdown" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+          </svg>
+      </button>
+      <div class="hidden w-full md:block md:w-auto" id="navbar-dropdown">
+        <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          {% if can_add_articke  %}
+          <li>
+            <a href="{% url 'comunication:create_article' %}" class="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent" aria-current="page">Create article</a>
+          </li>
+          
+          {% endif %}
+          <li>
+              <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" class="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Tasks <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>      
+    </svg></button>
+              <!-- Dropdown menu -->
+              <div id="dropdownNavbar" class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600">
+                  <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                    <li>
+                      <a href="{% url 'tasks:create_task' %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Task creation</a>
+                    </li>
+                  </ul>
+
+                  <div class="py-1">
+                    <ul>
+                      <li>
+                        <a href="{% url 'tasks:my_active_task' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">My tasks</a>
+                      </li>
+
+                      <li>
+                        <a href="{% url 'tasks:my_location_tasks' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">My location tasks</a>
+                      </li>
+                    </ul>
+              </div>
+          </li>
+          <li>
+            <a href="{% url 'notebook:notes_list_view' %}" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">My Note</a>
+          </li>
+          <li>
+            <a href="{% url 'notebook:topic_list' %}" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Notebook</a>
+          </li>
+          <li>
+            
+        <!-- Notifications -->
+                  <button
+                type="button"
+                data-dropdown-toggle="notification-dropdown"
+                class="text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+              >
+                <span class="sr-only">View notifications</span>
+                <!-- Bell icon -->
+                <svg
+                  aria-hidden="true"
+                  class="w-6 h-6"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"
+                  ></path>
+                </svg>
+              </button>
+                      <!-- Dropdown menu notification -->
+        <div
+        class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white rounded divide-y divide-gray-100 shadow-lg dark:divide-gray-600 dark:bg-gray-700 rounded-xl"
+        id="notification-dropdown"
+      >
+        <div
+          class="block py-2 px-4 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-600 dark:text-gray-300"
+        >
+          Notifications
+        </div>
+        <div>
+
+
+
+          <a
+            href="#"
+            class="flex py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-600"
+          >
+            <div class="flex-shrink-0">
+              <img
+                class="w-11 h-11 rounded-full"
+                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/robert-brown.png"
+                alt="Robert image"
+              />
+              <div
+                class="flex absolute justify-center items-center ml-6 -mt-5 w-5 h-5 bg-purple-500 rounded-full border border-white dark:border-gray-700"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="w-3 h-3 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+            <div class="pl-3 w-full">
+              <div
+                class="text-gray-500 font-normal text-sm mb-1.5 dark:text-gray-400"
+              >
+                <span class="font-semibold text-gray-900 dark:text-white"
+                  >Robert Brown</span
+                >
+                posted a new video: Glassmorphism - learn how to implement
+                the new design trend.
+              </div>
+              <div
+                class="text-xs font-medium text-primary-600 dark:text-primary-500"
+              >
+                3 hours ago
+              </div>
+            </div>
+          </a>
+        </div>
+        <a
+          href="#"
+          class="block py-2 text-md font-medium text-center text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-600 dark:text-white dark:hover:underline"
+        >
+          <div class="inline-flex items-center">
+            <svg
+              aria-hidden="true"
+              class="mr-2 w-4 h-4 text-gray-500 dark:text-gray-400"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+              <path
+                fill-rule="evenodd"
+                d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+            View all
+          </div>
+        </a>
+      </div>
+
+          </li>
+          <li>
+              <button
+              type="button"
+              class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+              id="user-menu-button"
+              aria-expanded="false"
+              data-dropdown-toggle="dropdown"
+              >
+              <span class="sr-only">Open user menu</span>
+              <img
+                class="w-8 h-8 rounded-full"
+                src=""
+                alt="user photo"
+              />
+              </button>
+                    <!-- Dropdown menu user -->
+        <div
+        class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
+        id="dropdown"
+        >
+        <div class="py-3 px-4">
+          <a href="{%  url 'admin:index' %}" target="_blank">
+            <span
+            class="block text-sm font-semibold text-gray-900 dark:text-white"
+            >{{user.get_full_name}}</span>
+       
+          </a>
+
+          
+          <span
+            class="block text-sm text-gray-900 truncate dark:text-white"
+            >{{ user.email }}</span
+          >
+        </div>
+        <ul
+          class="py-1 text-gray-700 dark:text-gray-300"
+          aria-labelledby="dropdown"
+        >
+            <a
+              href="{% url 'user:logout' %}"
+              class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              >Sign out</a
+            >
+          </li>
+        </ul>
+        </div>
+          </li>
+
+        </ul>
+      </div>
+  </nav>
+  
+<!-- 
+<div>
+    <a href="{% url 'home' %}">Home</a>
+</div>
+
+{% if request.user.is_authenticated %}
+<div>
+    <a href="{% url 'user:logout' %}">Logout</a>
+</div>
+{% else %}
+<div>
+    <a href="{% url 'user:login' %}">Login</a>
+</div>
+{% endif %}
+
+{% if can_create %}
+<div>
+    <a href="{% url 'comunication:create_article' %}">Create article</a>
+</div>
+{% endif %} -->
+
