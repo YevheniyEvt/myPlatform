@@ -39,6 +39,9 @@ jobs:
       CLOUDINARY_URL: ${{ secrets.CLOUDINARY_URL }}
       
     steps:
+    - name: Debug username
+      run: echo "Using Docker username: ${{ secrets.DOCKERHUB_USERNAME }}"
+      
     - uses: actions/checkout@v4
 
     - name: Set up Python ${{ matrix.python-version }}
