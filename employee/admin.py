@@ -38,8 +38,8 @@ class RetailEmployeeAdmin(admin.ModelAdmin):
 
 admin.site.register(Store)
 admin.site.register(District)
-# admin.site.register(Region)
-# admin.site.register(OficeDepartmens)
+admin.site.register(Region)
+admin.site.register(OficeDepartmens)
 
 
 

@@ -88,8 +88,8 @@ WSGI_APPLICATION = 'myPlatform.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 USERNAME = config('DATABASES_USER')
 PASSWORD = config('DATABASES_PASSWORD')
-HOST = config('DATABASES_HOST')
-PORT = config('DATABASES_PORT')
+HOST = config('DATABASES_HOST', 'localhost')
+PORT = config('DATABASES_PORT', 5432)
 DATABASE = config('DATABASES_NAME')
 
 
