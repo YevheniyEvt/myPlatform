@@ -49,7 +49,7 @@ jobs:
 
     - name: Debug username
       run: |
-        echo "Using Docker username: ${{ vars.DOCKER_USERNAME }}"
+        echo "Using Docker username: '${{ vars.DOCKER_USERNAME }}'"
 
     - name: Install Dependencies
       run: |
