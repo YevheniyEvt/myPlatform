@@ -69,5 +69,5 @@ jobs:
       with:
         platforms: linux/amd64,linux/arm64
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/myplatform:gitactions
+        tags: yevheniy88/myplatform:gitactions
     
