@@ -86,11 +86,11 @@ WSGI_APPLICATION = 'myPlatform.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-USERNAME = config('DATABASES_USER', cast=str, default='postgres')
-PASSWORD = config('DATABASES_PASSWORD', cast=str, default='postgres')
-HOST = config('DATABASES_HOST', cast=str, default='localhost')
+USERNAME = config('DATABASES_USER', default='postgres')
+PASSWORD = config('DATABASES_PASSWORD', default='postgres')
+HOST = config('DATABASES_HOST', default='localhost')
 PORT = config('DATABASES_PORT',  default=5432)
-DATABASE = config('DATABASES_NAME', cast=str, default='test_db')
+DATABASE = config('DATABASES_NAME', default='test_db')
 
 
 DATABASES = {
