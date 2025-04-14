@@ -21,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY', 'testkey123')
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['51.20.31.87']
+ALLOWED_HOSTS = ['51-20-31-87.nip.io', '51.20.31.87', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -86,11 +86,11 @@ WSGI_APPLICATION = 'myPlatform.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-USERNAME = config('DATABASES_USER')
-PASSWORD = config('DATABASES_PASSWORD')
-HOST = config('DATABASES_HOST', 'localhost')
-PORT = config('DATABASES_PORT', 5432)
-DATABASE = config('DATABASES_NAME')
+USERNAME = config('DATABASES_USER', cast=str, default='postgres')
+PASSWORD = config('DATABASES_PASSWORD', cast=str, default='postgres')
+HOST = config('DATABASES_HOST', cast=str, default='localhost')
+PORT = config('DATABASES_PORT', cast=int,  default=5432)
+DATABASE = config('DATABASES_NAME', cast=str, default='test_db')
 
 
 DATABASES = {
@@ -148,7 +148,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / 'static'
 
 CLOUDINARY_URL = config('CLOUDINARY_URL')
 
