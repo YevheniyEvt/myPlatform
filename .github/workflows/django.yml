@@ -58,7 +58,7 @@ jobs:
         python manage.py test
     
     - name: Deploy to Ubuntu Server
-      uses: appleboy/ssh-action@v1
+      uses: appleboy/ssh-action@v1.0.3
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.SSH_USER }}
