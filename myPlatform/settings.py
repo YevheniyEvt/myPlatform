@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'myPlatform.wsgi.application'
 USERNAME = config('DATABASES_USER', cast=str, default='postgres')
 PASSWORD = config('DATABASES_PASSWORD', cast=str, default='postgres')
 HOST = config('DATABASES_HOST', cast=str, default='localhost')
-PORT = config('DATABASES_PORT', cast=int,  default=5432)
+PORT = config('DATABASES_PORT',  default=5432)
 DATABASE = config('DATABASES_NAME', cast=str, default='test_db')
 
 
