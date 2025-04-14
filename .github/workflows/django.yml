@@ -19,9 +19,9 @@ jobs:
       postgres:
         image: postgres:14
         env:
-          POSTGRES_USER: test
-          POSTGRES_PASSWORD: test
-          POSTGRES_DB: testdb
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test_db
         ports:
           - 5432:5432
         options: >-
@@ -31,12 +31,9 @@ jobs:
           --health-retries 5
 
     env:
-      DATABASES_NAME: testdb
-      DATABASES_USER: test
-      DATABASES_PASSWORD: test
-      DATABASES_HOST: 127.0.0.1
-      DATABASES_PORT: 5432
       CLOUDINARY_URL: ${{ secrets.CLOUDINARY_URL }}
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      
       
     steps:
     
