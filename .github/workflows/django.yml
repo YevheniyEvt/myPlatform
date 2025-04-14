@@ -44,10 +44,6 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - name: Debug username
-      run: |
-        echo "Using Docker username: '${{ secrets.DOCKER_USERNAME }}'"
-
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
