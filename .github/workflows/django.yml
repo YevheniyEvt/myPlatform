@@ -63,7 +63,7 @@ jobs:
         python manage.py runscript add_data 
         
     - name: Deploy to Ubuntu Server
-      uses: c/ssh-action@v1.0.3
+      uses: appleboy/ssh-action@v1.0.3
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.SSH_USER }}
