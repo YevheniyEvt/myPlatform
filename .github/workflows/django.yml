@@ -55,7 +55,6 @@ jobs:
 
     - name: Make Migrations
       run: |
-        python manage.py makemigrations
         python manage.py migrate
 
     - name: Run Scripts
