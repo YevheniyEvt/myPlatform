@@ -72,6 +72,8 @@ jobs:
           cd /home/ubuntu/myplatform
           source venv/bin/activate
           cd src
+          git reset --hard
+          git clean -fd
           git pull origin master
           pip install -r requirements.txt
           python manage.py migrate

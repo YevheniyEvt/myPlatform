@@ -59,9 +59,18 @@ def add_stores():
             district=employee_models.District.objects.get(name=store_data['district'].get('name'))
         )
 
+def add_superuser():
+    User.objects.create_superuser(
+        username='admin',
+        email='Genya421@gmail.com',
+        password=str(1234),
+        first_name='Super',
+        last_name='User',
+
+    )
 
 def add_users():
-    for user_data in data.create_user_data(count=COUNT_USERS):
+    for user_data in data.create_user_data(count=COUNT_USERS - 1):
         User.objects.create(
             username=user_data.get('username'),
             first_name=user_data.get('first_name'),
@@ -133,15 +142,7 @@ def add_store_employee(count=COUNT_STORE_EMPLOYEES):
             store=store_db,
         )
 
-def add_superuser():
-    User.objects.create_superuser(
-        username='admin',
-        email='Genya421@gmail.com',
-        password=str(1234),
-        first_name='Super',
-        last_name='User',
 
-    )
 
 def run():
     add_employee_positions()
