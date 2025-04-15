@@ -24,14 +24,14 @@ class RetailPositionsChoises(models.TextChoices):
     COUNTRY_MANAGER = "CM", "Country Manager"
 
 class OfficePositionsChoises(models.TextChoices):
-    STORE_BOOKKEPER = "BKS", "Store bookkeper"
-    LOGISTIC_BOOKKEPER = "BKL", "Logistic bookkeper"
-    EMPLOYEE_BOOKKEPER = "BKE", "Employee bookkeper"
-    MAIN_BOOKKEPER = "BKM", "Main bookkeper"
+    STORE_BOOKKEPER = "BKS", "Bookkeper Store"
+    LOGISTIC_BOOKKEPER = "BKL", "Bookkeper Logistic"
+    EMPLOYEE_BOOKKEPER = "BKE", "Bookkeper Employee"
+    MAIN_BOOKKEPER = "BKM", "Bookkeper Main"
     LOGISTIC_SUPPORT = "LS", "Logigstic Supporter"
-    HELP_DESK = "IT", "Sys Admin"
-    AUDITOR = "AU", "Auditor"
-    FASILITY = "FA", "Facility"
+    HELP_DESK = "IT", "IT Admin"
+    AUDITOR = "AU", "Auditor Internal"
+    FASILITY = "FA", "Facility Management"
         
 
 class StorePositions(models.Model):
@@ -60,6 +60,7 @@ class RetailPositions(models.Model):
             for choise in RetailPositionsChoises.choices:
                     if self.position in choise:
                             return choise[1]
+            return self.position
 
 class Region(models.Model):
     name = models.CharField(max_length=100, unique=True)

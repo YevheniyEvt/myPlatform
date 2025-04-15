@@ -13,8 +13,13 @@ services:
       - "5433:5432"
 
   web:
-    image: yevheniy88/myplatform:01
-    command: python manage.py runserver 0.0.0.0:8000
+    build: .
+    
+    command: >
+      sh -c "python manage.py makemigrations &&
+             python manage.py migrate &&
+             python manage.py runscript add_data &&
+             python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/usr/src/app
     ports:
