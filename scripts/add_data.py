@@ -66,7 +66,6 @@ def add_superuser():
         password=str(1234),
         first_name='Super',
         last_name='User',
-
     )
 
 def add_users():
@@ -150,9 +149,10 @@ def run():
     add_districts()
     add_office_departments()
     add_stores()
+    add_superuser()
     add_users()
     add_office_employee()
     add_retail_employee()
     add_store_employee()
-    add_superuser()
+    
 
