@@ -63,7 +63,7 @@ jobs:
         python manage.py runscript add_data 
         
     - name: Deploy to Ubuntu Server
-      uses: appleboy/ssh-action@v1.0.3
+      uses: c/ssh-action@v1.0.3
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.SSH_USER }}
@@ -76,6 +76,7 @@ jobs:
           pip install -r requirements.txt
           python manage.py makemigrations
           python manage.py migrate
+          python manage.py runscript add_data 
           python manage.py collectstatic --noinput
           sudo systemctl restart gunicorn
 
