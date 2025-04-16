@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import get_user
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import Http404, HttpRequest, HttpResponse
 from django.db.models import Q
 from django.views.generic import View, ListView, DeleteView, UpdateView, CreateView
@@ -18,6 +18,19 @@ from employee.utils import get_user_store, get_user_location
 from .utils import get_allowed_articles, can_create_article, create_coment
 
 
+class CreateArticle(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    form_class = ArticlesForm
+    success_url = reverse_lazy('home')
+    template_name = 'comunication/create_article.html'
+    permission_required  = 'comunication.add_articke'
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        form.instance.location = get_user_location(self.request.user)
+        return super().form_valid(form)
+
+
+
 
 @login_required
 def create_article(request: HttpRequest):
@@ -26,17 +39,20 @@ def create_article(request: HttpRequest):
         raise Http404
     
     template_name = 'comunication/create_article.html'
-    direct_form = ArticlesForm()
-    context = {
-        "direct_form": direct_form,
-    }
+
     if request.method == "POST":
         form = ArticlesForm(request.POST, request.FILES)
         if form.is_valid():
-            form.instance.owner = curent_user
-            form.instance.location = get_user_location(curent_user)
-            form.save()
+            article = form.cleaned_data
+            article['owner'] = curent_user
+            article['location'] = get_user_location(curent_user)
+            Articke.objects.create(**article)
             return redirect("home")
+    else:
+        form = ArticlesForm()
+    context = {
+        "form": form,
+    }
     return render(request, template_name, context)
 
 @login_required

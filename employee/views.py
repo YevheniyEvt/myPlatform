@@ -16,14 +16,13 @@ def login_view(request):
         username = request.POST['username']
         password = request.POST["password"]
         user = authenticate(request=request, username=username, password=password)
-
+        
         if user is not None:
             login(request, user)
             return redirect("home")
         else:
             text = "Username or password is incorrect"
             messages.error(request=request, message=text)
-            return render(request, template_name, {"form": form})
     return render(request, template_name, {"form": form})
 
 def logout_view(request):

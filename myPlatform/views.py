@@ -37,11 +37,12 @@ def home(request):
 
     my_tasks = current_user.taskusers_set.filter(completed=False, not_accepted=False)
 
-
-    my_location_users = get_users_from_location(recipients_id=[current_user_location.id], recipients=current_user_location)
-    location_task = Task.objects.filter(taskusers__user__in=my_location_users)
-    list_task = TaskUsers.objects.filter(task__in=Subquery(location_task.values('pk')), creator=True)
-
+    if current_user_location is not None:
+        my_location_users = get_users_from_location(recipients_id=[current_user_location.id], recipients=current_user_location)
+        location_task = Task.objects.filter(taskusers__user__in=my_location_users)
+        list_task = TaskUsers.objects.filter(task__in=Subquery(location_task.values('pk')), creator=True)
+    else:
+        list_task = None
     notes = Note.objects.filter(user=current_user)[:5]
     
     search = request.GET.get('search', '')

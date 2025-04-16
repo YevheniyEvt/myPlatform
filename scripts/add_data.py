@@ -68,8 +68,8 @@ def add_superuser():
         last_name='User',
     )
 
-def add_users():
-    for user_data in data.create_user_data(count=COUNT_USERS - 1):
+def add_users(count=COUNT_USERS):
+    for user_data in data.create_user_data(count=count - 1):
         User.objects.create(
             username=user_data.get('username'),
             first_name=user_data.get('first_name'),
@@ -141,18 +141,26 @@ def add_store_employee(count=COUNT_STORE_EMPLOYEES):
             store=store_db,
         )
 
+def database_is_empty():
+    return not User.objects.all()
 
 
 def run():
-    add_employee_positions()
-    add_regions()
-    add_districts()
-    add_office_departments()
-    add_stores()
-    add_superuser()
-    add_users()
-    add_office_employee()
-    add_retail_employee()
-    add_store_employee()
+    if database_is_empty():
+        print('Start create employee data...', end=' ')
+        add_employee_positions()
+        add_regions()
+        add_districts()
+        add_office_departments()
+        add_stores()
+        add_superuser()
+        add_users()
+        add_office_employee()
+        add_retail_employee()
+        add_store_employee()
+        print('Ok')
+    else:
+        print('Employee data - Ok')
+
     
 
