@@ -1,0 +1,5008 @@
+[
+{
+  "model": "employee.storepositions",
+  "pk": 1,
+  "fields": {
+    "position": "SM"
+  }
+},
+{
+  "model": "employee.storepositions",
+  "pk": 2,
+  "fields": {
+    "position": "SMT"
+  }
+},
+{
+  "model": "employee.storepositions",
+  "pk": 3,
+  "fields": {
+    "position": "DepSm"
+  }
+},
+{
+  "model": "employee.storepositions",
+  "pk": 4,
+  "fields": {
+    "position": "AR"
+  }
+},
+{
+  "model": "employee.storepositions",
+  "pk": 5,
+  "fields": {
+    "position": "LR"
+  }
+},
+{
+  "model": "employee.storepositions",
+  "pk": 6,
+  "fields": {
+    "position": "SA"
+  }
+},
+{
+  "model": "employee.officepositions",
+  "pk": 1,
+  "fields": {
+    "position": "BKS"
+  }
+},
+{
+  "model": "employee.officepositions",
+  "pk": 2,
+  "fields": {
+    "position": "BKL"
+  }
+},
+{
+  "model": "employee.officepositions",
+  "pk": 3,
+  "fields": {
+    "position": "BKE"
+  }
+},
+{
+  "model": "employee.officepositions",
+  "pk": 4,
+  "fields": {
+    "position": "BKM"
+  }
+},
+{
+  "model": "employee.officepositions",
+  "pk": 5,
+  "fields": {
+    "position": "LS"
+  }
+},
+{
+  "model": "employee.officepositions",
+  "pk": 6,
+  "fields": {
+    "position": "IT"
+  }
+},
+{
+  "model": "employee.officepositions",
+  "pk": 7,
+  "fields": {
+    "position": "AU"
+  }
+},
+{
+  "model": "employee.officepositions",
+  "pk": 8,
+  "fields": {
+    "position": "FA"
+  }
+},
+{
+  "model": "employee.retailpositions",
+  "pk": 1,
+  "fields": {
+    "position": "DM"
+  }
+},
+{
+  "model": "employee.retailpositions",
+  "pk": 2,
+  "fields": {
+    "position": "DMT"
+  }
+},
+{
+  "model": "employee.retailpositions",
+  "pk": 3,
+  "fields": {
+    "position": "RMT"
+  }
+},
+{
+  "model": "employee.retailpositions",
+  "pk": 4,
+  "fields": {
+    "position": "RM"
+  }
+},
+{
+  "model": "employee.retailpositions",
+  "pk": 5,
+  "fields": {
+    "position": "CM"
+  }
+},
+{
+  "model": "employee.region",
+  "pk": 1,
+  "fields": {
+    "name": "Region1"
+  }
+},
+{
+  "model": "employee.region",
+  "pk": 2,
+  "fields": {
+    "name": "Region2"
+  }
+},
+{
+  "model": "employee.district",
+  "pk": 1,
+  "fields": {
+    "name": "South",
+    "region": 1
+  }
+},
+{
+  "model": "employee.district",
+  "pk": 2,
+  "fields": {
+    "name": "Dnipro",
+    "region": 2
+  }
+},
+{
+  "model": "employee.district",
+  "pk": 3,
+  "fields": {
+    "name": "Center",
+    "region": 1
+  }
+},
+{
+  "model": "employee.district",
+  "pk": 4,
+  "fields": {
+    "name": "West",
+    "region": 2
+  }
+},
+{
+  "model": "employee.district",
+  "pk": 5,
+  "fields": {
+    "name": "Volyn",
+    "region": 1
+  }
+},
+{
+  "model": "employee.district",
+  "pk": 6,
+  "fields": {
+    "name": "Podil",
+    "region": 2
+  }
+},
+{
+  "model": "employee.store",
+  "pk": 1,
+  "fields": {
+    "name": "Mykolaiv Emma12.0",
+    "short_name": "J081",
+    "city": "Mykolaiv",
+    "district": 6
+  }
+},
+{
+  "model": "employee.store",
+  "pk": 2,
+  "fields": {
+    "name": "Rih Oregon11.0",
+    "short_name": "J094",
+    "city": "Rih",
+    "district": 5
+  }
+},
+{
+  "model": "employee.store",
+  "pk": 3,
+  "fields": {
+    "name": "Kryvyi Vermont10.0",
+    "short_name": "J013",
+    "city": "Kryvyi",
+    "district": 4
+  }
+},
+{
+  "model": "employee.store",
+  "pk": 4,
+  "fields": {
+    "name": "Zaporizhzhia Kansas9.0",
+    "short_name": "J078",
+    "city": "Zaporizhzhia",
+    "district": 3
+  }
+},
+{
+  "model": "employee.store",
+  "pk": 5,
+  "fields": {
+    "name": "Lviv Delaware8.0",
+    "short_name": "J038",
+    "city": "Lviv",
+    "district": 2
+  }
+},
+{
+  "model": "employee.store",
+  "pk": 6,
+  "fields": {
+    "name": "Donetsk Georgia7.0",
+    "short_name": "J095",
+    "city": "Donetsk",
+    "district": 1
+  }
+},
+{
+  "model": "employee.store",
+  "pk": 7,
+  "fields": {
+    "name": "Dnipro Nevada6.0",
+    "short_name": "J033",
+    "city": "Dnipro",
+    "district": 6
+  }
+},
+{
+  "model": "employee.store",
+  "pk": 8,
+  "fields": {
+    "name": "Odesa Hawaii5.0",
+    "short_name": "J041",
+    "city": "Odesa",
+    "district": 5
+  }
+},
+{
+  "model": "employee.store",
+  "pk": 9,
+  "fields": {
+    "name": "Kharkiv Nebraska4.0",
+    "short_name": "J070",
+    "city": "Kharkiv",
+    "district": 4
+  }
+},
+{
+  "model": "employee.store",
+  "pk": 10,
+  "fields": {
+    "name": "Kyiv Utah3.0",
+    "short_name": "J062",
+    "city": "Kyiv",
+    "district": 3
+  }
+},
+{
+  "model": "employee.store",
+  "pk": 11,
+  "fields": {
+    "name": "Mykolaiv Naomi2.0",
+    "short_name": "J093",
+    "city": "Mykolaiv",
+    "district": 2
+  }
+},
+{
+  "model": "employee.store",
+  "pk": 12,
+  "fields": {
+    "name": "Rih Louisiana1.0",
+    "short_name": "J009",
+    "city": "Rih",
+    "district": 1
+  }
+},
+{
+  "model": "employee.oficedepartmens",
+  "pk": 1,
+  "fields": {
+    "name": "Bookkeper"
+  }
+},
+{
+  "model": "employee.oficedepartmens",
+  "pk": 2,
+  "fields": {
+    "name": "Logigstic"
+  }
+},
+{
+  "model": "employee.oficedepartmens",
+  "pk": 3,
+  "fields": {
+    "name": "IT"
+  }
+},
+{
+  "model": "employee.oficedepartmens",
+  "pk": 4,
+  "fields": {
+    "name": "Auditor"
+  }
+},
+{
+  "model": "employee.oficedepartmens",
+  "pk": 5,
+  "fields": {
+    "name": "Facility"
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 1,
+  "fields": {
+    "user": 26,
+    "position": 6,
+    "store": 12
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 2,
+  "fields": {
+    "user": 27,
+    "position": 5,
+    "store": 12
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 3,
+  "fields": {
+    "user": 28,
+    "position": 4,
+    "store": 12
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 4,
+  "fields": {
+    "user": 29,
+    "position": 3,
+    "store": 12
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 5,
+  "fields": {
+    "user": 30,
+    "position": 2,
+    "store": 12
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 6,
+  "fields": {
+    "user": 31,
+    "position": 1,
+    "store": 12
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 7,
+  "fields": {
+    "user": 32,
+    "position": 6,
+    "store": 11
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 8,
+  "fields": {
+    "user": 33,
+    "position": 5,
+    "store": 11
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 9,
+  "fields": {
+    "user": 34,
+    "position": 4,
+    "store": 11
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 10,
+  "fields": {
+    "user": 35,
+    "position": 3,
+    "store": 11
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 11,
+  "fields": {
+    "user": 36,
+    "position": 2,
+    "store": 11
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 12,
+  "fields": {
+    "user": 37,
+    "position": 1,
+    "store": 11
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 13,
+  "fields": {
+    "user": 38,
+    "position": 6,
+    "store": 10
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 14,
+  "fields": {
+    "user": 39,
+    "position": 5,
+    "store": 10
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 15,
+  "fields": {
+    "user": 40,
+    "position": 4,
+    "store": 10
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 16,
+  "fields": {
+    "user": 41,
+    "position": 3,
+    "store": 10
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 17,
+  "fields": {
+    "user": 42,
+    "position": 2,
+    "store": 10
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 18,
+  "fields": {
+    "user": 43,
+    "position": 1,
+    "store": 10
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 19,
+  "fields": {
+    "user": 44,
+    "position": 6,
+    "store": 9
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 20,
+  "fields": {
+    "user": 45,
+    "position": 5,
+    "store": 9
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 21,
+  "fields": {
+    "user": 46,
+    "position": 4,
+    "store": 9
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 22,
+  "fields": {
+    "user": 47,
+    "position": 3,
+    "store": 9
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 23,
+  "fields": {
+    "user": 48,
+    "position": 2,
+    "store": 9
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 24,
+  "fields": {
+    "user": 49,
+    "position": 1,
+    "store": 9
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 25,
+  "fields": {
+    "user": 50,
+    "position": 6,
+    "store": 8
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 26,
+  "fields": {
+    "user": 51,
+    "position": 5,
+    "store": 8
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 27,
+  "fields": {
+    "user": 52,
+    "position": 4,
+    "store": 8
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 28,
+  "fields": {
+    "user": 53,
+    "position": 3,
+    "store": 8
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 29,
+  "fields": {
+    "user": 54,
+    "position": 2,
+    "store": 8
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 30,
+  "fields": {
+    "user": 55,
+    "position": 1,
+    "store": 8
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 31,
+  "fields": {
+    "user": 56,
+    "position": 6,
+    "store": 7
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 32,
+  "fields": {
+    "user": 57,
+    "position": 5,
+    "store": 7
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 33,
+  "fields": {
+    "user": 58,
+    "position": 4,
+    "store": 7
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 34,
+  "fields": {
+    "user": 59,
+    "position": 3,
+    "store": 7
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 35,
+  "fields": {
+    "user": 60,
+    "position": 2,
+    "store": 7
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 36,
+  "fields": {
+    "user": 61,
+    "position": 1,
+    "store": 7
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 37,
+  "fields": {
+    "user": 62,
+    "position": 6,
+    "store": 6
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 38,
+  "fields": {
+    "user": 63,
+    "position": 5,
+    "store": 6
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 39,
+  "fields": {
+    "user": 64,
+    "position": 4,
+    "store": 6
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 40,
+  "fields": {
+    "user": 65,
+    "position": 3,
+    "store": 6
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 41,
+  "fields": {
+    "user": 66,
+    "position": 2,
+    "store": 6
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 42,
+  "fields": {
+    "user": 67,
+    "position": 1,
+    "store": 6
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 43,
+  "fields": {
+    "user": 68,
+    "position": 6,
+    "store": 5
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 44,
+  "fields": {
+    "user": 69,
+    "position": 5,
+    "store": 5
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 45,
+  "fields": {
+    "user": 70,
+    "position": 4,
+    "store": 5
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 46,
+  "fields": {
+    "user": 71,
+    "position": 3,
+    "store": 5
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 47,
+  "fields": {
+    "user": 72,
+    "position": 2,
+    "store": 5
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 48,
+  "fields": {
+    "user": 73,
+    "position": 1,
+    "store": 5
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 49,
+  "fields": {
+    "user": 74,
+    "position": 6,
+    "store": 4
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 50,
+  "fields": {
+    "user": 75,
+    "position": 5,
+    "store": 4
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 51,
+  "fields": {
+    "user": 76,
+    "position": 4,
+    "store": 4
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 52,
+  "fields": {
+    "user": 77,
+    "position": 3,
+    "store": 4
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 53,
+  "fields": {
+    "user": 78,
+    "position": 2,
+    "store": 4
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 54,
+  "fields": {
+    "user": 79,
+    "position": 1,
+    "store": 4
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 55,
+  "fields": {
+    "user": 80,
+    "position": 6,
+    "store": 3
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 56,
+  "fields": {
+    "user": 81,
+    "position": 5,
+    "store": 3
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 57,
+  "fields": {
+    "user": 82,
+    "position": 4,
+    "store": 3
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 58,
+  "fields": {
+    "user": 83,
+    "position": 3,
+    "store": 3
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 59,
+  "fields": {
+    "user": 84,
+    "position": 2,
+    "store": 3
+  }
+},
+{
+  "model": "employee.storeemployee",
+  "pk": 60,
+  "fields": {
+    "user": 85,
+    "position": 1,
+    "store": 3
+  }
+},
+{
+  "model": "employee.retailemployee",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "position": 1,
+    "district": 1,
+    "region": 1
+  }
+},
+{
+  "model": "employee.retailemployee",
+  "pk": 2,
+  "fields": {
+    "user": 2,
+    "position": 5,
+    "district": 6,
+    "region": 2
+  }
+},
+{
+  "model": "employee.retailemployee",
+  "pk": 3,
+  "fields": {
+    "user": 3,
+    "position": 1,
+    "district": 1,
+    "region": 1
+  }
+},
+{
+  "model": "employee.retailemployee",
+  "pk": 4,
+  "fields": {
+    "user": 4,
+    "position": 5,
+    "district": 6,
+    "region": 2
+  }
+},
+{
+  "model": "employee.retailemployee",
+  "pk": 5,
+  "fields": {
+    "user": 5,
+    "position": 1,
+    "district": 1,
+    "region": 1
+  }
+},
+{
+  "model": "employee.retailemployee",
+  "pk": 6,
+  "fields": {
+    "user": 6,
+    "position": 5,
+    "district": 6,
+    "region": 2
+  }
+},
+{
+  "model": "employee.retailemployee",
+  "pk": 7,
+  "fields": {
+    "user": 7,
+    "position": 1,
+    "district": 1,
+    "region": 1
+  }
+},
+{
+  "model": "employee.retailemployee",
+  "pk": 8,
+  "fields": {
+    "user": 8,
+    "position": 5,
+    "district": 6,
+    "region": 2
+  }
+},
+{
+  "model": "employee.retailemployee",
+  "pk": 9,
+  "fields": {
+    "user": 9,
+    "position": 1,
+    "district": 1,
+    "region": 1
+  }
+},
+{
+  "model": "employee.retailemployee",
+  "pk": 10,
+  "fields": {
+    "user": 10,
+    "position": 5,
+    "district": 6,
+    "region": 2
+  }
+},
+{
+  "model": "employee.retailemployee",
+  "pk": 11,
+  "fields": {
+    "user": 11,
+    "position": 1,
+    "district": 1,
+    "region": 1
+  }
+},
+{
+  "model": "employee.retailemployee",
+  "pk": 12,
+  "fields": {
+    "user": 12,
+    "position": 5,
+    "district": 6,
+    "region": 2
+  }
+},
+{
+  "model": "employee.retailemployee",
+  "pk": 13,
+  "fields": {
+    "user": 13,
+    "position": 1,
+    "district": 1,
+    "region": 1
+  }
+},
+{
+  "model": "employee.retailemployee",
+  "pk": 14,
+  "fields": {
+    "user": 14,
+    "position": 5,
+    "district": 6,
+    "region": 2
+  }
+},
+{
+  "model": "employee.retailemployee",
+  "pk": 15,
+  "fields": {
+    "user": 15,
+    "position": 1,
+    "district": 1,
+    "region": 1
+  }
+},
+{
+  "model": "employee.officeemployee",
+  "pk": 1,
+  "fields": {
+    "user": 16,
+    "position": 1,
+    "departament": 1
+  }
+},
+{
+  "model": "employee.officeemployee",
+  "pk": 2,
+  "fields": {
+    "user": 17,
+    "position": 8,
+    "departament": 5
+  }
+},
+{
+  "model": "employee.officeemployee",
+  "pk": 3,
+  "fields": {
+    "user": 18,
+    "position": 1,
+    "departament": 1
+  }
+},
+{
+  "model": "employee.officeemployee",
+  "pk": 4,
+  "fields": {
+    "user": 19,
+    "position": 8,
+    "departament": 5
+  }
+},
+{
+  "model": "employee.officeemployee",
+  "pk": 5,
+  "fields": {
+    "user": 20,
+    "position": 1,
+    "departament": 1
+  }
+},
+{
+  "model": "employee.officeemployee",
+  "pk": 6,
+  "fields": {
+    "user": 21,
+    "position": 8,
+    "departament": 5
+  }
+},
+{
+  "model": "employee.officeemployee",
+  "pk": 7,
+  "fields": {
+    "user": 22,
+    "position": 1,
+    "departament": 1
+  }
+},
+{
+  "model": "employee.officeemployee",
+  "pk": 8,
+  "fields": {
+    "user": 23,
+    "position": 8,
+    "departament": 5
+  }
+},
+{
+  "model": "employee.officeemployee",
+  "pk": 9,
+  "fields": {
+    "user": 24,
+    "position": 1,
+    "departament": 1
+  }
+},
+{
+  "model": "employee.officeemployee",
+  "pk": 10,
+  "fields": {
+    "user": 25,
+    "position": 8,
+    "departament": 5
+  }
+},
+{
+  "model": "comunication.articke",
+  "pk": 1,
+  "fields": {
+    "owner": 20,
+    "title": "sit amet, consectetur adipiscing elit. Etiam quis",
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis risus eleifend, posuere arcu eu, mattis sapien. Pellentesque quis euismod",
+    "pub_date": "2025-04-18T09:34:32.463Z",
+    "is_local": true,
+    "is_global": false,
+    "is_competition": false,
+    "permission": "distric",
+    "location": "District",
+    "image": null
+  }
+},
+{
+  "model": "comunication.articke",
+  "pk": 2,
+  "fields": {
+    "owner": 7,
+    "title": "amet, consectetur adipiscing elit. Etiam quis risus",
+    "content": "ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis risus eleifend, posuere arcu eu, mattis sapien. Pellentesque quis euismod",
+    "pub_date": "2025-04-18T09:34:32.467Z",
+    "is_local": false,
+    "is_global": true,
+    "is_competition": false,
+    "permission": "region",
+    "location": "Region",
+    "image": null
+  }
+},
+{
+  "model": "comunication.articke",
+  "pk": 3,
+  "fields": {
+    "owner": 9,
+    "title": "consectetur adipiscing elit. Etiam quis risus eleifend,",
+    "content": "dolor sit amet, consectetur adipiscing elit. Etiam quis risus eleifend, posuere arcu eu, mattis sapien. Pellentesque quis euismod",
+    "pub_date": "2025-04-18T09:34:32.471Z",
+    "is_local": false,
+    "is_global": false,
+    "is_competition": true,
+    "permission": "region",
+    "location": "Region",
+    "image": null
+  }
+},
+{
+  "model": "comunication.articke",
+  "pk": 4,
+  "fields": {
+    "owner": 14,
+    "title": "adipiscing elit. Etiam quis risus eleifend, posuere",
+    "content": "sit amet, consectetur adipiscing elit. Etiam quis risus eleifend, posuere arcu eu, mattis sapien. Pellentesque quis euismod",
+    "pub_date": "2025-04-18T09:34:32.475Z",
+    "is_local": true,
+    "is_global": false,
+    "is_competition": false,
+    "permission": "distric",
+    "location": "District",
+    "image": null
+  }
+},
+{
+  "model": "comunication.articke",
+  "pk": 5,
+  "fields": {
+    "owner": 3,
+    "title": "elit. Etiam quis risus eleifend, posuere arcu",
+    "content": "amet, consectetur adipiscing elit. Etiam quis risus eleifend, posuere arcu eu, mattis sapien. Pellentesque quis euismod",
+    "pub_date": "2025-04-18T09:34:32.479Z",
+    "is_local": false,
+    "is_global": true,
+    "is_competition": false,
+    "permission": "all",
+    "location": "Region",
+    "image": null
+  }
+},
+{
+  "model": "comunication.articke",
+  "pk": 6,
+  "fields": {
+    "owner": 22,
+    "title": "Etiam quis risus eleifend, posuere arcu eu,",
+    "content": "consectetur adipiscing elit. Etiam quis risus eleifend, posuere arcu eu, mattis sapien. Pellentesque quis euismod",
+    "pub_date": "2025-04-18T09:34:32.483Z",
+    "is_local": false,
+    "is_global": false,
+    "is_competition": true,
+    "permission": "all",
+    "location": "Region",
+    "image": null
+  }
+},
+{
+  "model": "comunication.articke",
+  "pk": 7,
+  "fields": {
+    "owner": 1,
+    "title": "quis risus eleifend, posuere arcu eu, mattis",
+    "content": "adipiscing elit. Etiam quis risus eleifend, posuere arcu eu, mattis sapien. Pellentesque quis euismod",
+    "pub_date": "2025-04-18T09:34:32.487Z",
+    "is_local": true,
+    "is_global": false,
+    "is_competition": false,
+    "permission": "region",
+    "location": "District",
+    "image": null
+  }
+},
+{
+  "model": "comunication.articke",
+  "pk": 8,
+  "fields": {
+    "owner": 23,
+    "title": "risus eleifend, posuere arcu eu, mattis sapien.",
+    "content": "elit. Etiam quis risus eleifend, posuere arcu eu, mattis sapien. Pellentesque quis euismod",
+    "pub_date": "2025-04-18T09:34:32.491Z",
+    "is_local": false,
+    "is_global": true,
+    "is_competition": false,
+    "permission": "distric",
+    "location": "Region",
+    "image": null
+  }
+},
+{
+  "model": "comunication.articke",
+  "pk": 9,
+  "fields": {
+    "owner": 4,
+    "title": "eleifend, posuere arcu eu, mattis sapien. Pellentesque",
+    "content": "Etiam quis risus eleifend, posuere arcu eu, mattis sapien. Pellentesque quis euismod",
+    "pub_date": "2025-04-18T09:34:32.494Z",
+    "is_local": false,
+    "is_global": false,
+    "is_competition": true,
+    "permission": "all",
+    "location": "Region",
+    "image": null
+  }
+},
+{
+  "model": "comunication.articke",
+  "pk": 10,
+  "fields": {
+    "owner": 16,
+    "title": "posuere arcu eu, mattis sapien. Pellentesque quis",
+    "content": "quis risus eleifend, posuere arcu eu, mattis sapien. Pellentesque quis euismod",
+    "pub_date": "2025-04-18T09:34:32.498Z",
+    "is_local": true,
+    "is_global": false,
+    "is_competition": false,
+    "permission": "all",
+    "location": "District",
+    "image": null
+  }
+},
+{
+  "model": "comunication.articke",
+  "pk": 11,
+  "fields": {
+    "owner": 6,
+    "title": "arcu eu, mattis sapien. Pellentesque quis euismod",
+    "content": "risus eleifend, posuere arcu eu, mattis sapien. Pellentesque quis euismod",
+    "pub_date": "2025-04-18T09:34:32.502Z",
+    "is_local": false,
+    "is_global": true,
+    "is_competition": false,
+    "permission": "all",
+    "location": "Region",
+    "image": null
+  }
+},
+{
+  "model": "comunication.articke",
+  "pk": 12,
+  "fields": {
+    "owner": 8,
+    "title": "eu, mattis sapien. Pellentesque quis euismod lacus.",
+    "content": "eleifend, posuere arcu eu, mattis sapien. Pellentesque quis euismod",
+    "pub_date": "2025-04-18T09:34:32.506Z",
+    "is_local": false,
+    "is_global": false,
+    "is_competition": true,
+    "permission": "all",
+    "location": "Region",
+    "image": null
+  }
+},
+{
+  "model": "comunication.articke",
+  "pk": 13,
+  "fields": {
+    "owner": 24,
+    "title": "mattis sapien. Pellentesque quis euismod lacus. Nam",
+    "content": "posuere arcu eu, mattis sapien. Pellentesque quis euismod",
+    "pub_date": "2025-04-18T09:34:32.510Z",
+    "is_local": true,
+    "is_global": false,
+    "is_competition": false,
+    "permission": "distric",
+    "location": "District",
+    "image": null
+  }
+},
+{
+  "model": "comunication.articke",
+  "pk": 14,
+  "fields": {
+    "owner": 19,
+    "title": "sapien. Pellentesque quis euismod lacus. Nam feugiat",
+    "content": "arcu eu, mattis sapien. Pellentesque quis euismod",
+    "pub_date": "2025-04-18T09:34:32.514Z",
+    "is_local": false,
+    "is_global": true,
+    "is_competition": false,
+    "permission": "all",
+    "location": "Region",
+    "image": null
+  }
+},
+{
+  "model": "comunication.articke",
+  "pk": 15,
+  "fields": {
+    "owner": 5,
+    "title": "Pellentesque quis euismod lacus. Nam feugiat sagittis",
+    "content": "eu, mattis sapien. Pellentesque quis euismod",
+    "pub_date": "2025-04-18T09:34:32.518Z",
+    "is_local": false,
+    "is_global": false,
+    "is_competition": true,
+    "permission": "all",
+    "location": "Region",
+    "image": null
+  }
+},
+{
+  "model": "comunication.articke",
+  "pk": 16,
+  "fields": {
+    "owner": 21,
+    "title": "quis euismod lacus. Nam feugiat sagittis sem",
+    "content": "mattis sapien. Pellentesque quis euismod",
+    "pub_date": "2025-04-18T09:34:32.522Z",
+    "is_local": true,
+    "is_global": false,
+    "is_competition": false,
+    "permission": "region",
+    "location": "District",
+    "image": null
+  }
+},
+{
+  "model": "comunication.articke",
+  "pk": 17,
+  "fields": {
+    "owner": 13,
+    "title": "euismod lacus. Nam feugiat sagittis sem quis",
+    "content": "sapien. Pellentesque quis euismod",
+    "pub_date": "2025-04-18T09:34:32.525Z",
+    "is_local": false,
+    "is_global": true,
+    "is_competition": false,
+    "permission": "distric",
+    "location": "Region",
+    "image": null
+  }
+},
+{
+  "model": "comunication.articke",
+  "pk": 18,
+  "fields": {
+    "owner": 15,
+    "title": "lacus. Nam feugiat sagittis sem quis dignissim.",
+    "content": "Pellentesque quis euismod",
+    "pub_date": "2025-04-18T09:34:32.529Z",
+    "is_local": false,
+    "is_global": false,
+    "is_competition": true,
+    "permission": "region",
+    "location": "Region",
+    "image": null
+  }
+},
+{
+  "model": "comunication.articke",
+  "pk": 19,
+  "fields": {
+    "owner": 2,
+    "title": "Nam feugiat sagittis sem quis dignissim. Suspendisse",
+    "content": "quis euismod",
+    "pub_date": "2025-04-18T09:34:32.533Z",
+    "is_local": true,
+    "is_global": false,
+    "is_competition": false,
+    "permission": "all",
+    "location": "District",
+    "image": null
+  }
+},
+{
+  "model": "comunication.articke",
+  "pk": 20,
+  "fields": {
+    "owner": 18,
+    "title": "feugiat sagittis sem quis dignissim. Suspendisse in",
+    "content": "euismod",
+    "pub_date": "2025-04-18T09:34:32.537Z",
+    "is_local": false,
+    "is_global": true,
+    "is_competition": false,
+    "permission": "region",
+    "location": "Region",
+    "image": null
+  }
+},
+{
+  "model": "comunication.viewarticle",
+  "pk": 1,
+  "fields": {
+    "user": 20,
+    "article": 1,
+    "view": true
+  }
+},
+{
+  "model": "comunication.viewarticle",
+  "pk": 2,
+  "fields": {
+    "user": 7,
+    "article": 20,
+    "view": true
+  }
+},
+{
+  "model": "comunication.viewarticle",
+  "pk": 3,
+  "fields": {
+    "user": 9,
+    "article": 19,
+    "view": true
+  }
+},
+{
+  "model": "comunication.viewarticle",
+  "pk": 4,
+  "fields": {
+    "user": 14,
+    "article": 18,
+    "view": true
+  }
+},
+{
+  "model": "comunication.viewarticle",
+  "pk": 5,
+  "fields": {
+    "user": 3,
+    "article": 17,
+    "view": true
+  }
+},
+{
+  "model": "comunication.viewarticle",
+  "pk": 6,
+  "fields": {
+    "user": 22,
+    "article": 16,
+    "view": true
+  }
+},
+{
+  "model": "comunication.viewarticle",
+  "pk": 7,
+  "fields": {
+    "user": 1,
+    "article": 15,
+    "view": true
+  }
+},
+{
+  "model": "comunication.viewarticle",
+  "pk": 8,
+  "fields": {
+    "user": 23,
+    "article": 14,
+    "view": true
+  }
+},
+{
+  "model": "comunication.viewarticle",
+  "pk": 9,
+  "fields": {
+    "user": 4,
+    "article": 13,
+    "view": true
+  }
+},
+{
+  "model": "comunication.viewarticle",
+  "pk": 10,
+  "fields": {
+    "user": 16,
+    "article": 12,
+    "view": true
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 1,
+  "fields": {
+    "owner": 1,
+    "article": 1,
+    "task": null,
+    "content": "Lorem ipsum dolor",
+    "pub_date": "2025-04-18T09:34:32.585Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 2,
+  "fields": {
+    "owner": 1,
+    "article": 1,
+    "task": null,
+    "content": "",
+    "pub_date": "2025-04-18T09:34:32.589Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 3,
+  "fields": {
+    "owner": 85,
+    "article": 2,
+    "task": null,
+    "content": "Lorem ipsum dolor",
+    "pub_date": "2025-04-18T09:34:32.593Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 4,
+  "fields": {
+    "owner": 85,
+    "article": 2,
+    "task": null,
+    "content": "",
+    "pub_date": "2025-04-18T09:34:32.597Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 5,
+  "fields": {
+    "owner": 84,
+    "article": 3,
+    "task": null,
+    "content": "Lorem ipsum dolor",
+    "pub_date": "2025-04-18T09:34:32.601Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 6,
+  "fields": {
+    "owner": 84,
+    "article": 3,
+    "task": null,
+    "content": "",
+    "pub_date": "2025-04-18T09:34:32.605Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 7,
+  "fields": {
+    "owner": 83,
+    "article": 4,
+    "task": null,
+    "content": "Lorem ipsum dolor",
+    "pub_date": "2025-04-18T09:34:32.608Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 8,
+  "fields": {
+    "owner": 83,
+    "article": 4,
+    "task": null,
+    "content": "",
+    "pub_date": "2025-04-18T09:34:32.612Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 9,
+  "fields": {
+    "owner": 82,
+    "article": 5,
+    "task": null,
+    "content": "Lorem ipsum dolor",
+    "pub_date": "2025-04-18T09:34:32.616Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 10,
+  "fields": {
+    "owner": 82,
+    "article": 5,
+    "task": null,
+    "content": "",
+    "pub_date": "2025-04-18T09:34:32.619Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 11,
+  "fields": {
+    "owner": 81,
+    "article": 6,
+    "task": null,
+    "content": "Lorem ipsum dolor",
+    "pub_date": "2025-04-18T09:34:32.623Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 12,
+  "fields": {
+    "owner": 81,
+    "article": 6,
+    "task": null,
+    "content": "",
+    "pub_date": "2025-04-18T09:34:32.627Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 13,
+  "fields": {
+    "owner": 80,
+    "article": 7,
+    "task": null,
+    "content": "Lorem ipsum dolor",
+    "pub_date": "2025-04-18T09:34:32.631Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 14,
+  "fields": {
+    "owner": 80,
+    "article": 7,
+    "task": null,
+    "content": "",
+    "pub_date": "2025-04-18T09:34:32.634Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 15,
+  "fields": {
+    "owner": 79,
+    "article": 8,
+    "task": null,
+    "content": "Lorem ipsum dolor",
+    "pub_date": "2025-04-18T09:34:32.638Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 16,
+  "fields": {
+    "owner": 79,
+    "article": 8,
+    "task": null,
+    "content": "",
+    "pub_date": "2025-04-18T09:34:32.642Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 17,
+  "fields": {
+    "owner": 78,
+    "article": 9,
+    "task": null,
+    "content": "Lorem ipsum dolor",
+    "pub_date": "2025-04-18T09:34:32.646Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 18,
+  "fields": {
+    "owner": 78,
+    "article": 9,
+    "task": null,
+    "content": "",
+    "pub_date": "2025-04-18T09:34:32.649Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 19,
+  "fields": {
+    "owner": 77,
+    "article": 10,
+    "task": null,
+    "content": "Lorem ipsum dolor",
+    "pub_date": "2025-04-18T09:34:32.653Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 20,
+  "fields": {
+    "owner": 77,
+    "article": 10,
+    "task": null,
+    "content": "",
+    "pub_date": "2025-04-18T09:34:32.657Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 21,
+  "fields": {
+    "owner": 76,
+    "article": 11,
+    "task": null,
+    "content": "Lorem ipsum dolor",
+    "pub_date": "2025-04-18T09:34:32.661Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 22,
+  "fields": {
+    "owner": 76,
+    "article": 11,
+    "task": null,
+    "content": "",
+    "pub_date": "2025-04-18T09:34:32.664Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 23,
+  "fields": {
+    "owner": 75,
+    "article": 12,
+    "task": null,
+    "content": "Lorem ipsum dolor",
+    "pub_date": "2025-04-18T09:34:32.668Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 24,
+  "fields": {
+    "owner": 75,
+    "article": 12,
+    "task": null,
+    "content": "",
+    "pub_date": "2025-04-18T09:34:32.672Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 25,
+  "fields": {
+    "owner": 74,
+    "article": 13,
+    "task": null,
+    "content": "Lorem ipsum dolor",
+    "pub_date": "2025-04-18T09:34:32.676Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 26,
+  "fields": {
+    "owner": 74,
+    "article": 13,
+    "task": null,
+    "content": "",
+    "pub_date": "2025-04-18T09:34:32.679Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 27,
+  "fields": {
+    "owner": 73,
+    "article": 14,
+    "task": null,
+    "content": "Lorem ipsum dolor",
+    "pub_date": "2025-04-18T09:34:32.683Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 28,
+  "fields": {
+    "owner": 73,
+    "article": 14,
+    "task": null,
+    "content": "",
+    "pub_date": "2025-04-18T09:34:32.687Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 29,
+  "fields": {
+    "owner": 72,
+    "article": 15,
+    "task": null,
+    "content": "Lorem ipsum dolor",
+    "pub_date": "2025-04-18T09:34:32.690Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 30,
+  "fields": {
+    "owner": 72,
+    "article": 15,
+    "task": null,
+    "content": "",
+    "pub_date": "2025-04-18T09:34:32.694Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 31,
+  "fields": {
+    "owner": 71,
+    "article": 16,
+    "task": null,
+    "content": "Lorem ipsum dolor",
+    "pub_date": "2025-04-18T09:34:32.698Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 32,
+  "fields": {
+    "owner": 71,
+    "article": 16,
+    "task": null,
+    "content": "",
+    "pub_date": "2025-04-18T09:34:32.701Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 33,
+  "fields": {
+    "owner": 70,
+    "article": 17,
+    "task": null,
+    "content": "Lorem ipsum dolor",
+    "pub_date": "2025-04-18T09:34:32.705Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 34,
+  "fields": {
+    "owner": 70,
+    "article": 17,
+    "task": null,
+    "content": "",
+    "pub_date": "2025-04-18T09:34:32.709Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 35,
+  "fields": {
+    "owner": 69,
+    "article": 18,
+    "task": null,
+    "content": "Lorem ipsum dolor",
+    "pub_date": "2025-04-18T09:34:32.713Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 36,
+  "fields": {
+    "owner": 69,
+    "article": 18,
+    "task": null,
+    "content": "",
+    "pub_date": "2025-04-18T09:34:32.716Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 37,
+  "fields": {
+    "owner": 68,
+    "article": 19,
+    "task": null,
+    "content": "Lorem ipsum dolor",
+    "pub_date": "2025-04-18T09:34:32.720Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 38,
+  "fields": {
+    "owner": 68,
+    "article": 19,
+    "task": null,
+    "content": "",
+    "pub_date": "2025-04-18T09:34:32.724Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 39,
+  "fields": {
+    "owner": 67,
+    "article": 20,
+    "task": null,
+    "content": "Lorem ipsum dolor",
+    "pub_date": "2025-04-18T09:34:32.727Z"
+  }
+},
+{
+  "model": "comunication.coment",
+  "pk": 40,
+  "fields": {
+    "owner": 67,
+    "article": 20,
+    "task": null,
+    "content": "",
+    "pub_date": "2025-04-18T09:34:32.731Z"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add ticket",
+    "content_type": 1,
+    "codename": "add_ticket"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change ticket",
+    "content_type": 1,
+    "codename": "change_ticket"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete ticket",
+    "content_type": 1,
+    "codename": "delete_ticket"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view ticket",
+    "content_type": 1,
+    "codename": "view_ticket"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add ticket comment",
+    "content_type": 2,
+    "codename": "add_ticketcomment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change ticket comment",
+    "content_type": 2,
+    "codename": "change_ticketcomment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete ticket comment",
+    "content_type": 2,
+    "codename": "delete_ticketcomment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view ticket comment",
+    "content_type": 2,
+    "codename": "view_ticketcomment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add ticket recipient",
+    "content_type": 3,
+    "codename": "add_ticketrecipient"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change ticket recipient",
+    "content_type": 3,
+    "codename": "change_ticketrecipient"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete ticket recipient",
+    "content_type": 3,
+    "codename": "delete_ticketrecipient"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view ticket recipient",
+    "content_type": 3,
+    "codename": "view_ticketrecipient"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add note",
+    "content_type": 4,
+    "codename": "add_note"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change note",
+    "content_type": 4,
+    "codename": "change_note"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete note",
+    "content_type": 4,
+    "codename": "delete_note"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view note",
+    "content_type": 4,
+    "codename": "view_note"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add section",
+    "content_type": 5,
+    "codename": "add_section"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change section",
+    "content_type": 5,
+    "codename": "change_section"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete section",
+    "content_type": 5,
+    "codename": "delete_section"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view section",
+    "content_type": 5,
+    "codename": "view_section"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add links",
+    "content_type": 6,
+    "codename": "add_links"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change links",
+    "content_type": 6,
+    "codename": "change_links"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete links",
+    "content_type": 6,
+    "codename": "delete_links"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view links",
+    "content_type": 6,
+    "codename": "view_links"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add image",
+    "content_type": 7,
+    "codename": "add_image"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change image",
+    "content_type": 7,
+    "codename": "change_image"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete image",
+    "content_type": 7,
+    "codename": "delete_image"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view image",
+    "content_type": 7,
+    "codename": "view_image"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can add code",
+    "content_type": 8,
+    "codename": "add_code"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can change code",
+    "content_type": 8,
+    "codename": "change_code"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can delete code",
+    "content_type": 8,
+    "codename": "delete_code"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can view code",
+    "content_type": 8,
+    "codename": "view_code"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 33,
+  "fields": {
+    "name": "Can add article",
+    "content_type": 9,
+    "codename": "add_article"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 34,
+  "fields": {
+    "name": "Can change article",
+    "content_type": 9,
+    "codename": "change_article"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 35,
+  "fields": {
+    "name": "Can delete article",
+    "content_type": 9,
+    "codename": "delete_article"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 36,
+  "fields": {
+    "name": "Can view article",
+    "content_type": 9,
+    "codename": "view_article"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 37,
+  "fields": {
+    "name": "Can add topic",
+    "content_type": 10,
+    "codename": "add_topic"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 38,
+  "fields": {
+    "name": "Can change topic",
+    "content_type": 10,
+    "codename": "change_topic"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 39,
+  "fields": {
+    "name": "Can delete topic",
+    "content_type": 10,
+    "codename": "delete_topic"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 40,
+  "fields": {
+    "name": "Can view topic",
+    "content_type": 10,
+    "codename": "view_topic"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 41,
+  "fields": {
+    "name": "Can add task",
+    "content_type": 11,
+    "codename": "add_task"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 42,
+  "fields": {
+    "name": "Can change task",
+    "content_type": 11,
+    "codename": "change_task"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 43,
+  "fields": {
+    "name": "Can delete task",
+    "content_type": 11,
+    "codename": "delete_task"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 44,
+  "fields": {
+    "name": "Can view task",
+    "content_type": 11,
+    "codename": "view_task"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 45,
+  "fields": {
+    "name": "Can add task users",
+    "content_type": 12,
+    "codename": "add_taskusers"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 46,
+  "fields": {
+    "name": "Can change task users",
+    "content_type": 12,
+    "codename": "change_taskusers"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 47,
+  "fields": {
+    "name": "Can delete task users",
+    "content_type": 12,
+    "codename": "delete_taskusers"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 48,
+  "fields": {
+    "name": "Can view task users",
+    "content_type": 12,
+    "codename": "view_taskusers"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 49,
+  "fields": {
+    "name": "Can add task history",
+    "content_type": 13,
+    "codename": "add_taskhistory"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 50,
+  "fields": {
+    "name": "Can change task history",
+    "content_type": 13,
+    "codename": "change_taskhistory"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 51,
+  "fields": {
+    "name": "Can delete task history",
+    "content_type": 13,
+    "codename": "delete_taskhistory"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 52,
+  "fields": {
+    "name": "Can view task history",
+    "content_type": 13,
+    "codename": "view_taskhistory"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 53,
+  "fields": {
+    "name": "Can add office positions",
+    "content_type": 14,
+    "codename": "add_officepositions"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 54,
+  "fields": {
+    "name": "Can change office positions",
+    "content_type": 14,
+    "codename": "change_officepositions"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 55,
+  "fields": {
+    "name": "Can delete office positions",
+    "content_type": 14,
+    "codename": "delete_officepositions"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 56,
+  "fields": {
+    "name": "Can view office positions",
+    "content_type": 14,
+    "codename": "view_officepositions"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 57,
+  "fields": {
+    "name": "Can add ofice departmens",
+    "content_type": 15,
+    "codename": "add_oficedepartmens"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 58,
+  "fields": {
+    "name": "Can change ofice departmens",
+    "content_type": 15,
+    "codename": "change_oficedepartmens"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 59,
+  "fields": {
+    "name": "Can delete ofice departmens",
+    "content_type": 15,
+    "codename": "delete_oficedepartmens"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 60,
+  "fields": {
+    "name": "Can view ofice departmens",
+    "content_type": 15,
+    "codename": "view_oficedepartmens"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 61,
+  "fields": {
+    "name": "Can add region",
+    "content_type": 16,
+    "codename": "add_region"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 62,
+  "fields": {
+    "name": "Can change region",
+    "content_type": 16,
+    "codename": "change_region"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 63,
+  "fields": {
+    "name": "Can delete region",
+    "content_type": 16,
+    "codename": "delete_region"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 64,
+  "fields": {
+    "name": "Can view region",
+    "content_type": 16,
+    "codename": "view_region"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 65,
+  "fields": {
+    "name": "Can add retail positions",
+    "content_type": 17,
+    "codename": "add_retailpositions"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 66,
+  "fields": {
+    "name": "Can change retail positions",
+    "content_type": 17,
+    "codename": "change_retailpositions"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 67,
+  "fields": {
+    "name": "Can delete retail positions",
+    "content_type": 17,
+    "codename": "delete_retailpositions"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 68,
+  "fields": {
+    "name": "Can view retail positions",
+    "content_type": 17,
+    "codename": "view_retailpositions"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 69,
+  "fields": {
+    "name": "Can add store positions",
+    "content_type": 18,
+    "codename": "add_storepositions"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 70,
+  "fields": {
+    "name": "Can change store positions",
+    "content_type": 18,
+    "codename": "change_storepositions"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 71,
+  "fields": {
+    "name": "Can delete store positions",
+    "content_type": 18,
+    "codename": "delete_storepositions"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 72,
+  "fields": {
+    "name": "Can view store positions",
+    "content_type": 18,
+    "codename": "view_storepositions"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 73,
+  "fields": {
+    "name": "Can add office employee",
+    "content_type": 19,
+    "codename": "add_officeemployee"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 74,
+  "fields": {
+    "name": "Can change office employee",
+    "content_type": 19,
+    "codename": "change_officeemployee"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 75,
+  "fields": {
+    "name": "Can delete office employee",
+    "content_type": 19,
+    "codename": "delete_officeemployee"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 76,
+  "fields": {
+    "name": "Can view office employee",
+    "content_type": 19,
+    "codename": "view_officeemployee"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 77,
+  "fields": {
+    "name": "Can add district",
+    "content_type": 20,
+    "codename": "add_district"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 78,
+  "fields": {
+    "name": "Can change district",
+    "content_type": 20,
+    "codename": "change_district"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 79,
+  "fields": {
+    "name": "Can delete district",
+    "content_type": 20,
+    "codename": "delete_district"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 80,
+  "fields": {
+    "name": "Can view district",
+    "content_type": 20,
+    "codename": "view_district"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 81,
+  "fields": {
+    "name": "Can add retail employee",
+    "content_type": 21,
+    "codename": "add_retailemployee"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 82,
+  "fields": {
+    "name": "Can change retail employee",
+    "content_type": 21,
+    "codename": "change_retailemployee"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 83,
+  "fields": {
+    "name": "Can delete retail employee",
+    "content_type": 21,
+    "codename": "delete_retailemployee"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 84,
+  "fields": {
+    "name": "Can view retail employee",
+    "content_type": 21,
+    "codename": "view_retailemployee"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 85,
+  "fields": {
+    "name": "Can add store",
+    "content_type": 22,
+    "codename": "add_store"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 86,
+  "fields": {
+    "name": "Can change store",
+    "content_type": 22,
+    "codename": "change_store"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 87,
+  "fields": {
+    "name": "Can delete store",
+    "content_type": 22,
+    "codename": "delete_store"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 88,
+  "fields": {
+    "name": "Can view store",
+    "content_type": 22,
+    "codename": "view_store"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 89,
+  "fields": {
+    "name": "Can add store employee",
+    "content_type": 23,
+    "codename": "add_storeemployee"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 90,
+  "fields": {
+    "name": "Can change store employee",
+    "content_type": 23,
+    "codename": "change_storeemployee"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 91,
+  "fields": {
+    "name": "Can delete store employee",
+    "content_type": 23,
+    "codename": "delete_storeemployee"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 92,
+  "fields": {
+    "name": "Can view store employee",
+    "content_type": 23,
+    "codename": "view_storeemployee"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 93,
+  "fields": {
+    "name": "Can add articke",
+    "content_type": 24,
+    "codename": "add_articke"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 94,
+  "fields": {
+    "name": "Can change articke",
+    "content_type": 24,
+    "codename": "change_articke"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 95,
+  "fields": {
+    "name": "Can delete articke",
+    "content_type": 24,
+    "codename": "delete_articke"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 96,
+  "fields": {
+    "name": "Can view articke",
+    "content_type": 24,
+    "codename": "view_articke"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 97,
+  "fields": {
+    "name": "Can add coment",
+    "content_type": 25,
+    "codename": "add_coment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 98,
+  "fields": {
+    "name": "Can change coment",
+    "content_type": 25,
+    "codename": "change_coment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 99,
+  "fields": {
+    "name": "Can delete coment",
+    "content_type": 25,
+    "codename": "delete_coment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 100,
+  "fields": {
+    "name": "Can view coment",
+    "content_type": 25,
+    "codename": "view_coment"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 101,
+  "fields": {
+    "name": "Can add delete history",
+    "content_type": 26,
+    "codename": "add_deletehistory"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 102,
+  "fields": {
+    "name": "Can change delete history",
+    "content_type": 26,
+    "codename": "change_deletehistory"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 103,
+  "fields": {
+    "name": "Can delete delete history",
+    "content_type": 26,
+    "codename": "delete_deletehistory"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 104,
+  "fields": {
+    "name": "Can view delete history",
+    "content_type": 26,
+    "codename": "view_deletehistory"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 105,
+  "fields": {
+    "name": "Can add notes old",
+    "content_type": 27,
+    "codename": "add_notesold"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 106,
+  "fields": {
+    "name": "Can change notes old",
+    "content_type": 27,
+    "codename": "change_notesold"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 107,
+  "fields": {
+    "name": "Can delete notes old",
+    "content_type": 27,
+    "codename": "delete_notesold"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 108,
+  "fields": {
+    "name": "Can view notes old",
+    "content_type": 27,
+    "codename": "view_notesold"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 109,
+  "fields": {
+    "name": "Can add view article",
+    "content_type": 28,
+    "codename": "add_viewarticle"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 110,
+  "fields": {
+    "name": "Can change view article",
+    "content_type": 28,
+    "codename": "change_viewarticle"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 111,
+  "fields": {
+    "name": "Can delete view article",
+    "content_type": 28,
+    "codename": "delete_viewarticle"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 112,
+  "fields": {
+    "name": "Can view view article",
+    "content_type": 28,
+    "codename": "view_viewarticle"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 113,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 29,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 114,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 29,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 115,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 29,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 116,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 29,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 117,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 30,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 118,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 30,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 119,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 30,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 120,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 30,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 121,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 31,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 122,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 31,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 123,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 31,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 124,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 31,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 125,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 32,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 126,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 32,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 127,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 32,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 128,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 32,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 129,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 33,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 130,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 33,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 131,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 33,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 132,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 33,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 133,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 34,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 134,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 34,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 135,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 34,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 136,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 34,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$tcxCwwv8FDAMu2277gSZ7g$72aDyY4mAF77HVvApHMkjs03Y5M2D6g3CbUJGD3WK9U=",
+    "last_login": null,
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "Super",
+    "last_name": "User",
+    "email": "Genya421@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.257Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Emma84",
+    "first_name": "Emma84",
+    "last_name": "Olivia",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.795Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Oregon83",
+    "first_name": "Oregon83",
+    "last_name": "Charlotte",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.799Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Vermont82",
+    "first_name": "Vermont82",
+    "last_name": "Harper",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.803Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 5,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Kansas81",
+    "first_name": "Kansas81",
+    "last_name": "Emma",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.807Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 6,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Delaware80",
+    "first_name": "Delaware80",
+    "last_name": "Emma",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.811Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 7,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Georgia79",
+    "first_name": "Georgia79",
+    "last_name": "Eleanor",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.814Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 8,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Nevada78",
+    "first_name": "Nevada78",
+    "last_name": "Mia",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.818Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 9,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Hawaii77",
+    "first_name": "Hawaii77",
+    "last_name": "Olivia",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.822Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 10,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Nebraska76",
+    "first_name": "Nebraska76",
+    "last_name": "Sophia",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.825Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 11,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Utah75",
+    "first_name": "Utah75",
+    "last_name": "Dakota",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.829Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 12,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Naomi74",
+    "first_name": "Naomi74",
+    "last_name": "Evelyn",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.832Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 13,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Louisiana73",
+    "first_name": "Louisiana73",
+    "last_name": "Emma",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.836Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 14,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Arizona72",
+    "first_name": "Arizona72",
+    "last_name": "Amelia",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.840Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 15,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "of71",
+    "first_name": "of71",
+    "last_name": "Mia",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.844Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 16,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Willow70",
+    "first_name": "Willow70",
+    "last_name": "Charlotte",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.847Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 17,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Ohio69",
+    "first_name": "Ohio69",
+    "last_name": "Emma",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.851Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 18,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Massachusetts68",
+    "first_name": "Massachusetts68",
+    "last_name": "Evelyn",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.855Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 19,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Colorado67",
+    "first_name": "Colorado67",
+    "last_name": "Iowa",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.859Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 20,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Mia66",
+    "first_name": "Mia66",
+    "last_name": "Evelyn",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.862Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 21,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Isabella65",
+    "first_name": "Isabella65",
+    "last_name": "Emma",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.866Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 22,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Ava64",
+    "first_name": "Ava64",
+    "last_name": "Amelia",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.870Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 23,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Maryland63",
+    "first_name": "Maryland63",
+    "last_name": "Charlotte",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.874Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 24,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Alaska62",
+    "first_name": "Alaska62",
+    "last_name": "Amelia",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.877Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 25,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Wyoming61",
+    "first_name": "Wyoming61",
+    "last_name": "Emma",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.881Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 26,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Hampshire60",
+    "first_name": "Hampshire60",
+    "last_name": "Emma",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.885Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 27,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Kentucky59",
+    "first_name": "Kentucky59",
+    "last_name": "Oklahoma",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.889Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 28,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Washington58",
+    "first_name": "Washington58",
+    "last_name": "Wisconsin",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.892Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 29,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Mexico57",
+    "first_name": "Mexico57",
+    "last_name": "Texas",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.896Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 30,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Maine56",
+    "first_name": "Maine56",
+    "last_name": "Charlotte",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.899Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 31,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Dakota55",
+    "first_name": "Dakota55",
+    "last_name": "Olivia",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.903Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 32,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Maya54",
+    "first_name": "Maya54",
+    "last_name": "Charlotte",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.906Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 33,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "West53",
+    "first_name": "West53",
+    "last_name": "Evelyn",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.910Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 34,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Hazel52",
+    "first_name": "Hazel52",
+    "last_name": "Charlotte",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.914Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 35,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Evelyn51",
+    "first_name": "Evelyn51",
+    "last_name": "Charlotte",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.917Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 36,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Iowa50",
+    "first_name": "Iowa50",
+    "last_name": "Charlotte",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.921Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 37,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Olivia49",
+    "first_name": "Olivia49",
+    "last_name": "Utah",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.925Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 38,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Carolina48",
+    "first_name": "Carolina48",
+    "last_name": "Emma",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.928Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 39,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Camila47",
+    "first_name": "Camila47",
+    "last_name": "Emma",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.932Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 40,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "South46",
+    "first_name": "South46",
+    "last_name": "Harper",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.936Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 41,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Minnesota45",
+    "first_name": "Minnesota45",
+    "last_name": "Olivia",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.940Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 42,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Island44",
+    "first_name": "Island44",
+    "last_name": "Evelyn",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.943Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 43,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Amelia43",
+    "first_name": "Amelia43",
+    "last_name": "Ava",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.947Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 44,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Arkansas42",
+    "first_name": "Arkansas42",
+    "last_name": "Evelyn",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.951Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 45,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "York41",
+    "first_name": "York41",
+    "last_name": "Evelyn",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.954Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 46,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "New40",
+    "first_name": "New40",
+    "last_name": "Emma",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.958Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 47,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Luna39",
+    "first_name": "Luna39",
+    "last_name": "Emma",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.962Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 48,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Oklahoma38",
+    "first_name": "Oklahoma38",
+    "last_name": "Charlotte",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.966Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 49,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Eleanor37",
+    "first_name": "Eleanor37",
+    "last_name": "Louisiana",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.970Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 50,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Dist.36",
+    "first_name": "Dist.36",
+    "last_name": "West",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.974Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 51,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Columbia35",
+    "first_name": "Columbia35",
+    "last_name": "Alaska",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.977Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 52,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Illinois34",
+    "first_name": "Illinois34",
+    "last_name": "Charlotte",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.981Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 53,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Sophia33",
+    "first_name": "Sophia33",
+    "last_name": "Mia",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.985Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 54,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Virginia32",
+    "first_name": "Virginia32",
+    "last_name": "Isabella",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.989Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 55,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Connecticut31",
+    "first_name": "Connecticut31",
+    "last_name": "Amelia",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.992Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 56,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Harper30",
+    "first_name": "Harper30",
+    "last_name": "Emma",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:31.996Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 57,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Elizabeth29",
+    "first_name": "Elizabeth29",
+    "last_name": "Jersey",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.000Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 58,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Jersey28",
+    "first_name": "Jersey28",
+    "last_name": "Olivia",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.004Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 59,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Michigan27",
+    "first_name": "Michigan27",
+    "last_name": "Olivia",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.007Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 60,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Wisconsin26",
+    "first_name": "Wisconsin26",
+    "last_name": "New",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.011Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 61,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "California25",
+    "first_name": "California25",
+    "last_name": "Harper",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.015Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 62,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Tennessee24",
+    "first_name": "Tennessee24",
+    "last_name": "Evelyn",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.018Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 63,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Texas23",
+    "first_name": "Texas23",
+    "last_name": "Sophia",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.022Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 64,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Rhode22",
+    "first_name": "Rhode22",
+    "last_name": "Isabella",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.025Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 65,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Lucy21",
+    "first_name": "Lucy21",
+    "last_name": "Olivia",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.038Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 66,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Missouri20",
+    "first_name": "Missouri20",
+    "last_name": "Olivia",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.042Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 67,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Montana19",
+    "first_name": "Montana19",
+    "last_name": "Olivia",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.046Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 68,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Aurora18",
+    "first_name": "Aurora18",
+    "last_name": "Charlotte",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.050Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 69,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Mississippi17",
+    "first_name": "Mississippi17",
+    "last_name": "Sophia",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.054Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 70,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Alabama16",
+    "first_name": "Alabama16",
+    "last_name": "Evelyn",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.058Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 71,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "North15",
+    "first_name": "North15",
+    "last_name": "Tennessee",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.061Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 72,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Pennsylvania14",
+    "first_name": "Pennsylvania14",
+    "last_name": "Emma",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.065Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 73,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Indiana13",
+    "first_name": "Indiana13",
+    "last_name": "Olivia",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.070Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 74,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Isla12",
+    "first_name": "Isla12",
+    "last_name": "Amelia",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.073Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 75,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Nora11",
+    "first_name": "Nora11",
+    "last_name": "Charlotte",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.077Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 76,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Charlotte10",
+    "first_name": "Charlotte10",
+    "last_name": "Emma",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.081Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 77,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Idaho9",
+    "first_name": "Idaho9",
+    "last_name": "Olivia",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.085Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 78,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Florida8",
+    "first_name": "Florida8",
+    "last_name": "Olivia",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.089Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 79,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Emma7",
+    "first_name": "Emma7",
+    "last_name": "Eleanor",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.093Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 80,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Oregon6",
+    "first_name": "Oregon6",
+    "last_name": "Charlotte",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.096Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 81,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Vermont5",
+    "first_name": "Vermont5",
+    "last_name": "Olivia",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.100Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 82,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Kansas4",
+    "first_name": "Kansas4",
+    "last_name": "Evelyn",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.104Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 83,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Delaware3",
+    "first_name": "Delaware3",
+    "last_name": "Amelia",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.109Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 84,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Georgia2",
+    "first_name": "Georgia2",
+    "last_name": "Evelyn",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.113Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 85,
+  "fields": {
+    "password": "password123",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Nevada1",
+    "first_name": "Nevada1",
+    "last_name": "Carolina",
+    "email": "Genya4211@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-04-18T09:34:32.117Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "tickets",
+    "model": "ticket"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "tickets",
+    "model": "ticketcomment"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "tickets",
+    "model": "ticketrecipient"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "notebook",
+    "model": "note"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "notebook",
+    "model": "section"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "notebook",
+    "model": "links"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "notebook",
+    "model": "image"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "notebook",
+    "model": "code"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 9,
+  "fields": {
+    "app_label": "notebook",
+    "model": "article"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "notebook",
+    "model": "topic"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 11,
+  "fields": {
+    "app_label": "tasks",
+    "model": "task"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 12,
+  "fields": {
+    "app_label": "tasks",
+    "model": "taskusers"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 13,
+  "fields": {
+    "app_label": "tasks",
+    "model": "taskhistory"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 14,
+  "fields": {
+    "app_label": "employee",
+    "model": "officepositions"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 15,
+  "fields": {
+    "app_label": "employee",
+    "model": "oficedepartmens"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 16,
+  "fields": {
+    "app_label": "employee",
+    "model": "region"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 17,
+  "fields": {
+    "app_label": "employee",
+    "model": "retailpositions"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 18,
+  "fields": {
+    "app_label": "employee",
+    "model": "storepositions"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 19,
+  "fields": {
+    "app_label": "employee",
+    "model": "officeemployee"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 20,
+  "fields": {
+    "app_label": "employee",
+    "model": "district"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 21,
+  "fields": {
+    "app_label": "employee",
+    "model": "retailemployee"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 22,
+  "fields": {
+    "app_label": "employee",
+    "model": "store"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 23,
+  "fields": {
+    "app_label": "employee",
+    "model": "storeemployee"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 24,
+  "fields": {
+    "app_label": "comunication",
+    "model": "articke"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 25,
+  "fields": {
+    "app_label": "comunication",
+    "model": "coment"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 26,
+  "fields": {
+    "app_label": "comunication",
+    "model": "deletehistory"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 27,
+  "fields": {
+    "app_label": "comunication",
+    "model": "notesold"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 28,
+  "fields": {
+    "app_label": "comunication",
+    "model": "viewarticle"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 29,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 30,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 31,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 32,
+  "fields": {
+    "app_label": "auth",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 33,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 34,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+}
+]

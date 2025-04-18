@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import Http404, HttpRequest, HttpResponse
 from django.db.models import Q
-from django.views.generic import View, ListView, DeleteView, UpdateView, CreateView
+from django.views.generic import View, ListView, DeleteView, UpdateView, CreateView, DetailView
 from django.views.generic.edit import FormMixin
 
 
@@ -30,30 +30,69 @@ class CreateArticle(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
+class UpdateArticle(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    model = Articke
+    form_class = ArticlesForm
+    template_name = "comunication/update_article.html"
+    permission_required  = 'comunication.update_articke'
+    context_object_name = 'article'
+
+    def get_queryset(self):
+        return super().get_queryset().filter(owner=self.request.user)
+    
+    def get_success_url(self):
+        return reverse_lazy('comunication:detail_article',
+                               kwargs={"pk": self.get_object().id})
+
+
+class DeleteArticle(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    model = Articke
+    success_url = reverse_lazy('home')
+    permission_required  = 'comunication.delete_articke'
+
+    def get_queryset(self):
+        return super().get_queryset().filter(owner=self.request.user)
+
+    def form_valid(self, *args, **kwargs):
+        content = f"user: {self.request.user}, delete article: {self.object.title}, with content:{self.object.content[:50]}."
+        DeleteHistory.objects.create(user=self.request.user, content=content, article=True)
+        return super().form_valid(*args, **kwargs)
+
+
+class DeteailArticle(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
+    mode = Articke
+    context_object_name = 'article'
 
 
 @login_required
-def create_article(request: HttpRequest):
-    curent_user = get_user(request)
-    if not curent_user.has_perm('comunication.add_articke'):
-        raise Http404
-    
-    template_name = 'comunication/create_article.html'
+def detail_article(request: HttpRequest, pk):
+    template_name = "comunication/detail_article.html"
+    article = Articke.objects.get(id=pk)
+    curent_user = request.user
 
-    if request.method == "POST":
-        form = ArticlesForm(request.POST, request.FILES)
-        if form.is_valid():
-            article = form.cleaned_data
-            article['owner'] = curent_user
-            article['location'] = get_user_location(curent_user)
-            Articke.objects.create(**article)
-            return redirect("home")
+    
+    allowed_articles = get_allowed_articles(curent_user)
+    if article in allowed_articles or article.is_competition == True:
+        coments = Coment.objects.filter(article=article)
+        context = {
+            "article": article,
+            "coments": coments,
+            "user": curent_user,
+        }
+        if request.method == "GET":
+            ViewArticle.objects.get_or_create(
+                article=article,
+                user=curent_user,
+                view=True
+            )
+            return render(request, template_name, context)
+        
+        if request.method == "POST":
+            create_coment(request=request, object_creation=article)
+            return redirect("comunication:detail_article", pk=pk)
     else:
-        form = ArticlesForm()
-    context = {
-        "form": form,
-    }
-    return render(request, template_name, context)
+        return redirect("home")
+
 
 @login_required
 def news_list(request: HttpRequest):
@@ -84,7 +123,6 @@ def global_news_list(request:HttpRequest):
     }
     return render(request, template_name, context)
 
-
 @login_required
 def competition_list(request: HttpRequest):
     search = request.GET.get('search', '')
@@ -100,33 +138,54 @@ def competition_list(request: HttpRequest):
     }
     return render(request, template_name, context)
 
+
+
+
 @login_required
-def detail_article(request: HttpRequest, article_id):
-    template_name = "comunication/detail_article.html"
-    article = get_object_or_404(Articke, id=article_id)
+def delete_coment(request: HttpRequest, pk):
+    current_user = request.user
+    coment = Coment.objects.filter(id=pk, owner=current_user).first()
+    article_id = coment.article.id
+    if request.method == 'POST':
+        content = f"user: {current_user}, delete comment from article: {coment.article.title}, with content:{coment.content}."
+        DeleteHistory.objects.create(user=current_user, content=content, comment=True)
+        coment.delete()
+    return redirect("comunication:detail_article", pk=article_id)
+
+
+
+
+
+  #####################################################3#########################
+# Old function (did not used. There are class_view)
+
+@login_required
+def create_article(request: HttpRequest):
+    """Old function. Use CreateArticle.as_view()"""
     curent_user = get_user(request)
-    if request.method == "GET":
-        ViewArticle.objects.get_or_create(
-           article=article,
-           user=curent_user,
-           view=True
-        )
-    allowed_articles = get_allowed_articles(curent_user)
-    if article in allowed_articles or article.is_competition == True:
-        coments = Coment.objects.filter(article=article)
-        context = {
-            "object": article,
-            "coments": coments,
-            "user": curent_user,
-        }
-        if request.method == "POST":
-            create_coment(request=request, object=article) 
-            return redirect("comunication:detail_article", article_id=article_id)
-        return render(request, template_name, context)
-    return redirect("home")
+    if not curent_user.has_perm('comunication.add_articke'):
+        raise Http404
+    
+    template_name = 'comunication/create_article.html'
+
+    if request.method == "POST":
+        form = ArticlesForm(request.POST, request.FILES)
+        if form.is_valid():
+            article = form.cleaned_data
+            article['owner'] = curent_user
+            article['location'] = get_user_location(curent_user)
+            Articke.objects.create(**article)
+            return redirect("home")
+    else:
+        form = ArticlesForm()
+    context = {
+        "form": form,
+    }
+    return render(request, template_name, context)
 
 @login_required
 def update_article(request: HttpRequest, article_id):
+    """Old function. Use UpdateArticle.as_view()"""
     template_name = "comunication/update_article.html"
     article =  get_object_or_404(Articke, id=article_id)
     article_data = Articke.objects.filter(id=article_id)
@@ -145,26 +204,14 @@ def update_article(request: HttpRequest, article_id):
     return render(request, template_name, context)
 
 @login_required
-def delete_article(request: HttpRequest, article_id):
+def delete_article(request: HttpRequest, pk):
+    """Old function. Use DeleteArticle.as_view()"""
     current_user = get_user(request)
-    article = Articke.objects.get(id=article_id)
+    article = Articke.objects.get(id=pk)
     if request.method == "POST":
         content = f"user: {current_user}, delete article: {article.title}, with content:{article.content[:50]}."
         DeleteHistory.objects.create(user=current_user, content=content, article=True)
         article.delete()
     return redirect("home")
+#######################################################################################
 
-
-def delete_coment(request: HttpRequest, coment_id):
-    current_user = get_user(request)
-    coment = Coment.objects.get(id=coment_id)
-    article_id = coment.article.id
-    if request.method == 'POST':
-        content = f"user: {current_user}, delete comment from article: {coment.article.title}, with content:{coment.content}."
-        DeleteHistory.objects.create(user=current_user, content=content, comment=True)
-        coment.delete()
-    return redirect("comunication:detail_article", article_id=article_id)
-
-
-
-  

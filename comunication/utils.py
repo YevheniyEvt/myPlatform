@@ -33,22 +33,24 @@ def can_create_article(curent_user):
         return False
     return True
 
-def create_coment(request, object):
+def create_coment(request, object_creation):
+    
     form = ComentForm(request.POST)
     if form.is_valid():
         form_data = form.cleaned_data
         owner = get_user(request)
         content = form_data.get("content")
-        if isinstance(object, Articke):
+        if isinstance(object_creation, Articke):
+            
             Coment.objects.create(
                 owner=owner,
-                article=object,
+                article=object_creation,
                 content=content
             )
-        if isinstance(object, Task):
+        if isinstance(object_creation, Task):
              Coment.objects.create(
                 owner=owner,
-                task=object,
+                task=object_creation,
                 content=content
             )
              

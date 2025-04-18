@@ -72,6 +72,7 @@ class ArticlesForm(forms.ModelForm):
         }))
     
     image=CloudinaryFileField(
+        label='Image',
         required=False,
         widget=forms.ClearableFileInput(
         attrs={
@@ -87,7 +88,6 @@ class ArticlesForm(forms.ModelForm):
     
 
 class ComentForm(forms.ModelForm):
-
     class Meta:
         model = Coment
         fields = ["content"]

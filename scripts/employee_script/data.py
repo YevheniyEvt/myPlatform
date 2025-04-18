@@ -3,12 +3,12 @@ import random
 REGIONS = ['Region1', 'Region2']
 
 DISTRICTS = [
-{'name': 'South', 'region_id': 1},
-{'name': 'Dnipro', 'region_id': 2},
-{'name': 'Center', 'region_id': 1},
-{'name': 'West', 'region_id': 2},
-{'name': 'Volyn', 'region_id': 1},
-{'name': 'Podil', 'region_id': 2},
+{'name': 'South', 'region': 'Region1'},
+{'name': 'Dnipro', 'region': 'Region2'},
+{'name': 'Center', 'region': 'Region1'},
+{'name': 'West', 'region': 'Region2'},
+{'name': 'Volyn', 'region': 'Region1'},
+{'name': 'Podil', 'region': 'Region2'},
     ]
 
 NAMES = [

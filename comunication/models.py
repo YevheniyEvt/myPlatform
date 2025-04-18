@@ -1,12 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils import timezone
 from django.utils.text import slugify
 
-from cloudinary import CloudinaryVideo, CloudinaryImage
 from cloudinary.models import CloudinaryField
 
-from employee.models import District, Region
 from tasks.models import Task
 
 # Create your models here.
@@ -65,6 +62,7 @@ class Articke(models.Model):
 
     
 class ViewArticle(models.Model):
+    """User view article or not"""
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     article = models.ForeignKey(Articke, on_delete=models.CASCADE)
     view = models.BooleanField(default=False)
@@ -72,6 +70,7 @@ class ViewArticle(models.Model):
 
 
 class Coment(models.Model):
+
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     article = models.ForeignKey(Articke, on_delete=models.CASCADE, blank=True, null=True)
     task = models.ForeignKey(Task, on_delete=models.CASCADE, blank=True, null=True)
@@ -81,6 +80,7 @@ class Coment(models.Model):
 
 
 class DeleteHistory(models.Model):
+    """All deleted objects"""
     user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
     content = models.CharField(max_length=500, blank=True, null=True)
     article = models.BooleanField(default=False)
