@@ -1,4 +1,5 @@
-from .models import RetailEmployee, OfficeEmployee, StoreEmployee
+from .models import RetailEmployee, OfficeEmployee, StoreEmployee, StorePositionsChoises, RetailPositionsChoises
+
 
 def get_user_district(curent_user):
     """Get District where employye is working,
@@ -38,8 +39,8 @@ def get_user_employee(user):
         return office_employee
 
 
-# def get_management_positions():
-#     return [
-#         StorePositionsChoises.STORE_MANAGER, StorePositionsChoises.DEPUTY_STORE_MANAGER,
-#         RetailPositionsChoises.DISTRICT_MANAGER, RetailPositionsChoises.REGION_MENAGER
-#         ]
+def get_management_positions():
+    return [
+        StorePositionsChoises.STORE_MANAGER, StorePositionsChoises.DEPUTY_STORE_MANAGER,
+        RetailPositionsChoises.DISTRICT_MANAGER, RetailPositionsChoises.REGION_MENAGER
+        ]
