@@ -6,9 +6,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import Http404, HttpRequest, HttpResponse
 from django.db.models import Q
-from django.views.generic import View, ListView, DeleteView, UpdateView, CreateView, DetailView
-from django.views.generic.edit import FormMixin
-
+from django.views.generic import View, ListView, DeleteView, UpdateView, CreateView, DetailView, FormView
+from django.views.generic.edit import FormMixin, ProcessFormView
+from django.views.generic.detail import SingleObjectMixin
 
 from django.urls import reverse_lazy
 
@@ -16,7 +16,7 @@ from .forms import ArticlesForm
 from .models import Articke, Coment, ViewArticle, DeleteHistory
 from employee.utils import get_user_store, get_user_location
 from .utils import get_allowed_articles, can_create_article, create_coment
-
+from .forms import ComentForm
 
 class CreateArticle(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = ArticlesForm
@@ -36,7 +36,7 @@ class UpdateArticle(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     template_name = "comunication/update_article.html"
     permission_required  = 'comunication.update_articke'
     context_object_name = 'article'
-
+    
     def get_queryset(self):
         return super().get_queryset().filter(owner=self.request.user)
     
@@ -59,10 +59,52 @@ class DeleteArticle(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
         return super().form_valid(*args, **kwargs)
 
 
-class DeteailArticle(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
-    mode = Articke
-    context_object_name = 'article'
+class CreateCommentView(CreateView):
+    model = Articke
+    form_class = ComentForm
+    
+    def get_success_url(self):
+        return reverse_lazy("comunication:detail_article", kwargs={'pk': self.article.id})
+    
+    def form_valid(self, form):
+        self.article = self.get_object()
+        form.instance.article = self.article 
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
 
+
+class DetailArticleView(DetailView):
+    model = Articke
+    context_object_name = 'article'
+    template_name = "comunication/detail_article.html"
+
+    def get_queryset(self):
+        allowed_articles = get_allowed_articles(self.request.user)
+        return allowed_articles
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        article = self.get_object()
+        if article:
+            ViewArticle.objects.get_or_create(
+                article=article,
+                user=self.request.user,
+                view=True
+            )
+        comments = Coment.objects.filter(article=article)
+        context['comments'] = comments
+        return context
+
+class ArticleCommentView(LoginRequiredMixin, View):
+
+    def post(self, request, *args, **kwargs):
+        view = CreateCommentView.as_view()
+        return view(request, *args, **kwargs)
+    
+    def get(self, request, *args, **kwargs):
+        view = DetailArticleView.as_view()
+        return view(request, *args, **kwargs)
+    
 
 @login_required
 def detail_article(request: HttpRequest, pk):

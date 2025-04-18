@@ -126,10 +126,9 @@ class DetailArticleTestCase(TestCase):
     fixtures = ["test_data"]
 
     def setUp(self):
-        self.article_2 = Articke.objects.filter(is_competition=True).first()
+        self.article_2 = Articke.objects.filter(is_global=True).first()
         self.comments_2 = Coment.objects.filter(article=self.article_2)
         self.user_all_permission = User.objects.get(username='admin')
-        self.user_district_permission = User.objects.filter(storeemployee__isnull=False).first()
     
     def test_detail_article_not_login_user(self):
         response = self.client.get(reverse('comunication:detail_article', kwargs={"pk": self.article_2.id}))
@@ -149,16 +148,14 @@ class DetailArticleTestCase(TestCase):
         article_view = ViewArticle.objects.filter(user=response.wsgi_request.user, article=self.article_2).first()
         self.assertIsNotNone(article_view)
         self.assertTrue(article_view.view)
-        self.assertQuerySetEqual(response.context['coments'], self.comments_2, ordered=False)
+        self.assertQuerySetEqual(response.context['comments'], self.comments_2, ordered=False)
         
     def test_detail_article_not_in_allowed_article(self):
-        user_location = self.user_district_permission.storeemployee.store.district
-        article = Articke.objects.exclude(location=user_location).exclude(is_competition=True).exclude(permission='all').first()
-
-        self.client.force_login(self.user_district_permission)
+        article = Articke.objects.exclude(is_competition=True).exclude(permission='all').first()
+        user = User.objects.filter(storeemployee__store__district__name=article.location).first()
+        self.client.force_login(user)
         response = self.client.get(reverse('comunication:detail_article', kwargs={"pk": article.id}))
-        self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse('home'), target_status_code=200)
+        self.assertEqual(response.status_code, 404)
 
 
 class GlobalNewsListTestCase(TestCase):
@@ -262,7 +259,7 @@ class DeleteArticleCommentTestCase(TestCase):
 
     def setUp(self):
         self.user = User.objects.get(username='admin')
-        self.article = Articke.objects.all().first()
+        self.article = Articke.objects.filter(is_competition=True).first()
         self.user_comment = Coment.objects.create(owner=self.user,
                                                 article=self.article,
                                                 content='Hello',
@@ -278,9 +275,10 @@ class DeleteArticleCommentTestCase(TestCase):
                              )
 
     def test_delete_comment_user_owner(self):
-        self.client.login(username='admin', password='1234')
-        response = self.client.post(reverse('comunication:delete_coment',kwargs={"pk": self.user_comment.id}), follow=True)
-        self.assertEqual(response.status_code, 200)
+        self.client.force_login(self.user)
+        
+        response = self.client.post(reverse('comunication:delete_coment', kwargs={"pk": self.user_comment.id}))
+        self.assertEqual(response.status_code, 302)
         self.assertIsNone(Coment.objects.filter(id=self.user_comment.id).first())
         
         del_history = DeleteHistory.objects.filter(content__icontains='Hello').first()
