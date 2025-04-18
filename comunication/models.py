@@ -20,8 +20,6 @@ class PermissionChoise(models.TextChoices):
     ALL = 'all'
 
 
-
-
 class Articke(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=150, unique=True)
@@ -68,7 +66,6 @@ class ViewArticle(models.Model):
     view = models.BooleanField(default=False)
 
 
-
 class Coment(models.Model):
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -76,7 +73,6 @@ class Coment(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE, blank=True, null=True)
     content = models.TextField(max_length=500)
     pub_date = models.DateTimeField(auto_now_add=True)
-
 
 
 class DeleteHistory(models.Model):
@@ -91,7 +87,6 @@ class DeleteHistory(models.Model):
 
     class Meta:
         ordering = ["-time_action"]
-
 
 
 class NotesOld(models.Model):

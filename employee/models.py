@@ -1,10 +1,17 @@
-from django.db import models
+""""
+The country is divided into Region. The Region are divided into District. Each district has n number of Stores.
+There are employees who work in the store - StoreEmployee
+They have positions - StorePositions.
+There are employees who manage the districts, regions and the country - RetailEmployee.
+They have positions - RetailPositions.
+There are employees who work in the office (OficeDepartmens) - OfficeEmployee.
+They have positions - OfficePositions.
+"""
 
+
+from django.db import models
 from django.contrib.auth.models import User
 
-
-
-       
 
 class StorePositionsChoises(models.TextChoices):
     STORE_MANAGER = "SM", "Store Manager"
@@ -33,6 +40,7 @@ class OfficePositionsChoises(models.TextChoices):
         
 
 class StorePositions(models.Model):
+    """Store employee positions"""
     position = models.CharField(max_length=50, choices=StorePositionsChoises, unique=True)
 
     def __str__(self):
@@ -40,7 +48,9 @@ class StorePositions(models.Model):
                     if self.position in choise:
                             return choise[1]
 
+
 class OfficePositions(models.Model):
+    """Office employee positions"""
     position = models.CharField(max_length=50, choices=OfficePositionsChoises, unique=True)
 
     def __str__(self):
@@ -49,9 +59,8 @@ class OfficePositions(models.Model):
                             return choise[1]
                             
                 
-        
-
 class RetailPositions(models.Model):
+    """Retail employee positions"""
     position = models.CharField(max_length=50, choices=RetailPositionsChoises, unique=True)
 
     def __str__(self):
@@ -59,6 +68,7 @@ class RetailPositions(models.Model):
                     if self.position in choise:
                             return choise[1]
             return self.position
+
 
 class Region(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -92,8 +102,6 @@ class OficeDepartmens(models.Model):
                 return self.name
 
 
-                  
-        
 class StoreEmployee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
     position = models.ForeignKey(StorePositions, on_delete=models.SET_NULL, blank=True, null=True)
@@ -110,8 +118,6 @@ class StoreEmployee(models.Model):
     @property
     def region(self):
             return self.store.region.name
-       
-
        
 
 class RetailEmployee(models.Model):
@@ -132,254 +138,3 @@ class OfficeEmployee(models.Model):
     def __str__(self):
             return self.user.get_full_name()
         
-
-
-
-
-
-
-
-
-# class DistrictPositions(models.Model):
-#         position = models.CharField(max_length=50, choices=RetailPositionsChoises, unique=True)
-
-#         def __str__(self):
-#                 return self.position
-
-# class RegionPositions(models.Model):
-#         position = models.CharField(max_length=50, choices=RetailPositionsChoises, unique=True)
-
-#         def __str__(self):
-#                 return self.position
-        
-
-        
-# class EmployeePosition(models.Model):
-#         store_posions = models.ForeignKey(StorePositions, on_delete=models.SET_NULL, max_length=50, blank=True, null=True)
-#         office_positions = models.ForeignKey(OfficePositions, on_delete=models.SET_NULL, max_length=50, blank=True, null=True)
-#         district_position = models.ForeignKey(DistrictPositions, on_delete=models.SET_NULL, max_length=50, blank=True, null=True)
-#         region_positions = models.ForeignKey(RegionPositions, on_delete=models.SET_NULL, max_length=50, blank=True, null=True)
-        
-        
-#         def __str__(self):
-#             if self.store_posions:
-#                    return self.store_posions.position
-#             elif self.office_positions:
-#                    return self.office_positions.position
-#             elif self.district_position:
-#                    return self.district_position.position
-#             elif self.region_positions:
-#                    return self.region_positions.position
-        
-# class EmployeePosition(models.Model):
-#         name = models.ForeignKey(AllPositions, on_delete=models.CASCADE)
-        
-
-# class Emploee(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
-#     position = models.OneToOneField(EmployeePosition, on_delete=models.SET_NULL, blank=True, null=True)
-
-#     def __str__(self):
-#             return self.user.username
-    
-
-
-
-
-"""
-class StorePosition(TextChoises):
-
-class ReatilPosition(TextChoises):
-
-class OfficePosition(TextChoises): 
-
-class Emploee:
-    user = Username
-    position = EmployeePosition
-    location = Location
-
-    def full_name:
-    
-    def email:
-
-    def get_employee_location
-
-    def get_position
-
-    def get_store
-
-    def get_district
-
-    def get_region
-
-    def get_department:
-    
-    def is_store_employee:
-        empl = StoreEmployee.get(self.user.id)
-    def is_office_employee:
-    
-    def is_district employee:
-    
-    def is_region_employee:
-    
-class Location:
-    store = Store
-    district = District
-    region = Region
-
-    
-
-class EmployeePosition:
-    all_position = Positions
-    
-
-class Positions:
-    store_posions = StorePositions
-    office_positions = OfficePositions
-    district_position = DistrictPositions
-    region_positions = RegionPositions
-
-
-class StorePositions:
-    position = StorePositionChoises
-
-
-class OfficePositions:
-    position = OfficePositionChoises
-
-
-class DistrictPositions:
-    position = ReatilPositionChoises
-
-
-class RegionPositions:
-    position = ReatilPositionChoises
-
-    
-class Store:
-    name =
-    short_name =
-    location = 
-    district = District
-    
-
-class District:
-    name = 
-    region = Region
-
-
-class Region:
-    name = 
-    country =
-
-class OficeDepartmens:
-    name =
-    
-
-"""
-
-# class UserInfo(models.Model):
-#     user = models.OneToOneField(settings.AUTH_USER_MODEL, unique=True, on_delete=models.CASCADE)
-    
-#     def __str__(self):
-#         return self.user.username
-
-
-# class StorePosition(models.Model):
-#     store_positions = {
-#         "SM": "Store Manager",
-#         "SMT": "Store Manager Trainee",
-#         "DepSm": "DeputyStoreManager",
-#         "AR": "Area Responsible",
-#         "LR": "Logistic Responsible",
-#         "SA": "Sails Assistens",
-#     }
-    
-#     position_name = models.CharField(max_length=50, choices=store_positions)
-#     user_store_position = models.OneToOneField(UserInfo, null=True, on_delete=models.SET_NULL)
-
-#     def __str__(self):
-#         return self.user_store_position.user.username
-    
-
-# class RetailPosition(models.Model):
-#     retail_position = {
-#         "DM": "District Manager",
-#         "DMT": "District Manager Tranee",
-#         "RMT": "Region Manager Trainee",
-#         "RM": "Region Manager",
-#         "CM": "Country Manager",
-#     }
-    
-#     position_name = models.CharField(max_length=50, choices=retail_position)
-#     user_retail_position = models.OneToOneField(UserInfo, null=True, on_delete=models.SET_NULL)
-#     def __str__(self):
-#         return self.user_retail_position.user.username
-
-
-# class OfficePosition(models.Model):
-#     office_position = {
-#         "BK": "Bookkeper",
-#         "LS": "Logigstic Support",
-#         "IT": "Sys Admin",
-#         "AU": "Auditor",
-#     }
-    
-#     position_name = models.CharField(max_length=50, choices=office_position)
-#     user_office_position = models.OneToOneField(UserInfo, null=True, on_delete=models.SET_NULL)
-#     def __str__(self):
-#         return self.user_office_position.user.username
-
-# class Employee(User):
-
-#     class Meta:
-#         proxy = True
-
-#     def set_position(self, position: str):
-#         userinfo = UserInfo(user=self)
-#         if position in StorePosition.store_positions.keys():
-#             position_todb = StorePosition(position_name=position, user_store_position=userinfo)
-#         elif position in OfficePosition.office_position.keys():
-#             position_todb = OfficePosition(position_name=position, user_office_position=userinfo)
-#         elif position in RetailPosition.retail_position.keys():
-#             position_todb = RetailPosition(position_name=position, user_retail_position=userinfo)
-#         else:
-#             return f"Position {position} does not exist"
-#         userinfo.save()
-#         position_todb.save()
-
-#     def get_position(self):
-#         if hasattr(self.userinfo, 'storeposition'):
-#             return StorePosition.store_positions.get(self.userinfo.storeposition.position_name)
-#         elif hasattr(self.userinfo, 'officeposition'):
-#             return OfficePosition.office_position.get(self.userinfo.officeposition.position_name)
-#         elif hasattr(self.userinfo, 'retailposition'):
-#             return RetailPosition.retail_position.get(self.userinfo.retailposition.position_name)
-#         else:
-#             return 'User does not have position yet'
-
-
-# class Position:
-#     office_position = models.ForeignKey(OfficePosition, null=True, on_delete=models.SET_NULL)
-#     retail_position = models.ForeignKey(RetailPosition, null=True, on_delete=models.SET_NULL)
-#     store_position = models.ForeignKey(StorePosition, null=True, on_delete=models.SET_NULL)
-
-
-# class Employee(models.Model):
-#     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-#     position = models.OneToOneField(Position, on_delete=models.CASCADE, related_name='position')
-
-# class Store:
-#     pass
-
-
-# class District:
-#     pass    
-
-
-# class Retail:
-#     pass
-
-
-# class Country:
-#     pass

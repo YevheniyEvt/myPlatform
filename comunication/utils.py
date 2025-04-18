@@ -1,13 +1,10 @@
 from django.db.models import Q
 from django.contrib.auth import get_user
 
-
-
 from employee.models import District, Region
 from employee.utils import get_user_district, get_user_store
 
 from tasks.models import Task
-
 from .forms import ComentForm
 from .models import Articke, PermissionChoise, Coment
 
