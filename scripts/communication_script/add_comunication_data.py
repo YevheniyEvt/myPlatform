@@ -26,12 +26,12 @@ def crete_articles():
         Articke.objects.create(
             owner=users[0],
             title=' '.join(TEXT_FOR_ARTICLE[i + 3:10 + i]),
-            content=' '.join(TEXT_FOR_ARTICLE[i:20]),
+            content=' '.join(TEXT_FOR_ARTICLE[i:15]),
             is_local=index[0],
             is_global=index[1],
             is_competition=index[2],
             permission=random.choice(PERMISSION),
-            location=DISTRICTS,
+            location=DISTRICTS[0],
         )
         users.rotate()
         locations.rotate()
