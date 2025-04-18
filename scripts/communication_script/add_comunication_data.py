@@ -16,7 +16,7 @@ PERMISSION =  [
     'region',
     'all']
 LOCATION = ['District', 'Region', 'Region']
-DISTRICTS = deque(DISTRICTS)
+DISTRICTS_D = deque(DISTRICTS)
 
 def crete_articles():
     users = deque(User.objects.exclude(storeemployee__isnull=False))
@@ -31,7 +31,7 @@ def crete_articles():
             is_global=index[1],
             is_competition=index[2],
             permission=random.choice(PERMISSION),
-            location=DISTRICTS[0],
+            location=DISTRICTS_D[0],
         )
         users.rotate()
         locations.rotate()

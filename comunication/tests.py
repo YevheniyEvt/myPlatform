@@ -136,8 +136,7 @@ class DetailArticleTestCase(TestCase):
         
     def test_detail_article_not_in_allowed_article(self):
         user_location = self.user_district_permission.storeemployee.store.district
-        article = Articke.objects.exclude(location=user_location).first()
-
+        article = Articke.objects.exclude(location=user_location).exclude(is_competition=True).exclude(permission='all').first()
         self.client.force_login(self.user_district_permission)
         response = self.client.get(reverse('comunication:detail_article', kwargs={"pk": article.id}))
         self.assertEqual(response.status_code, 302)
