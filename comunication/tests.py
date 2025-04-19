@@ -232,7 +232,7 @@ class CreateArticleCommentTestCase(TestCase):
 
     def setUp(self):
         self.user = User.objects.get(username='admin')
-        self.user_article = Articke.objects.filter(is_competition=True).first()
+        self.user_article = Articke.objects.filter(is_global=True).first()
 
     def test_create_article_comment_not_login_user(self):
         response = self.client.post(reverse('comunication:detail_article',kwargs={"pk": self.user_article.id}),
@@ -253,6 +253,13 @@ class CreateArticleCommentTestCase(TestCase):
         self.assertIsNotNone(comment)
         self.assertEqual(comment.article, self.user_article)
         self.assertEqual(comment.owner, self.user)
+
+    def test_create_comment_not_allowed_article(self):
+        article = Articke.objects.filter(is_local=True).first()
+        self.client.force_login(self.user)
+        response = self.client.post(reverse('comunication:detail_article', kwargs={'pk': article.id}),
+                                    data={'content': 'Hello'})
+        self.assertEqual(response.status_code, 404)
 
 class DeleteArticleCommentTestCase(TestCase):
     fixtures = ["test_data"]

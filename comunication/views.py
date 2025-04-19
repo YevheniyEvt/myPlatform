@@ -1,21 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
-
-from django.contrib import messages
 from django.contrib.auth import get_user
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.http import Http404, HttpRequest, HttpResponse
+from django.http import Http404, HttpRequest
+from django.urls import reverse_lazy
+
 from django.db.models import Q
 from django.views.generic import View, ListView, DeleteView, UpdateView, CreateView, DetailView, FormView
-from django.views.generic.edit import FormMixin, ProcessFormView
-from django.views.generic.detail import SingleObjectMixin
-
-from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 from .forms import ArticlesForm
 from .models import Articke, Coment, ViewArticle, DeleteHistory
-from employee.utils import get_user_store, get_user_location
-from .utils import get_allowed_articles, can_create_article, create_coment
+from employee.utils import get_user_location
+from .utils import get_allowed_articles, create_coment
 from .forms import ComentForm
 
 class CreateArticle(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
@@ -54,6 +50,7 @@ class DeleteArticle(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
         return super().get_queryset().filter(owner=self.request.user)
 
     def form_valid(self, *args, **kwargs):
+        
         content = f"user: {self.request.user}, delete article: {self.object.title}, with content:{self.object.content[:50]}."
         DeleteHistory.objects.create(user=self.request.user, content=content, article=True)
         return super().form_valid(*args, **kwargs)
@@ -71,7 +68,28 @@ class CreateCommentView(CreateView):
         form.instance.article = self.article 
         form.instance.owner = self.request.user
         return super().form_valid(form)
+    
+    def get_queryset(self):
+        allowed_articles = get_allowed_articles(self.request.user)
+        return allowed_articles
 
+
+class DeleteComment(LoginRequiredMixin, DeleteView):
+    model = Coment
+    permission_required  = 'comunication.delete_articke'
+
+    def get_queryset(self):
+        return super().get_queryset().filter(owner=self.request.user)
+    
+    def form_valid(self, *args, **kwargs):
+        content = f"user: {self.request.user}, delete article: {self.object.article.title}, with content:{self.object.content[:50]}."
+        DeleteHistory.objects.create(user=self.request.user, content=content, comment=True)
+        return super().form_valid(*args, **kwargs)
+    
+    def get_success_url(self):
+        article_id = self.object.article.id
+        return reverse_lazy("comunication:detail_article", kwargs={'pk': article_id})
+    
 
 class DetailArticleView(DetailView):
     model = Articke
@@ -95,6 +113,7 @@ class DetailArticleView(DetailView):
         context['comments'] = comments
         return context
 
+
 class ArticleCommentView(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
@@ -106,8 +125,110 @@ class ArticleCommentView(LoginRequiredMixin, View):
         return view(request, *args, **kwargs)
     
 
+class NewsListView(LoginRequiredMixin, ListView):
+    model = Articke
+    template_name = "comunication/list_article.html"
+    context_object_name = 'articles'
+
+    def get_queryset(self):
+        search = self.request.GET.get('search', '')
+        news = get_allowed_articles(self.request.user).exclude(is_competition=True).filter(
+        Q(title__icontains=search) |
+        Q(content__icontains=search))
+        return news
+
+
+class GlobalNewsListView(LoginRequiredMixin, ListView):
+    model = Articke
+    template_name = "comunication/list_article.html"
+    context_object_name = 'articles'
+
+    def get_queryset(self):
+        search = self.request.GET.get('search', '')
+        global_news = Articke.objects.all().filter(is_global=True).filter(
+        Q(title__icontains=search) |
+        Q(content__icontains=search))
+        return global_news
+
+
+class CompetitionListView(LoginRequiredMixin, ListView):
+    model = Articke
+    template_name = "comunication/list_article.html"
+    context_object_name = 'articles'
+
+    def get_queryset(self):
+        search = self.request.GET.get('search', '')
+        competition = Articke.objects.all().filter(is_competition=True).filter(
+        Q(title__icontains=search) |
+        Q(content__icontains=search))
+        return competition
+
+
+
+  #####################################################3#########################
+# Old function (did not used. There are class_view)
+@login_required
+def delete_coment(request: HttpRequest, pk):
+    """Old function. Use DeleteComment.as_view()"""
+    current_user = request.user
+    coment = Coment.objects.filter(id=pk, owner=current_user).first()
+    article_id = coment.article.id
+    if request.method == 'POST':
+        content = f"user: {current_user}, delete comment from article: {coment.article.title}, with content:{coment.content}."
+        DeleteHistory.objects.create(user=current_user, content=content, comment=True)
+        coment.delete()
+    return redirect("comunication:detail_article", pk=article_id)
+
+@login_required
+def competition_list(request: HttpRequest):
+    """Old function. Use CompetitionListView.as_view()"""
+    search = request.GET.get('search', '')
+    competition = Articke.objects.all().filter(is_competition=True).filter(
+        Q(title__icontains=search) |
+        Q(content__icontains=search)
+    )
+    template_name = "comunication/list_article.html"
+    title = "Competitions"
+    context = {
+        "articles": competition,
+        "title": title,
+    }
+    return render(request, template_name, context)
+
+@login_required
+def global_news_list(request:HttpRequest):
+    """Old function. Use GlobalNewsListView.as_view()"""
+    search = request.GET.get('search', '')
+    global_news = Articke.objects.all().filter(is_global=True).filter(
+        Q(title__icontains=search) |
+        Q(content__icontains=search)
+    )
+    template_name = "comunication/list_article.html"
+    context = {
+        "articles": global_news,
+    }
+    return render(request, template_name, context)
+
+@login_required
+def news_list(request: HttpRequest):
+    """Old function. Use NewsListView.as_view()"""
+    search = request.GET.get('search', '')
+    curent_user = get_user(request)
+    news = get_allowed_articles(curent_user).exclude(is_competition=True).filter(
+        Q(title__icontains=search) |
+        Q(content__icontains=search)
+    )
+    template_name = "comunication/list_article.html"
+    title = "News"
+    context = {
+        "articles": news,
+        "title": title,
+    }
+    return render(request, template_name, context)
+
 @login_required
 def detail_article(request: HttpRequest, pk):
+    """Old function. Use ArticleCommentView.as_view()"""
     template_name = "comunication/detail_article.html"
     article = Articke.objects.get(id=pk)
     curent_user = request.user
@@ -134,72 +255,6 @@ def detail_article(request: HttpRequest, pk):
             return redirect("comunication:detail_article", pk=pk)
     else:
         return redirect("home")
-
-
-@login_required
-def news_list(request: HttpRequest):
-    search = request.GET.get('search', '')
-    curent_user = get_user(request)
-    news = get_allowed_articles(curent_user).exclude(is_competition=True).filter(
-        Q(title__icontains=search) |
-        Q(content__icontains=search)
-    )
-    template_name = "comunication/list_article.html"
-    title = "News"
-    context = {
-        "articles": news,
-        "title": title,
-    }
-    return render(request, template_name, context)
-
-@login_required
-def global_news_list(request:HttpRequest):
-    search = request.GET.get('search', '')
-    global_news = Articke.objects.all().filter(is_global=True).filter(
-        Q(title__icontains=search) |
-        Q(content__icontains=search)
-    )
-    template_name = "comunication/list_article.html"
-    context = {
-        "articles": global_news,
-    }
-    return render(request, template_name, context)
-
-@login_required
-def competition_list(request: HttpRequest):
-    search = request.GET.get('search', '')
-    competition = Articke.objects.all().filter(is_competition=True).filter(
-        Q(title__icontains=search) |
-        Q(content__icontains=search)
-    )
-    template_name = "comunication/list_article.html"
-    title = "Competitions"
-    context = {
-        "articles": competition,
-        "title": title,
-    }
-    return render(request, template_name, context)
-
-
-
-
-@login_required
-def delete_coment(request: HttpRequest, pk):
-    current_user = request.user
-    coment = Coment.objects.filter(id=pk, owner=current_user).first()
-    article_id = coment.article.id
-    if request.method == 'POST':
-        content = f"user: {current_user}, delete comment from article: {coment.article.title}, with content:{coment.content}."
-        DeleteHistory.objects.create(user=current_user, content=content, comment=True)
-        coment.delete()
-    return redirect("comunication:detail_article", pk=article_id)
-
-
-
-
-
-  #####################################################3#########################
-# Old function (did not used. There are class_view)
 
 @login_required
 def create_article(request: HttpRequest):

@@ -1540,6 +1540,33 @@
   }
 },
 {
+  "model": "comunication.viewarticle",
+  "pk": 11,
+  "fields": {
+    "user": 1,
+    "article": 9,
+    "view": true
+  }
+},
+{
+  "model": "comunication.viewarticle",
+  "pk": 12,
+  "fields": {
+    "user": 1,
+    "article": 4,
+    "view": true
+  }
+},
+{
+  "model": "comunication.viewarticle",
+  "pk": 13,
+  "fields": {
+    "user": 1,
+    "article": 2,
+    "view": true
+  }
+},
+{
   "model": "comunication.coment",
   "pk": 1,
   "fields": {
@@ -3208,7 +3235,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$870000$PAcM1LOUynh6sUJJIHhLGl$OhRI7lk7tNkUVxvNU5MB6aFKgKuIWLeCcS2HujK6QXM=",
-    "last_login": null,
+    "last_login": "2025-04-18T21:11:05.193Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "Super",
@@ -5003,6 +5030,14 @@
   "fields": {
     "app_label": "sessions",
     "model": "session"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "rl1vbnciy2eicukeajm4uo11c3sx4el7",
+  "fields": {
+    "session_data": ".eJxVjDsOAiEUAO9CbQjy-FraewbyeICsGkiW3cp4d0OyhbYzk3mzgPtWwz7yGpbELuzMTr8sIj1zmyI9sN07p962dYl8Jvywg996yq_r0f4NKo46t4JsceC8M6aISAVRe5mJjIESI4GH7I3yqLODKJNAoYt2VtkEVinJPl_r3Te5:1u5szJ:Js5NR6jyF_5uFe63swC4VZXfGGqN95070KWXmjp0IHU",
+    "expire_date": "2025-05-02T21:11:05.253Z"
   }
 }
 ]
