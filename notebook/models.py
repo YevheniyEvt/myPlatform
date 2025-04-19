@@ -21,7 +21,7 @@ class Topic(models.Model):
         unique=True,
         validators=[MinLengthValidator(2, 'Must be more then 2 characters')],
         )
-    short_description = models.TextField()
+    short_description = models.TextField(blank=True, null=True)
     add_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -38,6 +38,7 @@ class Section(models.Model):
     class Meta:
         ordering = ['-add_date']
 
+
 class Code(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     section = models.ForeignKey(Section, on_delete=models.CASCADE)
@@ -50,6 +51,7 @@ class Article(models.Model):
     section = models.ForeignKey(Section, on_delete=models.CASCADE)
     content = models.TextField(unique=True)
     add_date = models.DateTimeField(auto_now_add=True)
+
 
 class Image(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -82,6 +84,7 @@ class Image(models.Model):
             )
         return None
     
+
 class Links(models.Model):
     section = models.ForeignKey(Section, on_delete=models.CASCADE)
     name = models.CharField(max_length=150, unique=True)

@@ -10,6 +10,7 @@ from .models import Articke, PermissionChoise, Coment
 
 
 def get_allowed_articles(curent_user):
+    """Return Queryset Article that user can see"""
     location = get_user_district(curent_user)
     if isinstance(location, District):
         region = location.region
@@ -23,15 +24,18 @@ def get_allowed_articles(curent_user):
         articles = Articke.objects.all()
         return articles
     return Articke.objects.all()
-    
 
+
+ #Old function for function view. Soon will be delete. There are class view now.  
+##########################################################################
 def can_create_article(curent_user):
+    """Old funcion to check permission."""
     if get_user_store(curent_user) is not None:
         return False
     return True
 
 def create_coment(request, object_creation):
-    
+    """Old function. Do no use now"""
     form = ComentForm(request.POST)
     if form.is_valid():
         form_data = form.cleaned_data
@@ -51,3 +55,4 @@ def create_coment(request, object_creation):
                 content=content
             )
              
+#############################################################################3

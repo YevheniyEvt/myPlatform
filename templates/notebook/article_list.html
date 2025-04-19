@@ -4,9 +4,16 @@
         <form class="mb-6" action="{% url 'notebook:show_articles' section_object.id %}" method="post">
             {% csrf_token %}
             <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-                <textarea  rows="6" name="content"
-                    class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
-                    placeholder="Write an Article" required></textarea>
+                {% for field in form %} 
+                {{ field }}
+                {% if field.errors %}
+                    <p class="mt-4 text-sm text-red-600 dark:text-red-500">
+                    {% for error in field.errors %}
+                        <span class="block">{{ error }}</span>
+                        {% endfor %}
+                    </p>
+                {% endif %}
+                {% endfor %}
             </div>
             <button type="submit" class="w-full inline-flex justify-center rounded-lg bg-green-700 px-3 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-blue-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Add</button>
         </form>

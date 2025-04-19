@@ -1,3 +1,4 @@
+"""Script to add data to database and dumpdata to json for test"""
 
 from scripts.communication_script.add_comunication_data import communication_run
 from scripts.employee_script.add_data_employee import employee_run

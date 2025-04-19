@@ -1,3 +1,13 @@
+""" There are Global news - like news for everyone from everywhere
+Local news - like news for current country/district/region
+Competition - local company competition for stores 
+
+Article have location(all/district/region) - only user from that location can see that article
+When user open article(open link) - it save in ViewArticle
+There are comments in article
+And when someone del article or comments this move will save to DeleteHistory
+"""
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
@@ -89,13 +99,15 @@ class DeleteHistory(models.Model):
         ordering = ["-time_action"]
 
 
-class NotesOld(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    date = models.DateTimeField(auto_now_add=True)
-    text = models.TextField()
 
-    def __str__(self):
-        return f'{self.date} "{self.text[0:50]}..."'
+# that class was used to load data from old database
+# class NotesOld(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     date = models.DateTimeField(auto_now_add=True)
+#     text = models.TextField()
+
+#     def __str__(self):
+#         return f'{self.date} "{self.text[0:50]}..."'
     
-    class Meta:
-        ordering = ['-date']
+#     class Meta:
+#         ordering = ['-date']

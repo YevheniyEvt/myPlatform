@@ -1,3 +1,4 @@
+"""Add communication app data to fill database"""
 
 import random
 from collections import deque

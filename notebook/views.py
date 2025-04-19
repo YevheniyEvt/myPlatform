@@ -1,21 +1,20 @@
 from django.views.generic import ListView, DeleteView, CreateView, DetailView, UpdateView, View
+from django.views.generic.edit import BaseCreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
+
 from django.db.models import Q, Count
+
 from django.http import Http404
-
-from cloudinary.utils import cloudinary_url
-
-from comunication.models import DeleteHistory
+from django.urls import reverse_lazy
 
 from .models import Topic, Section, Code, Article, Links, Image, Note
 from .forms import TopicForm, SectionForm, CodeForm, ArticleForm, LinksForm, ImageForm, NotesForm
-
 # Create your views here.
 
-class TopicListView(LoginRequiredMixin, ListView):
+class TopicListView(LoginRequiredMixin, BaseCreateView, ListView):
     model = Topic
     context_object_name = 'topics'
+    form_class = TopicForm
 
     def get(self, request, *args, **kwargs):
         self.search = request.GET.get('search', '')
@@ -50,16 +49,16 @@ class TopicDeleteView(LoginRequiredMixin, DeleteView):
     def get_queryset(self):
         return super().get_queryset().filter(user=self.request.user)
 
-class TopicDetailCreateSectionView(LoginRequiredMixin, DetailView, CreateView):
+class TopicDetailCreateSectionView(LoginRequiredMixin, DetailView, BaseCreateView):
     """ Show Topic detail, it is a section list(section_set).
         Create new section of instance topic"""
     model = Topic
     context_object_name = 'topic_object'
     form_class = SectionForm
-
-    def get(self, request, *args, **kwargs):
+    
+    def dispatch(self, request, *args, **kwargs):
         self.search = request.GET.get('search', '')
-        return super().get(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -74,13 +73,14 @@ class TopicDetailCreateSectionView(LoginRequiredMixin, DetailView, CreateView):
         form.instance.topic = self.get_object()
         form.instance.owner = self.request.user
         return super().form_valid(form)
-    
+
+
     def get_success_url(self):
         return reverse_lazy('notebook:topic_detail',
                              kwargs={"pk": self.get_object().id})
 
 
-class SectionDetailCreateView(LoginRequiredMixin, DetailView, CreateView):
+class SectionDetailCreateView(LoginRequiredMixin, DetailView, BaseCreateView):
     """ Base class of CodeSectionView, ArticleSectionView, LinksSectionView ,
         ImageSectionView. Have same logic for this classes"""
     model = Section
@@ -203,9 +203,6 @@ class ImageSectionView(SectionDetailCreateView):
         return reverse_lazy('notebook:show_images',
                              kwargs={"pk": self.get_object().id})
     
-    def get_form(self, form_class = ...):
-        form = ImageForm(self.request.POST, self.request.FILES)
-        return form
 
 class ImageSectionDeleteView(LoginRequiredMixin, DeleteView):
     model = Image
@@ -218,7 +215,7 @@ class ImageSectionDeleteView(LoginRequiredMixin, DeleteView):
     
 
 
-class BaseNoteView(View):
+class BaseNoteView:
     """ Set the value used in child classes """
     model = Note
     def dispatch(self, request, *args, **kwargs):

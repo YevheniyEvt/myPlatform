@@ -71,18 +71,17 @@
                               <form action="{% url 'notebook:topic_detail' topic_object.id %}" method="post">
                                   {% csrf_token %}
                                   <div class="grid gap-4 mb-4 sm:grid-cols-1">
-              
-                                      <div>
-                                          <label for="{{ form.title.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-                                          {{form.title}}
+                                      {% for field in form %} 
+                                      {{ field }}
+                                      {% if field.errors %}
+                                          <p class="mt-4 text-sm text-red-600 dark:text-red-500">
+                                          {% for error in field.errors %}
+                                              <span class="block">{{ error }}</span>
+                                              {% endfor %}
+                                          </p>
+                                      {% endif %}
+                                      {% endfor %}
                                       </div>
-                                      <div class="sm:col-span-2">
-                                          
-                                          <label for="{{ form.description.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">description</label>
-                                          {{form.description}}
-                                      </div>
-
-              
                                   <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                       Create
                                   </button>

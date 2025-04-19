@@ -1,4 +1,4 @@
-"""Add data to fill database"""
+"""Add employee app data to fill database"""
 
 import random
 from collections import deque
