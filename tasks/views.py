@@ -20,9 +20,6 @@ from .utils import employee_tasks_allowed_locations, users_to_tasks_create, get_
 
 # Create your views here.
 
-
-
-
 @login_required
 def create_task(request):
     template_name = 'tasks/create_task.html'

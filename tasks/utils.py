@@ -30,7 +30,6 @@ def employee_tasks_allowed_locations(current_user):
 def  get_users_from_location(recipients_id, recipients):
 
     if isinstance(recipients, StoreEmployee):
-        print(recipients_id)
         return [StoreEmployee.objects.get(id=user_id).user for user_id in recipients_id]
     
     elif isinstance(recipients, Store):

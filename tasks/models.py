@@ -9,7 +9,7 @@ import datetime
 class Task(models.Model):
     
     recipients = models.ManyToManyField(User, through='TaskUsers')
-    title = models.CharField(max_length=150, unique=True)
+    title = models.CharField(max_length=150)
     content = models.TextField()
     start_date = models.DateField(default=timezone.now)
     deadline = models.DateField()
