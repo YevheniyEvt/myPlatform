@@ -10,11 +10,18 @@ from scripts.dumptestdata import dump_data
 
 
 def run():
-    employee_run()
-    communication_run()
-    notebook_run()
-    tasks_run()
-
-    print('Create JSON...', end=' ')
-    dump_data()
-    print('Ok')
+    employee_change = employee_run()
+    communication_change = communication_run()
+    notebook_change = notebook_run()
+    task_change = tasks_run()
+    
+    if (employee_change or
+        communication_change or
+        notebook_change or
+        task_change
+        ):
+        print('Create JSON...', end=' ')
+        dump_data()
+        print('Ok')
+    else:
+        print('JSON data - OK')

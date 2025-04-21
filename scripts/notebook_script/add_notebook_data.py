@@ -108,5 +108,7 @@ def notebook_run():
         create_article()
         create_note()
         print('Ok')
+        return True
     else:
         print('Notebook data - Ok')
+        return False

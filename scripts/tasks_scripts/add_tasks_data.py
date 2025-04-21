@@ -15,7 +15,7 @@ TASKS_NOT_ACCEPTED = 5
 TEXT = data.TEXT
 
 def create_distribution_task():
-    user = User.objects.get(username='admin')
+    user = User.objects.filter(is_superuser=True).first()
     location = get_user_location(user)
     locations, _ = employee_tasks_allowed_locations(user)
     recipient = users_to_tasks_create(recipients_list=[recipient.id for recipient in locations],
@@ -32,7 +32,7 @@ def create_distribution_task():
         task.recipients.add(user, through_defaults={"creator": True})
 
 def create_quick_task():
-    user = User.objects.get(username='admin')
+    user = User.objects.filter(is_superuser=True).first()
     location = get_user_location(user)
     for index in range(COUNT_QUICK_TASKS):
         task = Task.objects.create(
@@ -45,14 +45,14 @@ def create_quick_task():
         task.recipients.add(user, through_defaults={"creator": True})
 
 def create_completed_task():
-    user = User.objects.get(username='admin')
+    user = User.objects.filter(is_superuser=True).first()
     tasks = Task.objects.filter(taskusers__user=user)
     for task in tasks[:TASKS_COMPLETED]:
         TaskUsers.objects.filter(task=task, user=user).update(completed=~F("completed"))
 
 
 def create_not_accepted_task():
-    user = User.objects.get(username='admin')
+    user = User.objects.filter(is_superuser=True).first()
     tasks = Task.objects.filter(taskusers__user=user)
     for task in tasks[TASKS_COMPLETED:TASKS_NOT_ACCEPTED + TASKS_COMPLETED]:
         TaskUsers.objects.filter(task=task, user=user).update(not_accepted=~F("not_accepted"))
@@ -69,5 +69,7 @@ def tasks_run():
         create_completed_task()
         create_not_accepted_task()
         print('Ok')
+        return True
     else:
         print('Tasks data - Ok')
+        return False

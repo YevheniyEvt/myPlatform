@@ -156,8 +156,10 @@ def employee_run():
         add_retail_employee()
         add_store_employee()
         print('Ok')
+        return True
     else:
         print('Employee data - Ok')
+        return False
 
     
 

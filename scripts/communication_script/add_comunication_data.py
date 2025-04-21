@@ -78,6 +78,8 @@ def communication_run():
         create_article_is_view()
         create_article_comments()
         print('Ok')
+        return True
     else:
         print('Articke data - Ok')
+        return False
 
