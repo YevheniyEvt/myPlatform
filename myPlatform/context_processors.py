@@ -1,3 +1,4 @@
+from django.utils import timezone
 
 
 def set_search(request):
@@ -24,3 +25,7 @@ def can_add(request):
         'can_add_articke': can_add_articke
     }
     return context
+
+def date():
+    date = timezone.localdate()
+    return {"date": date}

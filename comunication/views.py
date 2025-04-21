@@ -1,18 +1,15 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import get_user
-from django.contrib.auth.decorators import login_required
-from django.http import Http404, HttpRequest
+from django.views.generic import View, ListView, DeleteView, UpdateView, CreateView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.db.models import Q
+
 from django.urls import reverse_lazy
 
-from django.db.models import Q
-from django.views.generic import View, ListView, DeleteView, UpdateView, CreateView, DetailView, FormView
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-
-from .forms import ArticlesForm
-from .models import Articke, Coment, ViewArticle, DeleteHistory
+from comunication.forms import ArticlesForm
+from comunication.models import Articke, Coment, ViewArticle, DeleteHistory
 from employee.utils import get_user_location
-from .utils import get_allowed_articles, create_coment
-from .forms import ComentForm
+from comunication.utils import get_allowed_articles, create_coment
+from comunication.forms import ComentForm
+
 
 class CreateArticle(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = ArticlesForm
@@ -110,6 +107,7 @@ class DetailArticleView(DetailView):
                 view=True
             )
         comments = Coment.objects.filter(article=article)
+        print(comments)
         context['comments'] = comments
         return context
 
@@ -165,8 +163,14 @@ class CompetitionListView(LoginRequiredMixin, ListView):
 
 
 
-  #####################################################3#########################
-# Old function (did not used. There are class_view)
+#####################################################3#########################
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import get_user
+from django.contrib.auth.decorators import login_required
+from django.http import Http404, HttpRequest
+
+#Old function (did not used. There are class_view)
 @login_required
 def delete_coment(request: HttpRequest, pk):
     """Old function. Use DeleteComment.as_view()"""

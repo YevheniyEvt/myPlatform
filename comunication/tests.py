@@ -151,8 +151,9 @@ class DetailArticleTestCase(TestCase):
         self.assertQuerySetEqual(response.context['comments'], self.comments_2, ordered=False)
         
     def test_detail_article_not_in_allowed_article(self):
-        article = Articke.objects.exclude(is_competition=True).exclude(permission='all').first()
-        user = User.objects.filter(storeemployee__store__district__name=article.location).first()
+        user = User.objects.filter(storeemployee__isnull=False).first()
+        article_allowed = get_allowed_articles(user)
+        article = Articke.objects.all().difference(article_allowed)[0]
         self.client.force_login(user)
         response = self.client.get(reverse('comunication:detail_article', kwargs={"pk": article.id}))
         self.assertEqual(response.status_code, 404)
@@ -255,8 +256,10 @@ class CreateArticleCommentTestCase(TestCase):
         self.assertEqual(comment.owner, self.user)
 
     def test_create_comment_not_allowed_article(self):
-        article = Articke.objects.filter(is_local=True).first()
-        self.client.force_login(self.user)
+        user = User.objects.filter(storeemployee__isnull=False).first()
+        article_allowed = get_allowed_articles(user)
+        article = Articke.objects.all().difference(article_allowed)[0]
+        self.client.force_login(user)
         response = self.client.post(reverse('comunication:detail_article', kwargs={'pk': article.id}),
                                     data={'content': 'Hello'})
         self.assertEqual(response.status_code, 404)
