@@ -5,28 +5,32 @@
 <div class="container mx-auto px-4 py-8">
   <h1 class="mb-6 text-3xl font-bold text-gray-900 dark:text-white">My location tasks</h1>
 
-  {% if list_task %}
+  {% if tasks %}
   <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {% for object in list_task %}
+      {% for task in tasks %}
       <div class="flex flex-col justify-between rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-lg dark:border-gray-700 dark:bg-gray-800">
           <div>
-              <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">
-                  <a href="{% url 'tasks:detail_location_task' object.id %}" class="hover:underline">
-                      {{ object.title }}
+            {% if date > task.deadline and task.percent_completed < 100 %}
+              <h3 class="text-lg font-bold text-red-500 dark:text-white mb-2">
+            {% else %}
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">
+            {% endif %}
+                  <a href="{% url 'tasks:detail_location_task' task.id %}" class="hover:underline">
+                      {{ task.title }}
                   </a>
               </h3>
               <p class="text-sm text-gray-500 dark:text-gray-400">
-                  Created by: <span class="font-medium text-gray-800 dark:text-gray-300">{{ object.task_creator }}</span>
+                  Created by: <span class="font-medium text-gray-800 dark:text-gray-300">{{ task.task_creator }}</span>
               </p>
           </div>
           <div class="mt-4 space-y-1 text-sm text-gray-600 dark:text-gray-300">
-              <p><span class="font-medium">Start:</span> {{ object.start_date }}</p>
-              <p><span class="font-medium">Deadline:</span> {{ object.deadline }}</p>
-              <p><span class="font-medium">Progress:</span> {{ object.percent_completed }}%</p>
+              <p><span class="font-medium">Start:</span> {{ task.start_date }}</p>
+              <p><span class="font-medium">Deadline:</span> {{ task.deadline }}</p>
+              <p><span class="font-medium">Progress:</span> {{ task.percent_completed }}%</p>
           </div>
-          {% if object.task_creator == current_user %}
+          {% if task.task_creator == request.user %}
           <div class="mt-4">
-            <form action="{% url 'tasks:delete_task' object.id %}" method="post">
+            <form action="{% url 'tasks:delete_task' task.id %}" method="post">
               {% csrf_token %}
             <button type="submit" class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full " >
               Delete

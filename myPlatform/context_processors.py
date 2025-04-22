@@ -26,6 +26,6 @@ def can_add(request):
     }
     return context
 
-def date():
+def localdate(request):
     date = timezone.localdate()
     return {"date": date}

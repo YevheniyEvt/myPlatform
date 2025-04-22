@@ -5,13 +5,14 @@ from . import views
 app_name = 'tasks'
 
 urlpatterns = [
-    path('', views.my_tasks, name='my_tasks'),
-    path('active/', views.my_active_task, name='my_active_task'),
-    path('completed/', views.my_completed_task, name='my_completed_task'),
+    path('all/', views.MyTaskListView.as_view(), name='my_tasks'),
+    path('active/', views.MyTaskListView.as_view(), name='my_active_task'),
+    path('completed/', views.MyTaskListView.as_view(), name='my_completed_task'),
+
     path('<int:task_id>/', views.detail_task, name='detail_task'),
     
-    path('location/', views.my_location_tasks, name='my_location_tasks'),
-    path('location/<int:task_id>/', views.detail_location_task, name='detail_location_task'),
+    path('location/', views.MyLocationTaskView.as_view(), name='my_location_tasks'),
+    path('location/<int:pk>/', views.LocationTaskDetailView.as_view(), name='detail_location_task'),
 
     path('create/', views.CreateTaskView.as_view(), name='create_task'),
     path('update/<int:task_id>/', views.update_task, name='update_task'),

@@ -81,6 +81,7 @@ TEMPLATES = [
                 
                 'myPlatform.context_processors.set_search',
                 'myPlatform.context_processors.can_add',
+                'myPlatform.context_processors.localdate',
             ],
         },
     },

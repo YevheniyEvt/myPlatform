@@ -1,21 +1,25 @@
 import datetime
 
-from django.db.models import F, Q, Count, Subquery, OuterRef, Sum, DecimalField, FloatField, ExpressionWrapper
+from django.db.models import F, Q, Count, Subquery, OuterRef, Sum, DecimalField, FloatField, ExpressionWrapper, Case, When, Value
 from django.http import HttpRequest
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.utils import timezone
+from django.urls import reverse
+
 from django.contrib.auth.models import AnonymousUser
 
 from django.views.generic import View, ListView, DeleteView, UpdateView, CreateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.edit import BaseCreateView
+from django.contrib.auth.models import User
 
 from comunication.models import Coment, DeleteHistory
 from comunication.utils import create_coment
 
+from employee.models import StoreEmployee, RetailEmployee, OfficeEmployee
 from employee.utils import get_user_location, get_management_positions, get_user_employee
 
 from tasks.forms import TaskForm
@@ -47,12 +51,12 @@ class CreateTaskView(LoginRequiredMixin, BaseCreateView, ListView):
         return context
     
     def get_queryset(self):
-        
-        return (super().get_queryset().
-                        annotate(task_count=Count('taskusers')).
-                        filter(taskusers__user=self.request.user).
-                        annotate(is_creator=Q(taskusers__creator=True))
-                        )
+        query  =super().get_queryset()
+        return (query.
+                annotate(task_count=Count('taskusers')).
+                filter(taskusers__user=self.request.user).
+                annotate(is_creator=Q(taskusers__creator=True))
+                )
     
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -63,102 +67,75 @@ class CreateTaskView(LoginRequiredMixin, BaseCreateView, ListView):
         return response
 
     
-
-
-
-@login_required
-def my_tasks(request):
+class MyTaskListView(LoginRequiredMixin, ListView):
+    model = Task
     template_name = 'tasks/list_tasks.html'
-    current_user = get_user(request)
-    date = timezone.localdate()
-    task_users = TaskUsers.objects.filter(user=current_user)
-    all_task=True
-    context = {
-        "date": date,
-        "taskusers": task_users,
-        "all_task": all_task
-    }
-    return render(request, template_name, context)
+    context_object_name = 'tasks'
 
-@login_required
-def my_completed_task(request):
-    template_name = 'tasks/list_tasks.html'
-    current_user = get_user(request)
-    date = timezone.localdate()
-    task_users = TaskUsers.objects.filter(user=current_user)
-    completed_task = task_users.filter(Q(completed=True) | Q(not_accepted=True))
-    completed = True
-    context = {
-        "date": date,
-        "taskusers": completed_task,
-        "completed": completed
-    }
-    return render(request, template_name, context)
-
-@login_required
-def my_active_task(request: HttpRequest ):
-    
-    template_name = 'tasks/list_tasks.html'
-    current_user = get_user(request)
-    date = timezone.localdate()
-    task_users = TaskUsers.objects.filter(user=current_user)
-    active_task = task_users.exclude(Q(completed=True) | Q(not_accepted=True))
-    active = True
-    context = {
-        "date": date,
-        "taskusers": active_task,
-        "active": active
-    }
-    return render(request, template_name, context)
-
-@login_required
-def my_location_tasks(request):
-    template_name = 'tasks/list_my_location_tasks.html'
-    current_user = get_user(request)
-    date = timezone.localdate()
-
-    current_user_location = get_user_location(current_user)
-    my_location_users = get_users_from_location(recipients_id=[current_user_location.id], recipients=current_user_location)
-    location_task = Task.objects.filter(taskusers__user__in=my_location_users)
-
-    list_task_new = Task.objects.filter(taskusers__user__in=my_location_users).annotate(
-        count_completed =Count("taskusers", filter=Q(taskusers__completed=True)),
-        total=Count("taskusers", filter=Q(taskusers__creator=False)),
-        percent_completed = ExpressionWrapper(F('count_completed')*100/F('total'), output_field=DecimalField())
-        )
-
-    context = {
-        "date": date,
-        "list_task": list_task_new,
-        "current_user": current_user,
-    }
-
-    return render(request, template_name, context)
-
-
-def detail_location_task(request, task_id):
-    template_name = "tasks/detail_location_task.html"
-    current_user = get_user(request)
-    date = timezone.localdate()
-    current_user_location = get_user_location(current_user)
-    my_location_users = get_users_from_location(recipients_id=[current_user_location.id], recipients=current_user_location)
-
-    task = Task.objects.filter(id=task_id).first()
-    task_users = TaskUsers.objects.filter(task=task)
-    task_for_my_location = Task.objects.annotate(task_count=Count('taskusers')).filter(
-        Q(task_count__gt=1),
-        Q(id=task_id),
-        ).first()
-    
-    context = {
+    def get_queryset(self):
+        query = super().get_queryset()
+        outeref_taskusers = TaskUsers.objects.filter(
+             task=OuterRef('pk'),
+             user=self.request.user
+             )
+        query = (query.
+                filter(taskusers__user=self.request.user).
+                annotate(
+                    revised=Subquery(outeref_taskusers.values('revised')[:1]),
+                    completed=Subquery(outeref_taskusers.values('completed')[:1]),
+                    not_accepted=Subquery(outeref_taskusers.values('not_accepted')[:1]),
+                    is_creator=Subquery(outeref_taskusers.values('creator')[:1]),
+                    ))
         
-        "task_users": task_users,
-        "date": date,
-        "object": task,
-        "task_for_my_location": task_for_my_location,
-        "my_location_users": my_location_users
-    }   
-    return render(request, template_name, context)
+        url = self.request.get_full_path()
+        if reverse('tasks:my_tasks') == url:
+            return query
+        elif reverse('tasks:my_active_task') == url:
+            return query.exclude(Q(completed=True) | Q(not_accepted=True)) 
+        elif reverse('tasks:my_completed_task') == url:
+            return query.filter(Q(completed=True) | Q(not_accepted=True))
+        
+
+class MyLocationTaskView(LoginRequiredMixin, ListView):
+    model = Task
+    template_name = 'tasks/list_my_location_tasks.html'
+    context_object_name = 'tasks'
+
+    def get_queryset(self):
+        current_user_location = get_user_location(self.request.user)
+        my_location_users = get_users_from_location(recipients_id=[current_user_location.id], recipients=current_user_location)
+        query = super().get_queryset()
+        percent_completed = Case(
+            When(total=0, then=Value(0)),
+            default=ExpressionWrapper(F('count_completed')*100/F('total'), output_field=DecimalField()
+                                      ), output_field=DecimalField())
+        query = (query.
+                 filter(taskusers__user__in=my_location_users).
+                 annotate(
+                      count_completed=Count("taskusers", filter=Q(taskusers__completed=True)),
+                      total=Count("taskusers", filter=Q(taskusers__creator=False)),
+                      percent_completed=percent_completed, 
+                      ))
+        return query
+
+
+class LocationTaskDetailView(LoginRequiredMixin, DetailView):
+    model = Task
+    template_name = "tasks/detail_location_task.html"
+    context_object_name = 'task'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        current_user_location = get_user_location(self.request.user)
+        my_location_users = get_users_from_location(recipients_id=[current_user_location.id], recipients=current_user_location)
+        tasks_users = self.get_object().taskusers_set.filter(user__in=my_location_users)
+        context['tasks_users'] = tasks_users
+        return context
+
+
+
+
+
 
 
 def detail_task(request, task_id):
@@ -345,3 +322,101 @@ def create_task(request):
             task.recipients.add(current_user, through_defaults={"creator": True})
             return redirect('tasks:create_task')
     return render(request, template_name, context)
+
+@login_required
+def my_tasks(request):
+    """Old function. Use MyTaskListView.as_view()"""
+    template_name = 'tasks/list_tasks.html'
+    current_user = get_user(request)
+    date = timezone.localdate()
+    task_users = TaskUsers.objects.filter(user=current_user)
+    all_task=True
+    context = {
+        "date": date,
+        "taskusers": task_users,
+        "all_task": all_task
+    }
+    return render(request, template_name, context)
+
+@login_required
+def my_completed_task(request):
+    """Old function. Use MyTaskListView.as_view()"""
+    template_name = 'tasks/list_tasks.html'
+    current_user = get_user(request)
+    date = timezone.localdate()
+    task_users = TaskUsers.objects.filter(user=current_user)
+    completed_task = task_users.filter(Q(completed=True) | Q(not_accepted=True))
+    completed = True
+    context = {
+        "date": date,
+        "taskusers": completed_task,
+        "completed": completed
+    }
+    return render(request, template_name, context)
+
+@login_required
+def my_active_task(request: HttpRequest ):
+    """Old function. Use MyTaskListView.as_view()"""
+    template_name = 'tasks/list_tasks.html'
+    current_user = get_user(request)
+    date = timezone.localdate()
+    task_users = TaskUsers.objects.filter(user=current_user)
+    active_task = task_users.exclude(Q(completed=True) | Q(not_accepted=True))
+    active = True
+    context = {
+        "date": date,
+        "taskusers": active_task,
+        "active": active
+    }
+    return render(request, template_name, context)
+
+@login_required
+def my_location_tasks(request):
+    """Old function. Use MyLocationTaskView.as_view()"""
+    template_name = 'tasks/list_my_location_tasks.html'
+    current_user = get_user(request)
+    date = timezone.localdate()
+
+    current_user_location = get_user_location(current_user)
+    my_location_users = get_users_from_location(recipients_id=[current_user_location.id], recipients=current_user_location)
+    location_task = Task.objects.filter(taskusers__user__in=my_location_users)
+
+    list_task_new = Task.objects.filter(taskusers__user__in=my_location_users).annotate(
+        count_completed =Count("taskusers", filter=Q(taskusers__completed=True)),
+        total=Count("taskusers", filter=Q(taskusers__creator=False)),
+        percent_completed = ExpressionWrapper(F('count_completed')*100/F('total'), output_field=DecimalField())
+        )
+    context = {
+        "date": date,
+        "list_task": list_task_new,
+        "current_user": current_user,
+    }
+    return render(request, template_name, context)
+
+def detail_location_task(request, task_id):
+    """Old function. Use LocationTaskDetailView.as_view()"""
+    template_name = "tasks/detail_location_task.html"
+    current_user = get_user(request)
+    date = timezone.localdate()
+    current_user_location = get_user_location(current_user)
+    my_location_users = get_users_from_location(recipients_id=[current_user_location.id], recipients=current_user_location)
+
+    task = Task.objects.filter(id=task_id).first()
+    task_users = TaskUsers.objects.filter(task=task)
+
+    task_for_my_location = Task.objects.annotate(task_count=Count('taskusers')).filter(
+        Q(task_count__gt=1),
+        Q(id=task_id),
+        ).first()
+    
+    context = {
+        
+        "task_users": task_users,
+        "date": date,
+        "object": task,
+        "task_for_my_location": task_for_my_location,
+
+        "my_location_users": my_location_users
+    }   
+    return render(request, template_name, context)
+#######################################################################################################

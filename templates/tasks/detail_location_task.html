@@ -4,57 +4,78 @@
 
 
 <main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
-
-  
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-      
       <article class="">
-
-          <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">{{ object.title }}</h1>
+          <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">{{ task.title }}</h1>
           
-          <p class="lead">{{ object.content }}</p>
+          <p class="lead">{{ task.content }}</p>
+          <p class="p-1 text-sm text-gray-600">Start: {{ task.start_date }}, Deadline: {{ task.deadline }}</p> 
 
-          {% for task in task_users %}
-          {% if task.user in my_location_users %}
+          {% for task_user in tasks_users %}
           <div class="mt-6 flow-root sm:mt-8">
             <div class="grid grid-cols-8 gap-4 items-center py-6">
 
               <dl class="text-base">
+                
                 <dt class="text-center font-medium text-gray-500 dark:text-gray-400">Name</dt>
-                <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">
-                  <a href="{% url 'tasks:detail_task' task.id %}" class="hover:underline">{{ task.user.get_full_name }}</a>
+                {% if date > task.deadline and not task_user.completed %}
+                <dd class="mt-1.5 text-base font-semibold text-red-500 dark:text-white">
+                {% else %}
+                <dd class="mt-1.5 text-base font-semibold text-grey-900 dark:text-white">
+                {% endif %}
+                  <a href="{% url 'tasks:detail_task' task.id %}" class="hover:underline">{{ task_user.user.get_full_name }}</a>
                 </dd>
               </dl>
-  
+              
               <dl class="text-center">
-                <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Start date</dt>
-                <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ task.task.start_date}}</dd>
+                <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Location</dt>
+                <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">
+                  {% if task_user.user.storeemployee is not None %}
+                  {{ task_user.user.storeemployee.store}}
+                  {% elif task_user.user.retailemployee is not None %}
+                    {% if task_user.user.retailemployee.district is not None %}
+                    {{ task_user.user.retailemployee.district}}
+                    {% else %}
+                    {{ task_user.user.retailemployee.region}}
+                    {% endif %}
+                  {% elif task_user.user.officeemployee is not None %}
+                  {{ task_user.user.officeemployee.departament}}
+                  {% endif %}
+                </dd>
               </dl>
               <dl class="text-center">
-                <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Deadline</dt>
-                <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ task.task.deadline}}</dd>
+                <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Position</dt>
+                <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">
+                  {% if task_user.user.storeemployee is not None %}
+                  {{ task_user.user.storeemployee.position}}
+                  {% elif task_user.user.retailemployee is not None %}
+                  {{ task_user.user.retailemployee.position}}
+                  {% elif task_user.user.officeemployee is not None %}
+                  {{ task_user.user.officeemployee.position}}
+                  {% endif %}
+                </dd>
               </dl>
-  
+              
               <dl class="text-center">
                 <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Completed</dt>
-                {% if not task.completed %}
+                {% if not task_user.completed %}
                 -
                 {% else %}
-                <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ task.completed}}</dd>
+                <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ task_user.completed}}</dd>
                 {% endif %}
               </dl>
               <dl class="text-center">
                 <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Completed date</dt>
-                {% if task.completed_date is None %}
+                {% if task_user.completed_date is None %}
                 -
                 {% else %}
-                <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ task.completed_date}}</dd>
+                <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ task_user.completed_date}}</dd>
                 {% endif %}
               </dl>
   
               <dl class="text-center">
                 <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Not Accepted</dt>
-                {% if task.not_accepted%}
+                {% if task_user.not_accepted %}
                 Yes
                 {% else %}
                 <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">No</dd>
@@ -63,25 +84,18 @@
             
               <dl class="text-center">
                 <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Revised</dt>
-                {% if task.revised is None %}
+                {% if task_user.revised is None %}
                 -
                 {% else %}
-                <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ task.revised}}</dd>
+                <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ task_user.revised}}</dd>
                 {% endif %}
               </dl>
             
             </div>
           </div>
-          {% endif %}
           {% endfor %}
-
-
-
-          
       </article>
   </div>
-
-
 </main>
 
 
