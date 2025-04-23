@@ -1,1 +1,1 @@
-# Pet project
+# Pet project like TO-DO app
