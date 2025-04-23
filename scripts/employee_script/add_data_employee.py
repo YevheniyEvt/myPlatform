@@ -139,7 +139,7 @@ def add_store_employee():
         )
 
 def database_is_empty():
-    return not User.objects.all()
+    return not employee_models.RetailEmployee.objects.all()
 
 
 def employee_run():

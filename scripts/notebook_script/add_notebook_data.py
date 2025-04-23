@@ -96,7 +96,7 @@ def create_note():
             )
 
 def database_is_empty():
-    return not Topic.objects.first()
+    return not Note.objects.first()
 
 def notebook_run():
     if database_is_empty():
