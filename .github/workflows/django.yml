@@ -74,10 +74,10 @@ jobs:
           git fetch origin master
           git reset --hard origin/master
           git clean -fd
-          pip install -r requirements.txt
-          python manage.py migrate
-          python manage.py runscript add_data
-          python manage.py collectstatic --noinput
+        # pip install -r requirements.txt
+        # python manage.py migrate
+        # python manage.py runscript add_data
+        # python manage.py collectstatic --noinput
         #sudo systemctl restart gunicorn
 
     # - name: Login to Docker Hub
