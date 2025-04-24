@@ -32,6 +32,10 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False)
 
 ALLOWED_HOSTS = ['51.21.53.216.nip.io', '51.21.53.216', '127.0.0.1', 'localhost', '0.0.0.0', '172.31.44.227']
+CSRF_TRUSTED_ORIGINS = [
+    'https://51.21.53.216.nip.io',
+]
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Application definition
