@@ -12,7 +12,7 @@ services:
     ports:
       - "5433:5432"
 
-  web:
+  django-web:
     image: yevheniy88/myplatform:gitactions 
     command: >
       sh -c "python manage.py makemigrations &&
@@ -20,13 +20,23 @@ services:
              python manage.py runscript add_data &&
              python manage.py runserver 0.0.0.0:8000"
     volumes:
-      - .:/usr/src/app
+      - ./static:/app/static/
     ports:
       - "8000:8000"
     depends_on:
       - db
     env_file:
       - .env
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./static:/static:ro
+    depends_on:
+      - django-web
 
 volumes:
   pgdata:
