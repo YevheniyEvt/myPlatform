@@ -126,9 +126,10 @@ class DetailArticleTestCase(TestCase):
     fixtures = ["test_data"]
 
     def setUp(self):
-        self.article_2 = Articke.objects.filter(is_global=True).first()
-        self.comments_2 = Coment.objects.filter(article=self.article_2)
         self.user_all_permission = User.objects.get(username='admin')
+        self.article_2 = Articke.objects.filter(owner=self.user_all_permission).first()
+        self.comments_2 = Coment.objects.filter(article=self.article_2)
+        
     
     def test_detail_article_not_login_user(self):
         response = self.client.get(reverse('comunication:detail_article', kwargs={"pk": self.article_2.id}))
@@ -233,7 +234,7 @@ class CreateArticleCommentTestCase(TestCase):
 
     def setUp(self):
         self.user = User.objects.get(username='admin')
-        self.user_article = Articke.objects.filter(is_global=True).first()
+        self.user_article = Articke.objects.filter(owner=self.user).first()
 
     def test_create_article_comment_not_login_user(self):
         response = self.client.post(reverse('comunication:detail_article',kwargs={"pk": self.user_article.id}),
