@@ -1,8 +1,6 @@
-name: Django CI
+name: Deploy CI
 
 on:
-  push:
-    branches: [ "develop", "master" ]
   pull_request:
     branches: [ "master" ]
 
@@ -95,4 +93,5 @@ jobs:
     #     platforms: linux/amd64,linux/arm64
     #     push: true
     #     tags: ${{ secrets.DOCKER_USERNAME }}/myplatform:gitactions
-    
+
+
