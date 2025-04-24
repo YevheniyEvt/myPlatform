@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False)
 
 ALLOWED_HOSTS = ['51.21.53.216.nip.io', '51.21.53.216', '127.0.0.1', 'localhost', '0.0.0.0', '172.31.44.227']
 
