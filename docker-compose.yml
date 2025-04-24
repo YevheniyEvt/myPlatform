@@ -13,7 +13,7 @@ services:
       - "5433:5432"
 
   django-web:
-    image: yevheniy88/myplatform:gitactions 
+    build: .
     command: >
       sh -c "python manage.py makemigrations &&
              python manage.py migrate &&
