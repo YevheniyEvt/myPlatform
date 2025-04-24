@@ -53,7 +53,7 @@ jobs:
       run: |
         python manage.py test
 
-    - name: Make Migrations
+    - name: Migrate
       run: |
         python manage.py migrate
 
