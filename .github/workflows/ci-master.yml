@@ -47,10 +47,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Run Tests
-      run: |
-        python manage.py test
-
     - name: Migrate
       run: |
         python manage.py migrate
@@ -58,6 +54,10 @@ jobs:
     - name: Run Scripts
       run: |
         python manage.py runscript add_data 
+      
+    - name: Run Tests
+      run: |
+        python manage.py test
         
     - name: Deploy to Ubuntu Server
       uses: appleboy/ssh-action@v1.0.3
