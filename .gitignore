@@ -173,3 +173,5 @@ cloudinary
 
 .env
 docker-compose-develop.yml
+
+fixtures
