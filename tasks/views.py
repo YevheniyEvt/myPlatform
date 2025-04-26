@@ -277,6 +277,7 @@ from django.shortcuts import render
 from comunication.utils import create_coment
 from employee.utils import get_user_employee
 from django.contrib.auth import get_user
+from django.http import HttpRequest
 
 @login_required
 def create_task(request):
