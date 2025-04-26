@@ -246,15 +246,17 @@ class CreateArticleCommentTestCase(TestCase):
                              )
 
     def test_create_comment(self):
-        self.client.force_login(self.user)
-        response = self.client.post(reverse('comunication:detail_article', kwargs={'pk': self.user_article.id}),
+        article = Articke.objects.first()
+        user = article.owner
+        self.client.force_login(user)
+        response = self.client.post(reverse('comunication:detail_article', kwargs={'pk': self.article.id}),
                                     data={'content': 'Hello'})
 
         self.assertEqual(response.status_code, 302)
         comment = Coment.objects.filter(content='Hello').first()
         self.assertIsNotNone(comment)
-        self.assertEqual(comment.article, self.user_article)
-        self.assertEqual(comment.owner, self.user)
+        self.assertEqual(comment.article, article)
+        self.assertEqual(comment.owner, user)
 
     def test_create_comment_not_allowed_article(self):
         user = User.objects.filter(storeemployee__isnull=False).first()

@@ -179,13 +179,13 @@
                   {% endif %}
                 </dl>
                 {% if task.completed or task.not_accepted  %}
-                <form action="{% url 'tasks:open_task' task.id %}" method="post">
+                <form action="{% url 'tasks:open_task' task.task_user_id %}" method="post">
                   {% csrf_token %}
                   <button type="submit" class="w-full inline-flex justify-center rounded-lg bg-indigo-700 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-300 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">Open</button>
 
                 </form>
                 {% else %}
-                <form action="{% url 'tasks:complete_task' task.id %}" method="post">
+                <form action="{% url 'tasks:complete_task' task.task_user_id %}" method="post">
                   {% csrf_token %}
                   <button type="submit" class="w-full inline-flex justify-center rounded-lg bg-green-700 px-3 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-blue-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Complete</button>
 
@@ -204,7 +204,7 @@
                         </li>
                         {% if task.is_creator %}
                         <li>
-                          <form action="{% url 'tasks:delete_task' task.id %}" method="post">
+                          <form action="{% url 'tasks:delete_task' task.task_user_id %}" method="post">
                             {% csrf_token %}
                           <button type="submit" class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full " >
                             Delete
@@ -213,7 +213,7 @@
                         </li>
                         {% endif %}
                         <li>
-                          <form action="{% url 'tasks:not_accept_task' task.id %}" method="post">
+                          <form action="{% url 'tasks:not_accept_task' task.task_user_id %}" method="post">
                             {% csrf_token %}
                           <button type="submit" class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full " >
                             Not accept
