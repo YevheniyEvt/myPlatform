@@ -10,9 +10,6 @@ class TaskForm(forms.ModelForm):
         self.fields['content'].required = True
         self.fields['content'].label = 'Task'
 
-
-
-
     class Meta:
         model = Task
         fields = ["start_date", "deadline", "title", "content"]

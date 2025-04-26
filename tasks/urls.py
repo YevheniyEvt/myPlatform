@@ -16,14 +16,16 @@ urlpatterns = [
     path('location/<int:pk>/', views.LocationTaskDetailView.as_view(), name='detail_location_task'),
     
     path('create/', views.CreateTaskView.as_view(), name='create_task'),
-    
-    path('update/<int:task_id>/', views.update_task, name='update_task'),
-    path('delete/<int:task_id>/', views.delete_task, name='delete_task'),
+    path('update/<int:pk>/', views.TaskUpdateView.as_view(), name='update_task'),
+    path('delete/<int:pk>/', views.TaskDeleteView.as_view(), name='delete_task'),
+
+    path('delete/coment/<int:pk>', views.CommentDeleteView.as_view(), name='delete_coment'),
+
     path('complate/<int:task_id>', views.complete_task, name='complete_task'),
     path('open/<int:task_id>', views.open_task, name='open_task'),
     path('not-accept/<int:task_id>', views.not_accept_task, name='not_accept_task'),
     
-    path('delete/coment/<int:coment_id>', views.delete_coment, name='delete_coment'),
+
 
 
     

@@ -127,9 +127,7 @@ class DetailArticleTestCase(TestCase):
 
     def setUp(self):
         self.user_all_permission = User.objects.get(username='admin')
-        self.article_2 = Articke.objects.filter(owner=self.user_all_permission).first()
-        self.comments_2 = Coment.objects.filter(article=self.article_2)
-        
+        self.article_2 = Articke.objects.filter(owner=self.user_all_permission).first()        
     
     def test_detail_article_not_login_user(self):
         response = self.client.get(reverse('comunication:detail_article', kwargs={"pk": self.article_2.id}))
@@ -141,15 +139,17 @@ class DetailArticleTestCase(TestCase):
 
     def test_detail_article_in_allowed_article(self):
         self.client.force_login(self.user_all_permission)
-        response = self.client.get(reverse('comunication:detail_article', kwargs={"pk": self.article_2.id}))
+        article = get_allowed_articles(self.user_all_permission)[0]
+        comments = Coment.objects.filter(article=article)
+        response = self.client.get(reverse('comunication:detail_article', kwargs={"pk": article.id}))
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['article'], self.article_2)
+        self.assertEqual(response.context['article'], article)
         self.assertTemplateUsed(response, "comunication/detail_article.html")
 
-        article_view = ViewArticle.objects.filter(user=response.wsgi_request.user, article=self.article_2).first()
+        article_view = ViewArticle.objects.filter(user=response.wsgi_request.user, article=article).first()
         self.assertIsNotNone(article_view)
         self.assertTrue(article_view.view)
-        self.assertQuerySetEqual(response.context['comments'], self.comments_2, ordered=False)
+        self.assertQuerySetEqual(response.context['comments'], comments, ordered=False)
         
     def test_detail_article_not_in_allowed_article(self):
         user = User.objects.filter(storeemployee__isnull=False).first()
@@ -246,15 +246,17 @@ class CreateArticleCommentTestCase(TestCase):
                              )
 
     def test_create_comment(self):
-        self.client.force_login(self.user)
-        response = self.client.post(reverse('comunication:detail_article', kwargs={'pk': self.user_article.id}),
+        article = Articke.objects.first()
+        user = article.owner
+        self.client.force_login(user)
+        response = self.client.post(reverse('comunication:detail_article', kwargs={'pk': article.id}),
                                     data={'content': 'Hello'})
 
         self.assertEqual(response.status_code, 302)
         comment = Coment.objects.filter(content='Hello').first()
         self.assertIsNotNone(comment)
-        self.assertEqual(comment.article, self.user_article)
-        self.assertEqual(comment.owner, self.user)
+        self.assertEqual(comment.article, article)
+        self.assertEqual(comment.owner, user)
 
     def test_create_comment_not_allowed_article(self):
         user = User.objects.filter(storeemployee__isnull=False).first()

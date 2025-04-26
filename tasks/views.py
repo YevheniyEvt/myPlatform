@@ -1,32 +1,23 @@
-import datetime
-
-from django.db.models import F, Q, Count, Subquery, OuterRef, Sum, DecimalField, FloatField, ExpressionWrapper, Case, When, Value
-from django.http import HttpRequest
-from django.shortcuts import render, redirect
-from django.contrib.auth import get_user
-from django.contrib.auth.decorators import login_required
-from django.urls import reverse_lazy
 from django.utils import timezone
-from django.urls import reverse
+from django.urls import reverse_lazy, reverse
+from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 
-from django.contrib.auth.models import AnonymousUser
+from django.db.models import F, Q, Count, Subquery, OuterRef, DecimalField, ExpressionWrapper, Case, When, Value
 
 from django.views.generic import View, ListView, DeleteView, UpdateView, CreateView, DetailView
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import BaseCreateView
 from django.contrib.auth.models import User
 
 from comunication.models import Coment, DeleteHistory
-from comunication.utils import create_coment
 from comunication.forms import ComentForm
 
-from employee.models import StoreEmployee, RetailEmployee, OfficeEmployee
-from employee.utils import get_user_location, get_management_positions, get_user_employee
+from employee.utils import get_user_location, get_management_positions
 
 from tasks.forms import TaskForm
 from tasks.models import Task, TaskUsers, TaskHistory
 from tasks.utils import employee_tasks_allowed_locations, users_to_tasks_create, get_users_from_location
-
 
 # Create your views here.
 
@@ -86,6 +77,7 @@ class MyTaskListView(LoginRequiredMixin, ListView):
                     completed=Subquery(outeref_taskusers.values('completed')[:1]),
                     not_accepted=Subquery(outeref_taskusers.values('not_accepted')[:1]),
                     is_creator=Subquery(outeref_taskusers.values('creator')[:1]),
+                    task_user_id=Subquery(outeref_taskusers.values('id')[:1]),
                     ))
         
         url = self.request.get_full_path()
@@ -166,6 +158,7 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
         task_history = TaskHistory.objects.filter(task=self.object)
         context['comments'] = comments
         context['task_history'] = task_history
+        context['form'] = TaskForm(instance=self.object.task)
         return context
     
 
@@ -187,6 +180,7 @@ class CreateTaskCommentView(CreateView):
         form.instance.owner = self.request.user
         return super().form_valid(form)
     
+
 class TaskDetailCommentView(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
@@ -198,48 +192,58 @@ class TaskDetailCommentView(LoginRequiredMixin, View):
         return view(request, *args, **kwargs)
     
 
-def update_task(request, task_id):
-        task_user_data = TaskUsers.objects.filter(id=task_id).first()
-        task_data = Task.objects.filter(id=task_user_data.task.id)
-        if request.method == 'POST':
-            form = TaskForm(request.POST, initial=task_data.values()[0])
-            if not form.has_changed():
-                return redirect("tasks:detail_task", task_id=task_id)
-            elif form.is_valid():
-                form_data = form.cleaned_data
-                updated_field = {field: form_data[field] for field in form.changed_data}
-                Task.objects.filter(id=task_user_data.task.id).update(**updated_field)
-                return redirect("tasks:detail_task", task_id=task_id)
-        return redirect('tasks:my_active_task')
+class TaskUpdateView(LoginRequiredMixin, UpdateView):
+    form_class = TaskForm
+    model = Task
 
-def delete_task(request, task_id):
-    current_user = get_user(request)
-    task = Task.objects.get(id=task_id)
-    if request.method == 'POST':
-        content = f"user: {current_user}, delete task: {task.title}, with content:{task.content[:50]}."
-        DeleteHistory.objects.create(user=current_user, content=content, task=True)
-        Task.objects.get(id=task_id).delete()
-        return redirect('tasks:my_active_task')
+    def get_success_url(self):
+        return reverse_lazy("tasks:detail_task", kwargs={'pk': self.object.id})
 
+
+class TaskDeleteView(LoginRequiredMixin, DeleteView):
+    model = TaskUsers
+    success_url = reverse_lazy('tasks:my_tasks')
+
+    def get_queryset(self):
+        return super().get_queryset().filter(creator=True)
+    
+    def form_valid(self, *args, **kwargs):
+        content = f"user: {self.request.user}, delete task: {self.object.task.title}, with content:{self.object.task.content[:50]}."
+        DeleteHistory.objects.create(user=self.request.user, content=content, task=True)
+        return super().form_valid(*args, **kwargs)
+
+
+class CommentDeleteView(LoginRequiredMixin, DeleteView):
+    model = Coment
+
+    def form_valid(self, *args, **kwargs):
+        task = self.object.task
+        content = f"user: {self.request.user}, delete comment from task: {task.title}, with content:{self.object.content}."
+        DeleteHistory.objects.create(user=self.request.user, content=content, task=True)
+        return super().form_valid(*args, **kwargs)
+    
+    def get_success_url(self):
+        return reverse_lazy("tasks:detail_task", kwargs={'pk': self.object.task.id})
+    
+
+@login_required
 def complete_task(request, task_id):
         task = TaskUsers.objects.get(id=task_id)
-        current_user = get_user(request)
         if request.method == "POST":
             TaskUsers.objects.filter(id=task_id).update(
                 completed=True,
                 completed_date=timezone.now() 
                 )
             TaskHistory.objects.create(
-            user=current_user,
+            user=request.user,
             task=task,
             complete=True
         )
         return redirect('tasks:my_active_task')
 
+@login_required
 def open_task(request, task_id):
-        task = TaskUsers.objects.get(id=task_id)
-        current_user = get_user(request)
-            
+        task = TaskUsers.objects.get(id=task_id)            
         if request.method == "POST":
             TaskUsers.objects.filter(id=task_id).update(
                 completed=False,
@@ -247,12 +251,13 @@ def open_task(request, task_id):
                 not_accepted=False
                 )
             TaskHistory.objects.create(
-            user=current_user,
+            user=request.user,
             task=task,
             reopen=True
         )
         return redirect('tasks:my_completed_task')
 
+@login_required
 def not_accept_task(request, task_id):
         completed_date=timezone.now()
         if request.method == "POST":
@@ -263,21 +268,16 @@ def not_accept_task(request, task_id):
             )
         return redirect('tasks:my_active_task')
 
-def delete_coment(request, coment_id):
-    coment = Coment.objects.get(id=coment_id)
-    task = coment.task
-    current_user = get_user(request)
-    task_id = TaskUsers.objects.filter(task=task, user=current_user).first().id
-    if request.method == 'POST':
-        content = f"user: {current_user}, delete comment from task: {task.title}, with content:{coment.content}."
-        DeleteHistory.objects.create(user=current_user, content=content, comment=True)
-        coment.delete()
-    return redirect("tasks:detail_task", task_id=task_id)
 
 
 
 ####################################################################################################
-#Old function. Do not use at the moment, there are class view
+#Old function. Do not use at the moment, there are a class view
+from django.shortcuts import render
+from comunication.utils import create_coment
+from employee.utils import get_user_employee
+from django.contrib.auth import get_user
+from django.http import HttpRequest
 
 @login_required
 def create_task(request):
@@ -471,4 +471,42 @@ def detail_task(request, task_id):
                 create_coment(request=request, object=task) 
                 return redirect("tasks:detail_task", task_id=task_id)
     return render(request, template_name, context)
+
+def update_task(request, task_id):
+    """Old function. Use TaskUpdateView.as_view()"""
+    task_user_data = TaskUsers.objects.filter(id=task_id).first()
+    task_data = Task.objects.filter(id=task_user_data.task.id)
+    if request.method == 'POST':
+        form = TaskForm(request.POST, initial=task_data.values()[0])
+        if not form.has_changed():
+            return redirect("tasks:detail_task", task_id=task_id)
+        elif form.is_valid():
+            form_data = form.cleaned_data
+            updated_field = {field: form_data[field] for field in form.changed_data}
+            Task.objects.filter(id=task_user_data.task.id).update(**updated_field)
+            return redirect("tasks:detail_task", task_id=task_id)
+    return redirect('tasks:my_active_task')
+
+def delete_task(request, task_id):
+    """Old function. Use TaskDeleteView.as_view()"""
+    current_user = get_user(request)
+    task = Task.objects.get(id=task_id)
+    if request.method == 'POST':
+        content = f"user: {current_user}, delete task: {task.title}, with content:{task.content[:50]}."
+        DeleteHistory.objects.create(user=current_user, content=content, task=True)
+        Task.objects.get(id=task_id).delete()
+        return redirect('tasks:my_active_task')
+
+def delete_coment(request, coment_id):
+    """Old function. Use CommentDeleteView.as_view()"""
+    coment = Coment.objects.get(id=coment_id)
+    task = coment.task
+    current_user = get_user(request)
+    task_id = TaskUsers.objects.filter(task=task, user=current_user).first().id
+    if request.method == 'POST':
+        content = f"user: {current_user}, delete comment from task: {task.title}, with content:{coment.content}."
+        DeleteHistory.objects.create(user=current_user, content=content, comment=True)
+        coment.delete()
+    return redirect("tasks:detail_task", task_id=task_id)
+
 #######################################################################################################
