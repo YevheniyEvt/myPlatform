@@ -249,7 +249,7 @@ class CreateArticleCommentTestCase(TestCase):
         article = Articke.objects.first()
         user = article.owner
         self.client.force_login(user)
-        response = self.client.post(reverse('comunication:detail_article', kwargs={'pk': self.article.id}),
+        response = self.client.post(reverse('comunication:detail_article', kwargs={'pk': article.id}),
                                     data={'content': 'Hello'})
 
         self.assertEqual(response.status_code, 302)
