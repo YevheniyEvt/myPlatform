@@ -141,12 +141,13 @@ class DetailArticleTestCase(TestCase):
 
     def test_detail_article_in_allowed_article(self):
         self.client.force_login(self.user_all_permission)
-        response = self.client.get(reverse('comunication:detail_article', kwargs={"pk": self.article_2.id}))
+        article = get_allowed_articles(self.user_all_permission)[0]
+        response = self.client.get(reverse('comunication:detail_article', kwargs={"pk": article.id}))
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['article'], self.article_2)
+        self.assertEqual(response.context['article'], article)
         self.assertTemplateUsed(response, "comunication/detail_article.html")
 
-        article_view = ViewArticle.objects.filter(user=response.wsgi_request.user, article=self.article_2).first()
+        article_view = ViewArticle.objects.filter(user=response.wsgi_request.user, article=article).first()
         self.assertIsNotNone(article_view)
         self.assertTrue(article_view.view)
         self.assertQuerySetEqual(response.context['comments'], self.comments_2, ordered=False)
