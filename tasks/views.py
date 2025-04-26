@@ -52,7 +52,7 @@ class CreateTaskView(LoginRequiredMixin, BaseCreateView, ListView):
         return context
     
     def get_queryset(self):
-        query  =super().get_queryset()
+        query  = super().get_queryset()
         return (query.
                 annotate(task_count=Count('taskusers')).
                 filter(taskusers__user=self.request.user).
@@ -134,111 +134,69 @@ class LocationTaskDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class MyTaskDetailView(LoginRequiredMixin, DetailView):
+class TaskDetailView(LoginRequiredMixin, DetailView):
     model = Task
     template_name = 'tasks/detail_task.html'
-    context_object_name = 'task'
+    context_object_name = 'task_user'
 
-    def get_object(self, queryset = ...):
-        obj_query = super().get_object(queryset)
-        obj_query = (obj_query.annotate(task_count=Count('taskusers')).
-                 filter(
-                     Q(task_count=1),Q(id=self.kwargs.get('pk')),
-                     Q(taskusers__user=self.request.user)
-                     ).first())
+    def get_object(self):
+        user_id = self.kwargs.get('user_id', self.request.user.id)
+        obj_query = super().get_object()
+        user = User.objects.get(id=user_id)
+        obj_query = obj_query.taskusers_set.filter(user=user).first()
         return obj_query
 
-
     def get(self, request, *args, **kwargs):
-        task = self.get_object()
-        if task is not None:
-            TaskHistory.objects.get_or_create(
-                user=self.request.user,
-                task=self.get_object(),
-                revised=True,
-            )
-            task_user = task.taskusers_set.filter(user=self.request.user).first()
-            task_user.revised = timezone.now()
-            task_user.save()
+        user_id = self.kwargs.get('user_id', self.request.user.id)
+        user = User.objects.get(id=user_id)
+        task = Task.objects.get(pk=kwargs.get('pk')).taskusers_set.filter(user=user).first()
+        TaskHistory.objects.get_or_create(
+            user=self.request.user,
+            task=task,
+            revised=True,
+        )
+        if user == self.request.user:
+            task.revised = timezone.now()
+            task.save()
         return super().get(request, *args, **kwargs)
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        comments = Coment.objects.filter(task=self.object)
+        comments = Coment.objects.filter(task=self.object.task)
+        task_history = TaskHistory.objects.filter(task=self.object)
         context['comments'] = comments
+        context['task_history'] = task_history
         return context
     
-class CreateCommentView(CreateView):
+
+class CreateTaskCommentView(CreateView):
     model = Task
     form_class = ComentForm
     
+    def get_object(self):
+        obj_query = super().get_object()
+        obj_query = obj_query.taskusers_set.filter(user=self.request.user).first()
+        return obj_query
+
     def get_success_url(self):
         return reverse_lazy("tasks:detail_task", kwargs={'pk': self.task.id})
     
     def form_valid(self, form):
-        self.task = self.get_object()
+        self.task = self.get_object().task
         form.instance.task = self.task 
         form.instance.owner = self.request.user
         return super().form_valid(form)
     
-class DetailTaskCommentView(LoginRequiredMixin, View):
+class TaskDetailCommentView(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
-        view = CreateCommentView.as_view()
+        view = CreateTaskCommentView.as_view()
         return view(request, *args, **kwargs)
     
     def get(self, request, *args, **kwargs):
-        view = MyTaskDetailView.as_view()
+        view = TaskDetailView.as_view()
         return view(request, *args, **kwargs)
     
-
-
-def detail_task(request, task_id):
-    template_name = 'tasks/detail_task.html'
-    date = timezone.localdate()
-    current_user = get_user(request)
-
-    
-    task_current_user = TaskUsers.objects.get(id=task_id)
-    task_history = TaskHistory.objects.filter(task=task_current_user)
-    task = task_current_user.task
-    if task_current_user is not None and request.method == 'GET' and task_current_user.revised is None:
-        task_current_user.revised = timezone.now()
-        task_current_user.save()
-    
-    my_personal_task = Task.objects.annotate(task_count=Count('taskusers')).filter(
-        Q(task_count=1),
-        Q(id=task_id),
-        Q(taskusers__user=current_user),
-        ).first()
-    coments = Coment.objects.filter(task=task)
-    
-    context = {
-        "task_current_user": task_current_user,
-        "date": date,
-        "object": task_current_user,
-        "my_personal_task": my_personal_task,
-        "coments": coments,
-        "current_user": current_user,
-        "task_history": task_history,
-
-    }
-
-    if request.method == "GET":
-        TaskHistory.objects.get_or_create(
-            user=current_user,
-            task=task_current_user,
-            revised=True
-        )
-
-    if request.method == "POST":
-            if request.POST.get("content") is not None:
-                create_coment(request=request, object=task) 
-                return redirect("tasks:detail_task", task_id=task_id)
-
-            
-    return render(request, template_name, context)
-
 
 def update_task(request, task_id):
         task_user_data = TaskUsers.objects.filter(id=task_id).first()
@@ -473,5 +431,44 @@ def detail_location_task(request, task_id):
 
         "my_location_users": my_location_users
     }   
+    return render(request, template_name, context)
+
+def detail_task(request, task_id):
+    """Old function. Use TaskDetailCommentView.as_view()"""
+    template_name = 'tasks/detail_task.html'
+    date = timezone.localdate()
+    current_user = get_user(request)
+    task_current_user = TaskUsers.objects.get(id=task_id)
+    task_history = TaskHistory.objects.filter(task=task_current_user)
+    task = task_current_user.task
+    if task_current_user is not None and request.method == 'GET' and task_current_user.revised is None:
+        task_current_user.revised = timezone.now()
+        task_current_user.save()
+    my_personal_task = Task.objects.annotate(task_count=Count('taskusers')).filter(
+        Q(task_count=1),
+        Q(id=task_id),
+        Q(taskusers__user=current_user),
+        ).first()
+    coments = Coment.objects.filter(task=task)
+    context = {
+        "task_current_user": task_current_user,
+        "date": date,
+        "object": task_current_user,
+        "my_personal_task": my_personal_task,
+        "coments": coments,
+        "current_user": current_user,
+        "task_history": task_history,
+
+    }
+    if request.method == "GET":
+        TaskHistory.objects.get_or_create(
+            user=current_user,
+            task=task_current_user,
+            revised=True
+        )
+    if request.method == "POST":
+            if request.POST.get("content") is not None:
+                create_coment(request=request, object=task) 
+                return redirect("tasks:detail_task", task_id=task_id)
     return render(request, template_name, context)
 #######################################################################################################
