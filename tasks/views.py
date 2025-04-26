@@ -18,6 +18,7 @@ from django.contrib.auth.models import User
 
 from comunication.models import Coment, DeleteHistory
 from comunication.utils import create_coment
+from comunication.forms import ComentForm
 
 from employee.models import StoreEmployee, RetailEmployee, OfficeEmployee
 from employee.utils import get_user_location, get_management_positions, get_user_employee
@@ -133,9 +134,63 @@ class LocationTaskDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
+class MyTaskDetailView(LoginRequiredMixin, DetailView):
+    model = Task
+    template_name = 'tasks/detail_task.html'
+    context_object_name = 'task'
+
+    def get_object(self, queryset = ...):
+        obj_query = super().get_object(queryset)
+        obj_query = (obj_query.annotate(task_count=Count('taskusers')).
+                 filter(
+                     Q(task_count=1),Q(id=self.kwargs.get('pk')),
+                     Q(taskusers__user=self.request.user)
+                     ).first())
+        return obj_query
 
 
+    def get(self, request, *args, **kwargs):
+        task = self.get_object()
+        if task is not None:
+            TaskHistory.objects.get_or_create(
+                user=self.request.user,
+                task=self.get_object(),
+                revised=True,
+            )
+            task_user = task.taskusers_set.filter(user=self.request.user).first()
+            task_user.revised = timezone.now()
+            task_user.save()
+        return super().get(request, *args, **kwargs)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        comments = Coment.objects.filter(task=self.object)
+        context['comments'] = comments
+        return context
+    
+class CreateCommentView(CreateView):
+    model = Task
+    form_class = ComentForm
+    
+    def get_success_url(self):
+        return reverse_lazy("tasks:detail_task", kwargs={'pk': self.task.id})
+    
+    def form_valid(self, form):
+        self.task = self.get_object()
+        form.instance.task = self.task 
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
+    
+class DetailTaskCommentView(LoginRequiredMixin, View):
 
+    def post(self, request, *args, **kwargs):
+        view = CreateCommentView.as_view()
+        return view(request, *args, **kwargs)
+    
+    def get(self, request, *args, **kwargs):
+        view = MyTaskDetailView.as_view()
+        return view(request, *args, **kwargs)
+    
 
 
 def detail_task(request, task_id):
