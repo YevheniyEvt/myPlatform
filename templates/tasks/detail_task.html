@@ -9,29 +9,28 @@
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
       
     <article class="">
-      {% if task_current_user %}
 
-      {% if task_current_user.completed or task_current_user.not_accepted  %}
-      <form action="{% url 'tasks:open_task' task_current_user.id %}" method="post">
+      {% if task_user.completed or task_user.not_accepted  %}
+      <form action="{% url 'tasks:open_task' task_user.id %}" method="post">
         {% csrf_token %}
         <button type="submit" class="w-full inline-flex justify-center rounded-lg bg-indigo-700 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-300 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">Open</button>
     
       </form>
       {% else %}
-      <form action="{% url 'tasks:complete_task' task_current_user.id %}" method="post">
+      <form action="{% url 'tasks:complete_task' task_user.id %}" method="post">
         {% csrf_token %}
         <button type="submit" class="w-full inline-flex justify-center rounded-lg bg-green-700 px-3 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-blue-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Complete</button>
     
       </form>
       {% endif %}
       
-      <button id="dropdownTask{{task_current_user.id}}Button" data-dropdown-toggle="dropdownTask{{task_current_user.id}}" class="w-full inline-flex justify-center rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700" type="button">
+      <button id="dropdownTask{{task_user.id}}Button" data-dropdown-toggle="dropdownTask{{task_user.id}}" class="w-full inline-flex justify-center rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700" type="button">
         Details
         </button>
-        <div id="dropdownTask{{task_current_user.id}}" class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+        <div id="dropdownTask{{task_user.id}}" class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
           <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
               aria-labelledby="dropdownMenuIconHorizontalButton">
-              {% if task_current_user.creator %}
+              {% if task_user.creator %}
               <li>
                 <button id="QuickModalButton" data-modal-target="QuickModal" data-modal-toggle="QuickModal" class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full " type="button">
                   Edit
@@ -39,7 +38,7 @@
               </li>
 
               <li>
-                <form action="{% url 'tasks:delete_task' task_current_user.task.id %}" method="post">
+                <form action="{% url 'tasks:delete_task' task_user.id %}" method="post">
                   {% csrf_token %}
                 <button type="submit" class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full " >
                   Delete
@@ -48,7 +47,7 @@
               </li>
               {% endif %}
               <li>
-                <form action="{% url 'tasks:not_accept_task' task_current_user.id %}" method="post">
+                <form action="{% url 'tasks:not_accept_task' task_user.id %}" method="post">
                   {% csrf_token %}
                 <button type="submit" class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full " >
                   Not accept
@@ -59,33 +58,32 @@
           
           </div>
 
-      {% endif %}
 
         <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="{{ task_current_user.task.deadline }}"
-          title="{{ task_current_user.task.deadline }}">{{ task_current_user.task.deadline }}</time>
+          title="{{ task_current_user.task.deadline }}">{{ task_user.task.deadline }}</time>
         </p>
-        {% if task_current_user.completed %}
+        {% if task_user.completed %}
         <dd class="me-2 mt-1.5 inline-flex items-center rounded bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-300">
           <svg class="me-1 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.5 4h-13m13 16h-13M8 20v-3.333a2 2 0 0 1 .4-1.2L10 12.6a1 1 0 0 0 0-1.2L8.4 8.533a2 2 0 0 1-.4-1.2V4h8v3.333a2 2 0 0 1-.4 1.2L13.957 11.4a1 1 0 0 0 0 1.2l1.643 2.867a2 2 0 0 1 .4 1.2V20H8Z" />
           </svg>
           completed
         </dd>
-        {% elif task_current_user.not_accepted %}
+        {% elif task_user.not_accepted %}
         <dd class="me-2 mt-1.5 inline-flex items-center rounded bg-white-100 px-2.5 py-0.5 text-xs font-medium text-white-800 dark:bg-white-900 dark:text-white-300">
           <svg class="me-1 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.5 4h-13m13 16h-13M8 20v-3.333a2 2 0 0 1 .4-1.2L10 12.6a1 1 0 0 0 0-1.2L8.4 8.533a2 2 0 0 1-.4-1.2V4h8v3.333a2 2 0 0 1-.4 1.2L13.957 11.4a1 1 0 0 0 0 1.2l1.643 2.867a2 2 0 0 1 .4 1.2V20H8Z" />
           </svg>
           Not accepted
         </dd>
-        {% elif date > task_current_user.task.deadline %}
+        {% elif date > task_user.task.deadline %}
         <dd class="me-2 mt-1.5 inline-flex items-center rounded bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800 dark:bg-red-900 dark:text-red-300">
           <svg class="me-1 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.5 4h-13m13 16h-13M8 20v-3.333a2 2 0 0 1 .4-1.2L10 12.6a1 1 0 0 0 0-1.2L8.4 8.533a2 2 0 0 1-.4-1.2V4h8v3.333a2 2 0 0 1-.4 1.2L13.957 11.4a1 1 0 0 0 0 1.2l1.643 2.867a2 2 0 0 1 .4 1.2V20H8Z" />
           </svg>
           Passed
         </dd>
-        {% elif date <= task_current_user.task.deadline %}
+        {% elif date <= task_user.task.deadline %}
         <dd class="me-2 mt-1.5 inline-flex items-center rounded bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300">
           <svg class="me-1 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.5 4h-13m13 16h-13M8 20v-3.333a2 2 0 0 1 .4-1.2L10 12.6a1 1 0 0 0 0-1.2L8.4 8.533a2 2 0 0 1-.4-1.2V4h8v3.333a2 2 0 0 1-.4 1.2L13.957 11.4a1 1 0 0 0 0 1.2l1.643 2.867a2 2 0 0 1 .4 1.2V20H8Z" />
@@ -93,9 +91,9 @@
           In progress
         </dd>
         {% endif %}
-        <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">{{ task_current_user.task.title }}</h1>
+        <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">{{ task_user.task.title }}</h1>
         
-        <p class="lead">{{ task_current_user.task.content }}</p>
+        <p class="lead">{{ task_user.task.content }}</p>
         <!-- <figure><img src="https://flowbite.s3.amazonaws.com/typography-plugin/typography-image-1.png" alt="">
             <figcaption>Digital art by Anonymous</figcaption>
         </figure> -->
@@ -103,9 +101,9 @@
 
        <div>
         <p class="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 dark:text-white">Creator:</p>
-          <p class="text-sm text-gray-600">{{ task_current_user.task.task_creator.get_full_name}}</p>
+          <p class="text-sm text-gray-600">{{ task_user.task_creator}}</p>
           <p class="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 dark:text-white">Recipient:</p>
-          <p class="text-sm text-gray-600">{{ task_current_user.user.get_full_name}}</p>
+          <p class="text-sm text-gray-600">{{ task_user.user }}</p>
        </div>
 
         <div>
@@ -115,22 +113,22 @@
           {% for action in task_history %}
           {% if action.revised %}
           <p class="p-1 text-sm text-gray-600">
-            User {{action.user.get_full_name}} revised task at {{action.data_time_action}}
+            User {{action.user}} revised task at {{action.data_time_action}}
           </p>
           {% elif action.complete %}
           <p class="p-1 text-sm text-gray-600">
-            User {{action.user.get_full_name}} complete task at {{action.data_time_action}}
+            User {{action.user}} complete task at {{action.data_time_action}}
           </p>
           {% elif action.reopen %}
           <p class="p-1 text-sm text-gray-600">
-            User {{action.user.get_full_name}} open task at {{action.data_time_action}}
+            User {{action.user}} open task at {{action.data_time_action}}
           </p>
           {% endif %}
           {% endfor %}
         </div>
         
 
-        {% if task_current_user.user == current_user %}
+        {% if task_user.user == request.user %}
         {% include 'tasks/coments.html' %}
         {% endif %}
     </article>
@@ -154,7 +152,7 @@
               </button>
           </div>
           <!-- Modal body -->
-          <form action="{% url 'tasks:update_task' object.id %}" method="post">
+          <form action="{% url 'tasks:update_task' task_user.task.id %}" method="post">
               {% csrf_token %}
               <div class="grid gap-4 mb-4 sm:grid-cols-1">
                   <div id="1date-range-picker" date-rangepicker class="flex items-center">

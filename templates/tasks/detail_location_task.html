@@ -23,7 +23,7 @@
                 {% else %}
                 <dd class="mt-1.5 text-base font-semibold text-grey-900 dark:text-white">
                 {% endif %}
-                  <a href="{% url 'tasks:detail_task' task.id %}" class="hover:underline">{{ task_user.user.get_full_name }}</a>
+                  <a href="{% url 'tasks:detail_task' pk=task_user.task.id user_id=task_user.user.id  %}" class="hover:underline">{{ task_user.user.get_full_name }}</a>
                 </dd>
               </dl>
               
