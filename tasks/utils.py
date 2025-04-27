@@ -1,10 +1,8 @@
+from typing import List, Union, Tuple
 
 from django.contrib.auth.models import User
 
-
-
 from employee.utils import get_user_location
-
 from employee.models import (
     RetailPositions, StorePositions,
     Store, District, Region,
@@ -14,7 +12,10 @@ from employee.models import (
 
 
 
-def employee_tasks_allowed_locations(current_user):
+def employee_tasks_allowed_locations(current_user: User)->Union[
+                                    Tuple[List[StoreEmployee], str] | Tuple[List[Store], str] | Tuple[List[District], str] | None
+                                    ]:
+    """Get instance User. Return list of recipietns and type recipient for task"""
     location = get_user_location(current_user)
     if isinstance(location, Store):
         return StoreEmployee.objects.filter(store = location), 'users'
@@ -27,11 +28,14 @@ def employee_tasks_allowed_locations(current_user):
     
 
 
-def  get_users_from_location(recipients_id, recipients):
-
+def  get_users_from_location(recipients_id: List[int],
+                             recipients: Union[StoreEmployee| Store | District | Region])->Union[List[User], List]:
+    """Get list of employees id and instance of location
+    return list of instance Users from that location
+    """
     if isinstance(recipients, StoreEmployee):
         return [StoreEmployee.objects.get(id=user_id).user for user_id in recipients_id]
-    
+
     elif isinstance(recipients, Store):
         employees = []
         for store_id in recipients_id:
@@ -56,8 +60,10 @@ def  get_users_from_location(recipients_id, recipients):
 
 
 
-def users_to_tasks_create(recipients_list, recipients_type):
-
+def users_to_tasks_create(recipients_list: Union[List[str], List[int]],
+                          recipients_type: Union[StoreEmployee| Store | District | Region])->List[User]:
+    """Get list of users id or list with position(position always one, len(List[str]) == 1)
+    return list instance users who get task"""
     if recipients_list[0] == StorePositionsChoises.STORE_MANAGER:
         position = StorePositions.objects.get(position=StorePositionsChoises.STORE_MANAGER)
         employees_obj = StoreEmployee.objects.filter(position=position)
