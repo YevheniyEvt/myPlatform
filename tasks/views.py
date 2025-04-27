@@ -156,14 +156,15 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
         self.user_id = self.kwargs.get('user_id', self.request.user.id)
         user = User.objects.get(id=self.user_id)
         task = Task.objects.get(pk=kwargs.get('pk')).taskusers_set.filter(user=user).first()
-        TaskHistory.objects.get_or_create(
-            user=self.request.user,
-            task=task,
-            revised=True,
-        )
-        if user == self.request.user:
-            task.revised = timezone.now()
-            task.save()
+        if task is not None:
+            TaskHistory.objects.get_or_create(
+                user=self.request.user,
+                task=task,
+                revised=True,
+            )
+            if user == self.request.user:
+                task.revised = timezone.now()
+                task.save()
         return super().get(request, *args, **kwargs)
     
     def get_context_data(self, **kwargs):
@@ -180,6 +181,10 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
 class CreateTaskCommentView(CreateView):
     model = Task
     form_class = ComentForm
+    
+    def get_queryset(self):
+        query = super().get_queryset()
+        return query.filter(taskusers__user=self.request.user)
     
     def get_object(self):
         obj_query = super().get_object()
@@ -211,6 +216,10 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
     form_class = TaskForm
     model = Task
 
+    def get_queryset(self):
+        query = super().get_queryset()
+        return query.filter(taskusers__user=self.request.user).distinct()
+
     def get_success_url(self):
         return reverse_lazy("tasks:detail_task", kwargs={'pk': self.object.id})
 
@@ -220,7 +229,7 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('tasks:my_tasks')
 
     def get_queryset(self):
-        return super().get_queryset().filter(creator=True)
+        return super().get_queryset().filter(user=self.request.user, creator=True)
     
     def form_valid(self, *args, **kwargs):
         content = f"user: {self.request.user}, delete task: {self.object.task.title}, with content:{self.object.task.content[:50]}."
@@ -230,6 +239,10 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
 
 class CommentDeleteView(LoginRequiredMixin, DeleteView):
     model = Coment
+
+    def get_queryset(self):
+        query = super().get_queryset()
+        return query.filter(owner=self.request.user)
 
     def form_valid(self, *args, **kwargs):
         task = self.object.task
