@@ -53,7 +53,7 @@ class CreateTaskView(LoginRequiredMixin, BaseCreateView, ListView):
     def form_valid(self, form):
         response = super().form_valid(form)
         recipients_id_from_form = self.request.POST.getlist("recipients")
-        users = users_to_tasks_create(recipients_list=recipients_id_from_form, recipients_type=self.recipients_type[0])
+        users = users_to_tasks_create(recipients_list=recipients_id_from_form, recipients_type=self.recipients_query[0])
         self.object.recipients.set(users)
         self.object.recipients.add(self.request.user, through_defaults={"creator": True})
         return response
@@ -87,7 +87,7 @@ class MyTaskListView(LoginRequiredMixin, ListView):
             return query.exclude(Q(completed=True) | Q(not_accepted=True)) 
         elif reverse('tasks:my_completed_task') == url:
             return query.filter(Q(completed=True) | Q(not_accepted=True))
-        
+            
 
 class MyLocationTaskView(LoginRequiredMixin, ListView):
     model = Task
@@ -96,12 +96,15 @@ class MyLocationTaskView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         current_user_location = get_user_location(self.request.user)
-        my_location_users = get_users_from_location(recipients_id=[current_user_location.id], recipients=current_user_location)
+        my_location_users = get_users_from_location(recipients_id=[current_user_location.id],
+                                                    recipients=current_user_location
+                                                    )
         query = super().get_queryset()
         percent_completed = Case(
             When(total=0, then=Value(0)),
-            default=ExpressionWrapper(F('count_completed')*100/F('total'), output_field=DecimalField()
-                                      ), output_field=DecimalField())
+            default=ExpressionWrapper(F('count_completed')*100/F('total'), output_field=DecimalField()),
+            output_field=DecimalField()
+                                )
         query = (query.
                  filter(taskusers__user__in=my_location_users).
                  annotate(
@@ -116,12 +119,16 @@ class LocationTaskDetailView(LoginRequiredMixin, DetailView):
     model = Task
     template_name = "tasks/detail_location_task.html"
     context_object_name = 'task'
-    
+
+    def get_queryset(self):
+        current_user_location = get_user_location(self.request.user)
+        self.my_location_users = get_users_from_location(recipients_id=[current_user_location.id], recipients=current_user_location)
+        query = super().get_queryset()
+        return query.filter(taskusers__user__in=self.my_location_users).distinct()
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        current_user_location = get_user_location(self.request.user)
-        my_location_users = get_users_from_location(recipients_id=[current_user_location.id], recipients=current_user_location)
-        tasks_users = self.get_object().taskusers_set.filter(user__in=my_location_users)
+        tasks_users = self.get_object().taskusers_set.filter(user__in=self.my_location_users)
         context['tasks_users'] = tasks_users
         return context
 
@@ -131,16 +138,23 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
     template_name = 'tasks/detail_task.html'
     context_object_name = 'task_user'
 
+    def get_queryset(self):
+        current_user_location = get_user_location(self.request.user)
+        self.my_location_users = get_users_from_location(recipients_id=[current_user_location.id], recipients=current_user_location)
+        query = super().get_queryset()
+        return query.filter(
+            Q(taskusers__user__in=self.my_location_users) | 
+            Q(taskusers__user=self.request.user)).distinct()
+    
     def get_object(self):
-        user_id = self.kwargs.get('user_id', self.request.user.id)
         obj_query = super().get_object()
-        user = User.objects.get(id=user_id)
+        user = User.objects.get(id=self.user_id)
         obj_query = obj_query.taskusers_set.filter(user=user).first()
         return obj_query
 
     def get(self, request, *args, **kwargs):
-        user_id = self.kwargs.get('user_id', self.request.user.id)
-        user = User.objects.get(id=user_id)
+        self.user_id = self.kwargs.get('user_id', self.request.user.id)
+        user = User.objects.get(id=self.user_id)
         task = Task.objects.get(pk=kwargs.get('pk')).taskusers_set.filter(user=user).first()
         TaskHistory.objects.get_or_create(
             user=self.request.user,
@@ -156,7 +170,8 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         comments = Coment.objects.filter(task=self.object.task)
         task_history = TaskHistory.objects.filter(task=self.object)
-        context['comments'] = comments
+        if self.user_id == self.request.user.id:
+            context['comments'] = comments
         context['task_history'] = task_history
         context['form'] = TaskForm(instance=self.object.task)
         return context
