@@ -19,11 +19,11 @@ urlpatterns = [
     path('update/<int:pk>/', views.TaskUpdateView.as_view(), name='update_task'),
     path('delete/<int:pk>/', views.TaskDeleteView.as_view(), name='delete_task'),
 
-    path('delete/coment/<int:pk>', views.CommentDeleteView.as_view(), name='delete_coment'),
+    path('delete/coment/<int:pk>/', views.CommentDeleteView.as_view(), name='delete_coment'),
 
-    path('complate/<int:task_id>', views.complete_task, name='complete_task'),
-    path('open/<int:task_id>', views.open_task, name='open_task'),
-    path('not-accept/<int:task_id>', views.not_accept_task, name='not_accept_task'),
+    path('complate/<int:task_id>/', views.complete_task, name='complete_task'),
+    path('open/<int:task_id>/', views.open_task, name='open_task'),
+    path('not-accept/<int:task_id>/', views.not_accept_task, name='not_accept_task'),
     
 
 

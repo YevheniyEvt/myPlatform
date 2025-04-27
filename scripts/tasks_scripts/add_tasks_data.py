@@ -6,7 +6,7 @@ from tasks.models import Task, TaskUsers
 from tasks.utils import get_user_location, employee_tasks_allowed_locations, users_to_tasks_create
 from scripts.tasks_scripts import data
 
-COUNT_QUICK_TASKS = 15
+COUNT_QUICK_TASKS = 10
 COUNT_DISTRIBUTION_TASKS = 10
 TASKS_COMPLETED = 5
 TASKS_NOT_ACCEPTED = 5
@@ -32,17 +32,18 @@ def create_distribution_task():
         task.recipients.add(user, through_defaults={"creator": True})
 
 def create_quick_task():
-    user = User.objects.filter(is_superuser=True).first()
-    location = get_user_location(user)
-    for index in range(COUNT_QUICK_TASKS):
-        task = Task.objects.create(
-            title=' '.join(TEXT[index:index + 4]),
-            content=' '.join(TEXT[index:index + 10]),
-            location=location,
-            start_date='2025-04-07',
-            deadline='2025-04-07'
-        )
-        task.recipients.add(user, through_defaults={"creator": True})
+    users = User.objects.all()
+    for user in users:
+        location = get_user_location(user)
+        for index in range(COUNT_QUICK_TASKS):
+            task = Task.objects.create(
+                title=str(user).join(TEXT[index:index + 1]),
+                content=' '.join(TEXT[index:index + 10]),
+                location=location,
+                start_date='2025-04-07',
+                deadline='2025-04-07'
+            )
+            task.recipients.add(user, through_defaults={"creator": True})
 
 def create_completed_task():
     user = User.objects.filter(is_superuser=True).first()
