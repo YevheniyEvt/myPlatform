@@ -157,7 +157,7 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
         user = User.objects.get(id=self.user_id)
         task = Task.objects.get(pk=kwargs.get('pk')).taskusers_set.filter(user=user).first()
         if task is not None:
-            TaskHistory.objects.get_or_create(
+            TaskHistory.objects.create(
                 user=self.request.user,
                 task=task,
                 revised=True,
