@@ -32,7 +32,7 @@ def create_distribution_task():
         task.recipients.add(user, through_defaults={"creator": True})
 
 def create_quick_task():
-    users = User.objects.all()
+    users = User.objects.all()[:5]
     for user in users:
         location = get_user_location(user)
         for index in range(COUNT_QUICK_TASKS):

@@ -51,11 +51,16 @@ class CreateTaskView(LoginRequiredMixin, BaseCreateView, ListView):
                 )
     
     def form_valid(self, form):
+        location = get_user_location(self.request.user)
+        form.instance.location = location
         response = super().form_valid(form)
         recipients_id_from_form = self.request.POST.getlist("recipients")
-        users = users_to_tasks_create(recipients_list=recipients_id_from_form, recipients_type=self.recipients_query[0])
-        self.object.recipients.set(users)
-        self.object.recipients.add(self.request.user, through_defaults={"creator": True})
+        if User.objects.filter(id = recipients_id_from_form[0]).first() == self.request.user:
+            self.object.recipients.add(self.request.user, through_defaults={"creator": True})
+        else:
+            users = users_to_tasks_create(recipients_list=recipients_id_from_form, recipients_type=self.recipients_query[0])
+            self.object.recipients.set(users)
+            self.object.recipients.add(self.request.user, through_defaults={"creator": True})
         return response
 
     

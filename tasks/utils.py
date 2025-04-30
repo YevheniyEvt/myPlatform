@@ -37,6 +37,7 @@ def  get_users_from_location(recipients_id: List[int],
         return [StoreEmployee.objects.get(id=user_id).user for user_id in recipients_id]
 
     elif isinstance(recipients, Store):
+        
         employees = []
         for store_id in recipients_id:
             store=Store.objects.get(id=store_id)
