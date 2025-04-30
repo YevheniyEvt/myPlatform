@@ -95,7 +95,7 @@
 <details>
   <summary>Detail task</summary>
 
-  ![image](https://github.com/user-attachments/assets/5c76353d-5045-41ff-b00a-e0ba0638b8a2)
+  ![image](https://github.com/user-attachments/assets/170bea07-1d70-461b-8ccf-8a12b6a21677)
 </details>
 
 ### My task
