@@ -1,10 +1,10 @@
 # Pet project 
+*Focus on server-side logic. Frontend is built on Tailwind classes*
 ## A platform for communication between company employees 
 *Original platform is myJysk app*
 - The company's structure has several levels - regions, districts, stores
 - There are store employee, retail employee, office employee.
 - They have different position like store manager, district manager etc.
-
 
 ## Home page
 ### Has blocks with the current user's tasks and diary
@@ -16,7 +16,6 @@
   ![image](https://github.com/user-attachments/assets/d08c4d53-c56f-4ef6-aabc-8a69d10f1e33)
 </details>
 
-
 ### Has blocks with various news for communication
 - Each employee can see news within their position and location (store, district, region etc.)
 - Links differ depending on whether the employee viewed article or not.
@@ -25,7 +24,6 @@
 
   ![image](https://github.com/user-attachments/assets/7eed38e3-3082-4ae3-8a2a-86b78053974e)
 </details>
-
 
 ### I also added a block where you can store notes.
 <details>
