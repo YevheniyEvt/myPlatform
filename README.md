@@ -68,7 +68,7 @@
 <details>
   <summary>My location tasks</summary>
 
-  ![image](https://github.com/user-attachments/assets/3364330a-4c22-4dc9-962c-fe3158f397bc)
+  ![image](https://github.com/user-attachments/assets/670d25a9-496a-4044-a258-84cea98b1fa0)
 </details>
 
 - In the task details of my location, you can see which employees completed the task, who viewed it, and when.
