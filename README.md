@@ -8,6 +8,8 @@
 
 ## Home page
 ### Has blocks with the current user's tasks and diary
+- Links differ depending on whether the employee viewed task or not.
+- If a task is overdue, it turns red.
 <details>
   <summary>Screenshot</summary>
 
@@ -17,6 +19,7 @@
 
 ### Has blocks with various news for communication
 - Each employee can see news within their position and location (store, district, region etc.)
+- Links differ depending on whether the employee viewed article or not.
 <details>
   <summary>Screenshot</summary>
 
@@ -55,12 +58,47 @@
 ## Tasks
 - Employees can write tasks depending on the milestones of their position - everyone, a specific district, a specific region, a store, an employee...
 - The employee can see their own tasks, tasks created by them, and tasks from his location.
-- 
+- Tasks have different statuses - active, overdue, not accepted, completed.
+- Employees can complete and reopen tasks. Managers can see the status of their subordinates tasks.
 <details>
-  <summary>My created task</summary>
+  <summary>My created tasks</summary>
 
   ![image](https://github.com/user-attachments/assets/307a0fad-1770-40ab-a577-63c948b45df7)
 </details>
+
+### Task of my location
+<details>
+  <summary>My location tasks</summary>
+
+  ![image](https://github.com/user-attachments/assets/3364330a-4c22-4dc9-962c-fe3158f397bc)
+</details>
+
+- In the task details of my location, you can see which employees completed the task, who viewed it, and when.
+
+<details>
+  <summary>Detail location task</summary>
+
+  ![image](https://github.com/user-attachments/assets/b5820573-c3e1-4b09-86c6-4fd34c16ec5a)
+</details>
+
+<details>
+  <summary>Detail task</summary>
+
+  ![image](https://github.com/user-attachments/assets/5c76353d-5045-41ff-b00a-e0ba0638b8a2)
+</details>
+
+### My task
+- In My Tasks you can see all tasks and their status.
+<details>
+  <summary>Detail task</summary>
+
+  ![image](https://github.com/user-attachments/assets/fffc19f8-b5cf-46bf-a6ac-39d443038cbc)
+</details>
+
+
+
+
+
 
 
 
