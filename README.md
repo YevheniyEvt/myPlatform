@@ -5,7 +5,10 @@
 - The company's structure has several levels - regions, districts, stores
 - There are store employee, retail employee, office employee.
 - They have different position like store manager, district manager etc.
-
+- Employees can write comments on articles and tasks.
+- The database records history:
+  - Who viewed the task, who completed/opened the task.
+  - Who deleted the article, comment, task.
 ## Home page
 ### Has blocks with the current user's tasks and diary
 - Links differ depending on whether the employee viewed task or not.
