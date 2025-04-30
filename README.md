@@ -1,5 +1,5 @@
 # Pet project 
-*Focus on server-side logic. Frontend is built on Tailwind classes*
+*Focus on server-side logic. Frontend is built on Tailwind classes. Images i store in Cloudinary*
 
 *Can try. Login with test user*
 <details>
