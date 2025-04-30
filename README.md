@@ -57,9 +57,17 @@
   ![image](https://github.com/user-attachments/assets/01e85cc2-ab3c-4201-b988-cf16adb11805)
 </details>
 
+## My note 
+<details>
+  <summary>Notes</summary>
+
+  ![image](https://github.com/user-attachments/assets/f053e33c-9823-44bc-a2c4-4d44fbcab97c)
+</details>
+
 ## Tasks
 - Employees can write tasks depending on the milestones of their position - everyone, a specific district, a specific region, a store, an employee...
 - The employee can see their own tasks, tasks created by them, and tasks from his location.
+  For example, a district manager 'South' can see the tasks of the employee from district 'South'. A store manager of '021' store can see the tasks of the employee from '021' store.
 - Tasks have different statuses - active, overdue, not accepted, completed.
 - Employees can complete and reopen tasks. Managers can see the status of their subordinates tasks.
 <details>
@@ -69,6 +77,7 @@
 </details>
 
 ### Task of my location
+- Progress is the percentage of workers from my location who have already closed this task
 <details>
   <summary>My location tasks</summary>
 
