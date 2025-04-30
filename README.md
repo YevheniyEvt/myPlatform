@@ -1,5 +1,16 @@
 # Pet project 
 *Focus on server-side logic. Frontend is built on Tailwind classes*
+
+*Can try. Login with test user*
+<details>
+  <summary>Link</summary>
+  
+  [Link](https://51.21.53.216.nip.io/)
+  
+  ![image](https://github.com/user-attachments/assets/cc9391f9-c14a-48b1-9661-c92fc006a7a1)
+</details>
+
+
 ## A platform for communication between company employees 
 *Original platform is myJysk app*
 - The company's structure has several levels - regions, districts, stores
