@@ -59,7 +59,6 @@ def home(request):
         "global_news": global_news,
         "my_tasks": my_tasks,
         "task_for_my_location": list_task,
-        "date": date,
         "notes": notes,
         "sections_query": sections_query,
     }

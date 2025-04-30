@@ -21,21 +21,21 @@
                                     <div class="flex-1 min-w-0 ms-4 w">
                                         {% if date <= obj.task.deadline %}
                                             {% if obj.revised is None %}
-                                                <a href="{% url 'tasks:detail_task' obj.id %}"   class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline ">
+                                                <a href="{% url 'tasks:detail_task' obj.task.id %}"   class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline ">
                                                     <h2><b>{{obj.task.title}}</b></h2>
                                                 </a>
                                             {% else %}
-                                                <a href="{% url 'tasks:detail_task' obj.id %}"   class="font-medium text-blue-400 underline dark:text-blue-500 hover:no-underline ">
+                                                <a href="{% url 'tasks:detail_task' obj.task.id %}"   class="font-medium text-blue-400 underline dark:text-blue-500 hover:no-underline ">
                                                     <h2>{{obj.task.title}}</h2>
                                                 </a>
                                             {% endif %}
                                         {% elif date > obj.task.deadline %}
                                             {% if obj.revised is None %}
-                                                <a href="{% url 'tasks:detail_task' obj.id %}"   class="font-medium text-red-600 underline dark:text-red-500 hover:no-underline ">
+                                                <a href="{% url 'tasks:detail_task' obj.task.id %}"   class="font-medium text-red-600 underline dark:text-red-500 hover:no-underline ">
                                                     <h2><b>{{obj.task.title}}</b></h2>
                                                 </a>
                                             {% else %}
-                                                <a href="{% url 'tasks:detail_task' obj.id %}"   class="font-medium text-red-400 underline dark:text-red-500 hover:no-underline ">
+                                                <a href="{% url 'tasks:detail_task' obj.task.id %}"   class="font-medium text-red-400 underline dark:text-red-500 hover:no-underline ">
                                                     <h2>{{obj.task.title}}</h2>
                                                 </a>
                                             {% endif %}

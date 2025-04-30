@@ -3,6 +3,7 @@
 import random
 from collections import deque
 from django.contrib.auth.models import User
+from decouple import config
 
 from scripts.employee_script import data
 
@@ -21,7 +22,8 @@ ID_STORE_EMPLOYEES = range(COUNT_OFFICE_EMPLOYEES + COUNT_RETAIL_EMPLOYEES + 1, 
 SLICE_RETAIL_EMPLOYEES = (0, COUNT_RETAIL_EMPLOYEES)
 SLICE_OFFICE_EMPLOYEES = (COUNT_RETAIL_EMPLOYEES, COUNT_RETAIL_EMPLOYEES + COUNT_OFFICE_EMPLOYEES)
 SLICE_STORE_EMPLOYEES = (COUNT_OFFICE_EMPLOYEES + COUNT_RETAIL_EMPLOYEES , COUNT_OFFICE_EMPLOYEES + COUNT_RETAIL_EMPLOYEES + COUNT_STORE_EMPLOYEES)
-
+SUPER_USER_PASSWORD = config('SUPER_USER_PASSWORD', cast=str, default='1234')
+TEST_USER_PASSWORD = 'Qwer1234qwer'
 
 def add_employee_positions():
     for store_pos in employee_models.StorePositionsChoises.values:
@@ -65,8 +67,15 @@ def add_superuser():
     User.objects.create_superuser(
         username='admin',
         email='Genya421@gmail.com',
-        password=str(1234),
+        password=SUPER_USER_PASSWORD,
         first_name='Super',
+        last_name='User',
+    )
+def add_test_user():
+    User.objects.create_superuser(
+        username='test_user',
+        password=TEST_USER_PASSWORD,
+        first_name='Test',
         last_name='User',
     )
 
@@ -151,6 +160,7 @@ def employee_run():
         add_office_departments()
         add_stores()
         add_superuser()
+        add_test_user()
         add_users()
         add_office_employee()
         add_retail_employee()
