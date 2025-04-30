@@ -107,7 +107,6 @@ class DetailArticleView(DetailView):
                 view=True
             )
         comments = Coment.objects.filter(article=article)
-        print(comments)
         context['comments'] = comments
         return context
 
