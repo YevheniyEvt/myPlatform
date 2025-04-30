@@ -25,7 +25,7 @@ class CreateTaskView(LoginRequiredMixin, BaseCreateView, ListView):
     model = Task
     form_class = TaskForm
     context_object_name = 'tasks'
-    success_url = reverse_lazy('tasks:my_tasks')
+    success_url = reverse_lazy('tasks:create_task')
     template_name = 'tasks/create_task.html'
     
     def setup(self, request, *args, **kwargs):

@@ -41,7 +41,6 @@ def  get_users_from_location(recipients_id: List[int],
         employees = []
         for store_id in recipients_id:
             store=Store.objects.get(id=store_id)
-            print(StoreEmployee.objects.filter(store=store))
             employees.extend([employee for employee in StoreEmployee.objects.filter(store=store)])
         return [employee.user for employee in employees]
     
