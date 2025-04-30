@@ -91,8 +91,8 @@
 - In My Tasks you can see all tasks and their status.
 <details>
   <summary>Detail task</summary>
-
-  ![image](https://github.com/user-attachments/assets/fffc19f8-b5cf-46bf-a6ac-39d443038cbc)
+  
+  ![image](https://github.com/user-attachments/assets/fb3c3911-7fb5-4e2e-87a9-42ff5ea88662)
 </details>
 
 
