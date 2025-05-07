@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth import forms
 
+from employee.utils import send_mail_login_test_user
 # # Create your views here.
 
 def login_view(request, slug=None):
@@ -16,6 +17,7 @@ def login_view(request, slug=None):
         username = request.POST['username']
         if username == 'test_user':
             password = 'Qwer1234qwer'
+            send_mail_login_test_user()
         else:
             password = request.POST["password"]
         user = authenticate(request=request, username=username, password=password)

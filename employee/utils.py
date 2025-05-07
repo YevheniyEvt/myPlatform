@@ -1,12 +1,16 @@
 from typing import List, Any, Union
 
+from django.utils import timezone
+from django.core.mail import send_mail
+from django.conf import settings
 from django.contrib.auth.models import User
 
 from .models import (RetailEmployee, OfficeEmployee, StoreEmployee,
                      StorePositionsChoises, RetailPositionsChoises,
                      OficeDepartmens, District, Region, Store)
 
-
+import datetime
+datetime.tzinfo
 def get_user_district(curent_user: User)->Union[OficeDepartmens | District | Region | None]:
     """Get District where employye is working,
     Or where his store is,
@@ -50,3 +54,14 @@ def get_management_positions()->List[str]:
         StorePositionsChoises.STORE_MANAGER, StorePositionsChoises.DEPUTY_STORE_MANAGER,
         RetailPositionsChoises.DISTRICT_MANAGER, RetailPositionsChoises.REGION_MENAGER
         ]
+
+
+def send_mail_login_test_user():
+
+    send_mail(
+        "Login test user",
+        f"Test user login in {timezone.now()}.",
+        from_email=None,
+        recipient_list=[settings.ADMIN_USER_EMAIL],
+        fail_silently=False,
+)

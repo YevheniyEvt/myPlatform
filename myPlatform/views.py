@@ -1,15 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 
 from django.db.models import Subquery, Q, Count
 from django.contrib.auth import get_user
 from django.contrib.auth.decorators import login_required
-from django.utils import timezone
 
 from tasks.models import TaskUsers, Task
 from tasks.utils import get_users_from_location
 from employee.utils import get_user_location
-from comunication.models import Articke, ViewArticle
-from comunication.utils import can_create_article, get_allowed_articles
+from comunication.models import Articke
+from comunication.utils import get_allowed_articles
 from notebook.models import Section, Note
 
 
@@ -18,14 +17,10 @@ def home(request):
     template_name = 'home.html'
     current_user = get_user(request)
     current_user_location = get_user_location(current_user)
-    date = timezone.localdate()
-
-    can_create = can_create_article(current_user)
 
     news_revised_user = get_allowed_articles(current_user).exclude(is_competition=True).filter(is_global=False).annotate(
         revised_user=Count('viewarticle', filter=Q(viewarticle__user=current_user))
     )
- 
 
     competitions = Articke.objects.all().filter(is_competition=True).annotate(
         revised_user=Count('viewarticle', filter=Q(viewarticle__user=current_user))
@@ -33,7 +28,7 @@ def home(request):
 
     global_news = Articke.objects.all().filter(is_global=True).annotate(
         revised_user=Count('viewarticle', filter=Q(viewarticle__user=current_user))
-    )[:5]
+    )[:3]
 
     my_tasks = current_user.taskusers_set.filter(completed=False, not_accepted=False)
 
