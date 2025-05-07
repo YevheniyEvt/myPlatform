@@ -6,6 +6,7 @@ from django.db.models import Q, Count
 
 from django.http import Http404
 from django.urls import reverse_lazy
+from django.shortcuts import redirect
 
 from .models import Topic, Section, Code, Article, Links, Image, Note
 from .forms import TopicForm, SectionForm, CodeForm, ArticleForm, LinksForm, ImageForm, NotesForm
@@ -94,6 +95,12 @@ class SectionDetailCreateView(LoginRequiredMixin, DetailView, BaseCreateView):
         form.instance.section = self.get_object()
         form.instance.owner = self.request.user
         return super().form_valid(form)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        topics = Topic.objects.all()
+        context['all_topics'] = topics
+        return context
     
 
 class SectionDeleteView(LoginRequiredMixin, DeleteView):
@@ -286,3 +293,11 @@ class NotesDelete(LoginRequiredMixin, DeleteView):
     def get_queryset(self):
         return super().get_queryset().filter(user=self.request.user)
     
+
+def change_section_topic(request, section_pk):
+    section = Section.objects.get(id=section_pk)
+    topic = Topic.objects.get(id=request.POST['topic_id'])
+    if request.method == 'POST':
+        section.topic = topic
+        section.save()
+    return redirect('notebook:show_articles', pk=section_pk)
