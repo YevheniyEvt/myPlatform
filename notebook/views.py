@@ -203,9 +203,9 @@ class ImageSectionView(SectionDetailCreateView):
         return reverse_lazy('notebook:show_images',
                              kwargs={"pk": self.get_object().id})
     
-    def get_form(self, form_class = ...):
-        form = ImageForm(self.request.POST, self.request.FILES)
-        return form
+    # def get_form(self, form_class = ...):
+    #     form = ImageForm(self.request.POST, self.request.FILES)
+    #     return form
 
 class ImageSectionDeleteView(LoginRequiredMixin, DeleteView):
     model = Image
@@ -216,7 +216,6 @@ class ImageSectionDeleteView(LoginRequiredMixin, DeleteView):
         return reverse_lazy('notebook:show_images',
                              kwargs={"pk": self.get_object().section.id})
     
-
 
 class BaseNoteView(View):
     """ Set the value used in child classes """

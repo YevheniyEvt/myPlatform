@@ -1,18 +1,12 @@
 
 
-  <form action="{% url 'notebook:show_images' section_object.id %}" method="post" enctype="multipart/form-data" class="max-w-lg mx-auto">
-    {% csrf_token %}
-    <div>
-      <label for="image_title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image title</label>
-      {{ form.image_title  }}
-  </div>
-  <div class="mb-5">
-    <label for="image_description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image description</label>
-    {{ form.image_description  }}
-  </div>
-
+<form action="{% url 'notebook:show_images' section_object.id %}" method="post" enctype="multipart/form-data" class="max-w-lg mx-auto">
+  {% csrf_token %}
+  {% for field in form %}
+  {% if field.name == 'image_file' %}
+  <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ field.label }}</label>
   <div class="relative w-full">
-    {{ form.image_file  }}      
+    {{ field }}   
     <button type="submit" class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
       <svg class="w-4 h-4 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
         <path d="M14.707 7.793a1 1 0 0 0-1.414 0L11 10.086V1.5a1 1 0 0 0-2 0v8.586L6.707 7.793a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.416 0l4-4a1 1 0 0 0-.002-1.414Z"/>
@@ -20,8 +14,19 @@
      </svg>
     </button>
   </div>
-
-  </form>
+  {% else %}
+  <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ field.label }}</label>
+  {{ field }}
+  {% endif %}
+  {% if field.errors %}
+      <p class="mt-4 text-sm text-red-600 dark:text-red-500">
+      {% for error in field.errors %}
+          <span class="block">{{ error }}</span>
+          {% endfor %}
+      </p>
+  {% endif %}
+{% endfor %}
+</form>
 
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

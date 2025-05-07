@@ -13,6 +13,12 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 from decouple import config
 
+from dotenv import load_dotenv, dotenv_values
+load_dotenv()
+import cloudinary
+
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -149,7 +155,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-CLOUDINARY_URL = config('CLOUDINARY_URL')
+
+# cloudinary.config(cloudinary_url=config('CLOUDINARY_URL'))
+# CLOUDINARY_URL = config('CLOUDINARY_URL')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
