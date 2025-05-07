@@ -21,21 +21,21 @@
                                     <div class="flex-1 min-w-0 ms-4 w">
                                         {% if date <= obj.task.deadline %}
                                             {% if obj.revised is None %}
-                                                <a href="{% url 'tasks:detail_task' task_id=obj.id %}"   class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline ">
+                                                <a href="{% url 'tasks:detail_task' obj.task.id %}"   class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline ">
                                                     <h2><b>{{obj.task.title}}</b></h2>
                                                 </a>
                                             {% else %}
-                                                <a href="{% url 'tasks:detail_task' task_id=obj.id %}"   class="font-medium text-blue-400 underline dark:text-blue-500 hover:no-underline ">
+                                                <a href="{% url 'tasks:detail_task' obj.task.id %}"   class="font-medium text-blue-400 underline dark:text-blue-500 hover:no-underline ">
                                                     <h2>{{obj.task.title}}</h2>
                                                 </a>
                                             {% endif %}
                                         {% elif date > obj.task.deadline %}
                                             {% if obj.revised is None %}
-                                                <a href="{% url 'tasks:detail_task' task_id=obj.id %}"   class="font-medium text-red-600 underline dark:text-red-500 hover:no-underline ">
+                                                <a href="{% url 'tasks:detail_task' obj.task.id %}"   class="font-medium text-red-600 underline dark:text-red-500 hover:no-underline ">
                                                     <h2><b>{{obj.task.title}}</b></h2>
                                                 </a>
                                             {% else %}
-                                                <a href="{% url 'tasks:detail_task' task_id=obj.id %}"   class="font-medium text-red-400 underline dark:text-red-500 hover:no-underline ">
+                                                <a href="{% url 'tasks:detail_task' obj.task.id %}"   class="font-medium text-red-400 underline dark:text-red-500 hover:no-underline ">
                                                     <h2>{{obj.task.title}}</h2>
                                                 </a>
                                             {% endif %}
@@ -92,42 +92,6 @@
                                 </div>
                             </li>
                             {% endfor %}
-                            <!-- <li class="py-3 sm:py-4">
-                                <div class="flex items-center">
-                                    <div class="flex-1 min-w-0 ms-4">
-                                        {% if date <= obj.task.deadline %}
-                                            {% if obj.revised is None %}
-                                                <a href="{% url 'tasks:detail_location_task' task_id=obj.task.id %}"   class="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline ">
-                                                    <h2><b>{{obj.task.title}}</b></h2>
-                                                </a>
-                                            {% else %}
-                                                <a href="{% url 'tasks:detail_location_task' task_id=obj.task.id %}"   class="font-medium text-blue-400 underline dark:text-blue-500 hover:no-underline ">
-                                                    <h2>{{obj.task.title}}</h2>
-                                                </a>
-                                            {% endif %}
-                                        {% elif date > obj.task.deadline %}
-                                            {% if obj.revised is None %}
-                                                <a href="{% url 'tasks:detail_location_task' task_id=obj.task.id %}"   class="font-medium text-red-600 underline dark:text-red-500 hover:no-underline ">
-                                                    <h2><b>{{obj.task.title}}</b></h2>
-                                                </a>
-                                            {% else %}
-                                                <a href="{% url 'tasks:detail_location_task' task_id=obj.task.id %}"   class="font-medium text-red-400 underline dark:text-red-500 hover:no-underline ">
-                                                    <h2>{{obj.task.title}}</h2>
-                                                </a>
-                                            {% endif %}
-                                                
-                                        {% endif %}
-                                       
-                                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                            
-                                        </p>
-                                    </div>
-                                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                        {{obj.task.deadline|date:"F j, Y"  }}
-                                    </div>
-                                </div>
-                            </li> -->
-
                         </div>
                     </div>
                 </ul>
@@ -205,7 +169,7 @@
 <div class="m-4 grid mb-8 border border-blue-300  rounded-lg shadow-xs dark:border-gray-700 md:mb-12 md:grid-cols-3 bg-white dark:bg-gray-800">
 
     <figure class="flex flex-col items-center justify-center p-8 bg-white border-b border-white md:rounded-se-lg dark:bg-gray-800 dark:border-gray-700">
-        <div >
+        <div class="bg-white border border-blue-300  rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700">
             <div class="flex items-center justify-between mb-4">
                 <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">News</h5>
            </div>
@@ -252,7 +216,7 @@
     </figure>
     
     <figure class="flex flex-col items-center justify-center p-8 bg-white border-b border-white rounded-t-lg md:rounded-t-none md:rounded-ss-lg md:border-e dark:bg-gray-800 dark:border-gray-700">
-        <div>
+        <div class="bg-white border border-blue-300  rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700">
             <div class="flex items-center justify-between mb-4">
                 <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Competitions</h5>
            </div>

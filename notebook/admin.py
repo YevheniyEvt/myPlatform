@@ -2,8 +2,8 @@ from django.contrib import admin
 from .models import Topic, Section, Links, Image, Note
 # Register your models here.
 
-admin.site.register(Image)
 admin.site.register(Links)
+admin.site.register(Image)
 admin.site.register(Note)
 
 class LinksInLine(admin.TabularInline):

@@ -18,7 +18,6 @@ load_dotenv()
 import cloudinary
 
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,12 +26,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-0h)qbs@5_@cuxv#5#+^#n+xhrk=lmxz#q=26y0)@$3i)!!8lli'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['51.21.53.216.nip.io', '51.21.53.216', '127.0.0.1', 'localhost', '0.0.0.0', '172.31.44.227']
+CSRF_TRUSTED_ORIGINS = [
+    'https://51.21.53.216.nip.io',
+]
 
 
 # Application definition
@@ -82,6 +84,7 @@ TEMPLATES = [
                 
                 'myPlatform.context_processors.set_search',
                 'myPlatform.context_processors.can_add',
+                'myPlatform.context_processors.localdate',
             ],
         },
     },
@@ -92,11 +95,11 @@ WSGI_APPLICATION = 'myPlatform.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-USERNAME = config('DATABASES_USER')
-PASSWORD = config('DATABASES_PASSWORD')
-HOST = config('DATABASES_HOST')
-PORT = config('DATABASES_PORT')
-DATABASE = config('DATABASES_NAME')
+USERNAME = config('DATABASES_USER', default='postgres')
+PASSWORD = config('DATABASES_PASSWORD', default='postgres')
+HOST = config('DATABASES_HOST', default='localhost')
+PORT = config('DATABASES_PORT',  default=5432)
+DATABASE = config('DATABASES_NAME', default='test_db')
 
 
 DATABASES = {
@@ -154,6 +157,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'static'
 
 
 # cloudinary.config(cloudinary_url=config('CLOUDINARY_URL'))
@@ -166,3 +170,29 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = 'user:login'
 
+# test settings
+FIXTURE_DIRS = [
+    BASE_DIR / 'fixtures'
+    ]
+
+# email settings
+EMAIL_HOST = config("EMAIL_HOST", cast=str, default=None)
+EMAIL_PORT = config("EMAIL_PORT", cast=str, default='587') # Recommended
+EMAIL_HOST_USER = config("EMAIL_HOST_USER", cast=str, default=None)
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", cast=str, default=None)
+EMAIL_USE_TLS = config("EMAIL_USE_TLS", cast=bool, default=True)  # Use EMAIL_PORT 587 for TLS
+#EMAIL_USE_SSL = config("EMAIL_USE_TLS", cast=bool, default=False)  # EUse MAIL_PORT 465 for SSL
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+ADMIN_USER_NAME = config('ADMIN_USER_NAME', default='admin')
+ADMIN_USER_EMAIL = config('ADMIN_USER_EMAIL', default=None)
+
+
+
+MANAGERS = []
+ADMINS = []
+if all([ADMIN_USER_NAME, ADMIN_USER_EMAIL]):
+    ADMINS += [
+        (f'{ADMIN_USER_NAME}', f'{ADMIN_USER_EMAIL}')
+    ]
+    MANAGERS = ADMINS

@@ -7,7 +7,7 @@
         <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Coments</h2>
     </div>
     
-    <form class="mb-6" action="{% url 'tasks:detail_task' object.id %}" method="post">
+    <form class="mb-6" action="{% url 'tasks:detail_task' task_user.task.id %}" method="post">
         {% csrf_token %}
         <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <textarea  rows="6" name="content"
@@ -20,7 +20,7 @@
         </button>
     </form>
 
-    {% for coment in coments %}
+    {% for coment in comments %}
     <article class=" mb-6 text-base bg-white border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900">
         <footer class="flex justify-between items-center mb-2">
             <div class="flex items-center">

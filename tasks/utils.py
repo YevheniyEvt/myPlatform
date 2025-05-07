@@ -1,23 +1,24 @@
+from typing import List, Union, Tuple
 
 from django.contrib.auth.models import User
-
-
+from django.core.exceptions import ObjectDoesNotExist
 
 from employee.utils import get_user_location
-
 from employee.models import (
     RetailPositions, StorePositions,
     Store, District, Region,
     OficeDepartmens, StoreEmployee, RetailEmployee,
-    StorePositionsChoises, RetailPositionsChoises,
     )
 
 
 
-def employee_tasks_allowed_locations(current_user):
+def employee_tasks_allowed_locations(current_user: User)->Union[
+                                    Tuple[List[StoreEmployee], str] | Tuple[List[Store], str] | Tuple[List[District], str] | None
+                                    ]:
+    """Get instance User. Return list of recipietns and type recipient for task"""
     location = get_user_location(current_user)
     if isinstance(location, Store):
-        return StoreEmployee.objects.filter(store = location), 'users'
+        return StoreEmployee.objects.filter(store=location), 'users'
     if isinstance(location, District):
         return Store.objects.filter(district=location), 'stores'
     if isinstance(location, Region):
@@ -27,57 +28,48 @@ def employee_tasks_allowed_locations(current_user):
     
 
 
-def  get_users_from_location(recipients_id, recipients):
-
+def  get_users_from_location(recipients_id: List[int],
+                             recipients: Union[StoreEmployee| Store | District | Region])->Union[List[User], None]:
+    """Get list of employees id and instance of location
+    return list of instance Users from that location
+    """
     if isinstance(recipients, StoreEmployee):
-        print(recipients_id)
-        return [StoreEmployee.objects.get(id=user_id).user for user_id in recipients_id]
-    
+        users = User.objects.exclude(storeemployee=None).filter(storeemployee__id__in=recipients_id)
+        return users
+
     elif isinstance(recipients, Store):
-        employees = []
-        for store_id in recipients_id:
-            store=Store.objects.get(id=store_id)
-            employees.extend([employee for employee in StoreEmployee.objects.filter(store=store)])
-        return [employee.user for employee in employees]
+        users = User.objects.exclude(storeemployee=None).filter(storeemployee__store__id__in=recipients_id)
+        return users
     
     elif isinstance(recipients, District):
-        employees = []
-        for districts_id in recipients_id:
-            districts=District.objects.get(id=districts_id)
-            for store in districts.store_set.all():
-                employees.extend([employee for employee in StoreEmployee.objects.filter(store=store)])
-        return [employee.user for employee in employees]
+        stores = Store.objects.filter(district__id__in=recipients_id)
+        users = User.objects.exclude(storeemployee=None).filter(storeemployee__store__in=stores)
+        return users
     
     elif isinstance(recipients, Region):
+        districts = District.objects.filter(region__id__in=recipients_id)
+        stores = Store.objects.filter(store__district__in=districts)
+        users = User.objects.exclude(storeemployee=None).filter(storeemployee__store__in=stores)
+        return users
+
+
+
+def users_to_tasks_create(recipients_list: Union[List[str], List[int]],
+                          recipients_type: Union[StoreEmployee| Store | District | Region])->List[User]:
+    """Get list of users id or list with position(position always one, len(List[str]) == 1)
+    return list instance users who get task"""
+    recipient = recipients_list[0]
+
+    try:
+        position = StorePositions.objects.get(position=recipient)
+        return User.objects.filter(storeemployee__position=position)
+    
+    except StorePositions.DoesNotExist:
+        try:
+            position = RetailPositions.objects.get(position=recipient)
+            return User.objects.filter(storeemployee__position=position)
         
-        region = Region.objects.get(id = recipients_id[0])
-        districts = region.district_set.all()
-        return get_users_from_location(recipients_id=[district.id for district in districts], recipients=districts[0])
-    return []
+        except RetailPositions.DoesNotExist:
+            return get_users_from_location(recipients_id=recipients_list, recipients=recipients_type)
 
 
-
-def users_to_tasks_create(recipients_list, recipients_type):
-
-    if recipients_list[0] == StorePositionsChoises.STORE_MANAGER:
-        position = StorePositions.objects.get(position=StorePositionsChoises.STORE_MANAGER)
-        employees_obj = StoreEmployee.objects.filter(position=position)
-        return [employee.user for employee in employees_obj]
-    
-    elif recipients_list[0] == StorePositionsChoises.DEPUTY_STORE_MANAGER:
-        position = StorePositions.objects.get(position=StorePositionsChoises.DEPUTY_STORE_MANAGER)
-        employees_obj = StoreEmployee.objects.filter(position=position)
-        return [employee.user for employee in employees_obj]
-    
-    elif recipients_list[0] == RetailPositionsChoises.REGION_MENAGER:
-        position = RetailPositions.objects.get(position=RetailPositionsChoises.REGION_MENAGER)
-        employees_obj = RetailEmployee.objects.filter(position=position)
-        return [employee.user for employee in employees_obj]
-    
-    elif recipients_list[0] == RetailPositionsChoises.DISTRICT_MANAGER:
-        position = RetailPositions.objects.get(position=RetailPositionsChoises.DISTRICT_MANAGER)
-        employees_obj = RetailEmployee.objects.filter(position=position)
-        return [employee.user for employee in employees_obj]
-
-    users = get_users_from_location(recipients_id=recipients_list, recipients=recipients_type)
-    return users

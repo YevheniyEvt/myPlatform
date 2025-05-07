@@ -1,15 +1,5 @@
 {% extends 'base.html' %}
 
-
-<!-- <h1>Create task</h1>
-<form action="{% url 'tasks:create_task' %}" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="enter">
-</form> -->
-
-
-
 {% block task_creation %}
 <!-- Modal toggle -->
  <div>
@@ -49,7 +39,7 @@
                                 <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                             </svg>
                         </div>
-                        <input id="1datepicker-range-start" name="start_date" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start">
+                        <input id="1datepicker-range-start" name="start_date" type="text" autocomplete="off"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start">
                         </div>
                         <span class="mx-4 text-gray-500">to</span>
                         <div class="relative">
@@ -58,39 +48,38 @@
                                 <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                             </svg>
                         </div>
-                        <input id="1datepicker-range-end" name="deadline" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
+                        <input id="1datepicker-range-end" name="deadline" type="text" autocomplete="off" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
                     </div>
                     </div>
                     <div>
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-                        <input type="text" name="title" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
-                    </div>
+                        {{form.title}}
+                      </div>
                     <div class="sm:col-span-2">
                         <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Task</label>
-                        <textarea id="description" name="content" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Write product description here"></textarea>                    
-                    </div>
+                        {{form.content}}                    </div>
                     <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Recipients</label>
                     <div class="grid gap-4 mb-4 grid-cols-7">
                         
-                        {% if locations == 'users' %}
+                        {% if recipients_type == 'users' %}
                         <select name="recipients" id="order-type" class="block w-full min-w-[8rem] rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
-                          <option value="{{ current_employee.id }}">{{ current_employee.user.get_full_name }} </option>
+                          <option value="{{ request.user.id }}">{{ request.user }} </option>
                             {% for recipient in recipients %}
-                            <option value="{{ recipient.id }}">{{ recipient.user.get_full_name }} </option>
+                            <option value="{{ recipient.id }}">{{ recipient }} </option>
                             {% endfor %}
                           </select>
 
-                        {% elif locations == 'stores' %}                        
+                        {% elif recipients_type == 'stores' %}                        
                         <select name="recipients" id="order-type" class="block w-full min-w-[8rem] rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
-                          <option value="{{ current_employee.id }}">{{ current_employee.user.get_full_name }} </option>
+                          <option value="{{ request.user.id }}">{{ request.user }} </option>
                           {% for position in positions %}
                           <option value="{{ position }}">{{ position }} </option>
                           {% endfor %}
                         </select>
                         
-                        {% elif locations == 'districts' %}
+                        {% elif recipients_type == 'districts' %}
                         <select name="recipients" id="order-type" class="block w-full min-w-[8rem] rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
-                          <option value="{{ current_employee.id }}">{{ current_employee.user.get_full_name }} </option>
+                          <option value="{{ request.user.id }}">{{ request.user }} </option>
                           {% for position in positions %}
                             <option value="{{ position }}">{{ position }} </option>
                             {% endfor %}
@@ -139,7 +128,7 @@
                                     <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                                 </svg>
                             </div>
-                            <input id="datepicker-range-start" name="start_date" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start">
+                            <input id="datepicker-range-start" name="start_date" type="text" autocomplete="off" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start">
                             </div>
                             <span class="mx-4 text-gray-500">to</span>
                             <div class="relative">
@@ -148,38 +137,38 @@
                                     <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                                 </svg>
                             </div>
-                            <input id="datepicker-range-end" name="deadline" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
+                            <input id="datepicker-range-end" name="deadline" type="text" autocomplete="off" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end">
                         </div>
                         </div>
                         <div>
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-                            <input type="text" name="title" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
-                        </div>
+                            {{form.title}}                        
+                          </div>
                         <div class="sm:col-span-2">
                             <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Task</label>
-                            <textarea id="description" name="content" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Write product description here"></textarea>                    
-                        </div>
-                        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Users</label>
+                            {{form.content}}                        
+                          </div>
+                        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Recipients</label>
                         <div class="grid gap-4 mb-4 grid-cols-7">
-                            {% if locations == 'users' %}
-                            {% for recipient in recipients %}
-                            <div class="flex items-center w-40 ps-4 border border-gray-200 rounded-sm dark:border-gray-700">
-                                <input id="bordered-checkbox-{{recipient.user.id}}" type="checkbox" value="{{recipient.user.id}}" name="recipients" class="h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <label for="bordered-checkbox-{{recipient.user.id}}" class=" py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{recipient.user.get_full_name}}</label>
-                            </div>
-                            {% endfor %}
-                            {% elif locations == 'stores' %}
+                            {% if recipients_type == 'users' %}
                             {% for recipient in recipients %}
                             <div class="flex items-center w-40 ps-4 border border-gray-200 rounded-sm dark:border-gray-700">
                                 <input id="bordered-checkbox-{{recipient.id}}" type="checkbox" value="{{recipient.id}}" name="recipients" class="h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <label for="bordered-checkbox-{{recipient.id}}" class=" py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{recipient.short_name}}</label>
+                                <label for="bordered-checkbox-{{recipient.id}}" class=" py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{recipient}}</label>
                             </div>
                             {% endfor %}
-                            {% elif locations == 'districts' %}
+                            {% elif recipients_type == 'stores' %}
                             {% for recipient in recipients %}
                             <div class="flex items-center w-40 ps-4 border border-gray-200 rounded-sm dark:border-gray-700">
                                 <input id="bordered-checkbox-{{recipient.id}}" type="checkbox" value="{{recipient.id}}" name="recipients" class="h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <label for="bordered-checkbox-{{recipient.id}}" class=" py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{recipient.name}}</label>
+                                <label for="bordered-checkbox-{{recipient.id}}" class=" py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{recipient}}</label>
+                            </div>
+                            {% endfor %}
+                            {% elif recipients_type == 'districts' %}
+                            {% for recipient in recipients %}
+                            <div class="flex items-center w-40 ps-4 border border-gray-200 rounded-sm dark:border-gray-700">
+                                <input id="bordered-checkbox-{{recipient.id}}" type="checkbox" value="{{recipient.id}}" name="recipients" class="h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="bordered-checkbox-{{recipient.id}}" class=" py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{recipient}}</label>
                             </div>
                             {% endfor %}
                             {% endif %}
@@ -206,87 +195,60 @@
           <p class="text-xl font-semibold text-red-900 dark:text-red sm:text-2xl">{{errors}}</p>
           {% endif %}
         <div class="gap-4 sm:flex sm:items-center sm:justify-between">
-          
           <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">My created tasks</h2>
-          
-          <div class="mt-6 gap-4 space-y-4 sm:mt-0 sm:flex sm:items-center sm:justify-end sm:space-y-0">
-            <div>
-              <label for="order-type" class="sr-only mb-2 block text-sm font-medium text-gray-900 dark:text-white">Select order type</label>
-              <select id="order-type" class="block w-full min-w-[8rem] rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
-                <option selected>All orders</option>
-                <option value="pre-order">Pre-order</option>
-                <option value="transit">In transit</option>
-                <option value="confirmed">Confirmed</option>
-                <option value="cancelled">Cancelled</option>
-              </select>
-            </div>
-  
-            <span class="inline-block text-gray-500 dark:text-gray-400"> from </span>
-  
-            <div>
-              <label for="duration" class="sr-only mb-2 block text-sm font-medium text-gray-900 dark:text-white">Select duration</label>
-              <select id="duration" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500">
-                <option selected>this week</option>
-                <option value="this month">this month</option>
-                <option value="last 3 months">the last 3 months</option>
-                <option value="lats 6 months">the last 6 months</option>
-                <option value="this year">this year</option>
-              </select>
-            </div>
-          </div>
         </div>
         
         <div class="mt-6 flow-root sm:mt-8">
           <div class="divide-y divide-gray-200 dark:divide-gray-700">
   
-              {% for object in tasks %}
+              {% for task in tasks %}
               <div class="grid grid-cols-6 gap-4 items-center py-6">
                   <dl class="text-base">
                     <dt class="text-center font-medium text-gray-500 dark:text-gray-400">Title</dt>
                     <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">
-                      {% if object.task in task_for_my_location %}
-                      <a href="{% url 'tasks:detail_location_task' object.task.id %}" class="hover:underline">{{ object.task.title }}</a>
+                      {% if task.task_count > 1 %}
+                      <a href="{% url 'tasks:detail_location_task' task.id %}" class="hover:underline">{{ task.title }}</a>
                       {% else %}
-                      <a href="{% url 'tasks:detail_task' object.id %}" class="hover:underline">{{ object.task.title }}</a>
+                      <a href="{% url 'tasks:detail_task' task.id %}" class="hover:underline">{{ task.title }}</a>
                       {% endif %}
                     </dd>
                   </dl>
 
                   <dl class="text-center">
                     <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Location</dt>
-                    <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ object.task.location }}</dd>
+                    <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ task.location }}</dd>
                   </dl>
                 
                   <dl class="text-center">
                     <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Start date:</dt>
-                    <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ object.task.start_date }}</dd>
+                    <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ task.start_date }}</dd>
                   </dl>
                 
                   <dl class="text-center">
                     <dt class="text-base font-medium text-gray-500 dark:text-gray-400">End date:</dt>
-                    <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ object.task.deadline }}</dd>
+                    <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ task.deadline }}</dd>
                   </dl>
                 
-                  <button id="dropdownTask{{object.id}}Button" data-dropdown-toggle="dropdownTask{{object.id}}" class="w-full inline-flex justify-center rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700" type="button">
+                  <button id="dropdownTask{{task.id}}Button" data-dropdown-toggle="dropdownTask{{task.id}}" class="w-full inline-flex justify-center rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700" type="button">
                     Details
                     </button>
-                    <div id="dropdownTask{{object.id}}" class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                    <div id="dropdownTask{{task.id}}" class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                       <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                           aria-labelledby="dropdownMenuIconHorizontalButton">
-                          {% if object.task in task_for_my_location %}
+                          {% if task.task_count > 1 %}
                             <li>
-                              <a href="{% url 'tasks:detail_location_task' object.task.id %}"
+                              <a href="{% url 'tasks:detail_location_task' task.id %}"
                                     class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-center">Detail</a>
                             </li>
                             {% else %}
                             <li>
-                              <a href="{% url 'tasks:detail_task' object.id %}"
+                              <a href="{% url 'tasks:detail_task' task.id %}"
                                     class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-center">Detail</a>
                             </li>
                             {% endif %}
-                            {% if object.task.task_creator == current_user %}
+                            {% if task.is_creator %}
                             <li>
-                              <form action="{% url 'tasks:delete_task' object.task.id %}" method="post">
+                              <form action="{% url 'tasks:delete_task' task.id %}" method="post">
                                 {% csrf_token %}
                               <button type="submit" class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full " >
                                 Delete

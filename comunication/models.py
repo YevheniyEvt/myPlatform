@@ -1,12 +1,19 @@
+""" There are Global news - like news for everyone from everywhere
+Local news - like news for current country/district/region
+Competition - local company competition for stores 
+
+Article have location(all/district/region) - only user from that location can see that article
+When user open article(open link) - it save in ViewArticle
+There are comments in article
+And when someone del article or comments this move will save to DeleteHistory
+"""
+
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils import timezone
 from django.utils.text import slugify
 
-from cloudinary import CloudinaryVideo, CloudinaryImage
 from cloudinary.models import CloudinaryField
 
-from employee.models import District, Region
 from tasks.models import Task
 
 # Create your models here.
@@ -21,8 +28,6 @@ class PermissionChoise(models.TextChoices):
     DISTRIC = 'distric'
     REGION = 'region'
     ALL = 'all'
-
-
 
 
 class Articke(models.Model):
@@ -65,13 +70,14 @@ class Articke(models.Model):
 
     
 class ViewArticle(models.Model):
+    """User view article or not"""
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     article = models.ForeignKey(Articke, on_delete=models.CASCADE)
     view = models.BooleanField(default=False)
 
 
-
 class Coment(models.Model):
+
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     article = models.ForeignKey(Articke, on_delete=models.CASCADE, blank=True, null=True)
     task = models.ForeignKey(Task, on_delete=models.CASCADE, blank=True, null=True)
@@ -79,8 +85,8 @@ class Coment(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
 
 
-
 class DeleteHistory(models.Model):
+    """All deleted objects"""
     user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
     content = models.CharField(max_length=500, blank=True, null=True)
     article = models.BooleanField(default=False)
@@ -94,13 +100,14 @@ class DeleteHistory(models.Model):
 
 
 
-class NotesOld(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    date = models.DateTimeField(auto_now_add=True)
-    text = models.TextField()
+# that class was used to load data from old database
+# class NotesOld(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     date = models.DateTimeField(auto_now_add=True)
+#     text = models.TextField()
 
-    def __str__(self):
-        return f'{self.date} "{self.text[0:50]}..."'
+#     def __str__(self):
+#         return f'{self.date} "{self.text[0:50]}..."'
     
-    class Meta:
-        ordering = ['-date']
+#     class Meta:
+#         ordering = ['-date']

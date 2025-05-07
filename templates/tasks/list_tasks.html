@@ -15,7 +15,7 @@
           <div class="space-y-6 sm:space-y-8">
             <ol class="flex flex-col gap-4 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800 sm:justify-center md:flex-row md:items-center lg:gap-6">
               
-              {% if all_task %}
+              {% if 'all' in request.get_full_path  %}
               <li class="flex items-center gap-2 md:flex-1 md:flex-col md:gap-1.5 lg:flex-none">
                 <svg class="h-5 w-5 text-indigo-700 dark:text-indigo-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">    
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -37,7 +37,7 @@
               <div class="hidden h-px w-8 shrink-0 bg-gray-200 dark:bg-gray-700 md:block xl:w-16"></div>
               
               
-              {% if active %}
+              {% if 'active' in request.get_full_path  %}
               <li class="flex items-center gap-2 md:flex-1 md:flex-col md:gap-1.5 lg:flex-none">
                 <svg class="h-5 w-5 text-indigo-700 dark:text-indigo-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">    
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -59,7 +59,7 @@
   
               <div class="hidden h-px w-8 shrink-0 bg-gray-200 dark:bg-gray-700 md:block xl:w-16"></div>
   
-              {% if completed %}
+              {% if 'completed' in request.get_full_path  %}
               <li class="flex items-center gap-2 md:flex-1 md:flex-col md:gap-1.5 lg:flex-none">
                 <svg class="h-5 w-5 text-indigo-700 dark:text-indigo-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">    
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.5 11.5 11 14l4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -116,60 +116,60 @@
       <div class="mt-6 flow-root sm:mt-8">
         <div class="divide-y divide-gray-200 dark:divide-gray-700">
 
-            {% for object in taskusers %}
+            {% for task in tasks %}
             
             <div class="grid grid-cols-7 gap-4 items-center py-6">
                 <dl class="text-base">
                   <dt class="text-center font-medium text-gray-500 dark:text-gray-400">Title</dt>
                   <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">
-                    <a href="{% url 'tasks:detail_task' object.id %}" class="hover:underline">{{ object.task.title }}</a>
+                    <a href="{% url 'tasks:detail_task' task.id %}" class="hover:underline">{{ task.title|truncatechars:20 }}</a>
                   </dd>
                 </dl>
               
                 <dl class="text-center">
                   <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Start date:</dt>
-                  <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ object.task.start_date }}</dd>
+                  <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ task.start_date }}</dd>
                 </dl>
               
                 <dl class="text-center">
                   <dt class="text-base font-medium text-gray-500 dark:text-gray-400">End date:</dt>
-                  <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ object.task.deadline }}</dd>
+                  <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{ task.deadline }}</dd>
                 </dl>
 
                 <dl class="text-center">
                   <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Revised</dt>
                   <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">
-                    {% if object.revised is None %}
+                    {% if task.revised is None %}
                     -
                     {% else %}
-                    {{ object.revised|date:"b. j, Y"|title }}</dd>
+                    {{ task.revised|date:"b. j, Y"|title }}</dd>
                     {% endif %}
                 </dl>
               
                 <dl class="text-center">
                   <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Status:</dt>
-                  {% if object.completed %}
+                  {% if task.completed %}
                   <dd class="me-2 mt-1.5 inline-flex items-center rounded bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-300">
                     <svg class="me-1 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.5 4h-13m13 16h-13M8 20v-3.333a2 2 0 0 1 .4-1.2L10 12.6a1 1 0 0 0 0-1.2L8.4 8.533a2 2 0 0 1-.4-1.2V4h8v3.333a2 2 0 0 1-.4 1.2L13.957 11.4a1 1 0 0 0 0 1.2l1.643 2.867a2 2 0 0 1 .4 1.2V20H8Z" />
                     </svg>
                     completed
                   </dd>
-                  {% elif object.not_accepted %}
+                  {% elif task.not_accepted %}
                   <dd class="me-2 mt-1.5 inline-flex items-center rounded bg-white-100 px-2.5 py-0.5 text-xs font-medium text-white-800 dark:bg-white-900 dark:text-white-300">
                     <svg class="me-1 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.5 4h-13m13 16h-13M8 20v-3.333a2 2 0 0 1 .4-1.2L10 12.6a1 1 0 0 0 0-1.2L8.4 8.533a2 2 0 0 1-.4-1.2V4h8v3.333a2 2 0 0 1-.4 1.2L13.957 11.4a1 1 0 0 0 0 1.2l1.643 2.867a2 2 0 0 1 .4 1.2V20H8Z" />
                     </svg>
                     Not accepted
                   </dd>
-                  {% elif date > object.task.deadline %}
+                  {% elif date > task.deadline %}
                   <dd class="me-2 mt-1.5 inline-flex items-center rounded bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800 dark:bg-red-900 dark:text-red-300">
                     <svg class="me-1 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.5 4h-13m13 16h-13M8 20v-3.333a2 2 0 0 1 .4-1.2L10 12.6a1 1 0 0 0 0-1.2L8.4 8.533a2 2 0 0 1-.4-1.2V4h8v3.333a2 2 0 0 1-.4 1.2L13.957 11.4a1 1 0 0 0 0 1.2l1.643 2.867a2 2 0 0 1 .4 1.2V20H8Z" />
                     </svg>
                     Passed
                   </dd>
-                  {% elif date <= object.task.deadline %}
+                  {% elif date <= task.deadline %}
                   <dd class="me-2 mt-1.5 inline-flex items-center rounded bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300">
                     <svg class="me-1 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.5 4h-13m13 16h-13M8 20v-3.333a2 2 0 0 1 .4-1.2L10 12.6a1 1 0 0 0 0-1.2L8.4 8.533a2 2 0 0 1-.4-1.2V4h8v3.333a2 2 0 0 1-.4 1.2L13.957 11.4a1 1 0 0 0 0 1.2l1.643 2.867a2 2 0 0 1 .4 1.2V20H8Z" />
@@ -178,33 +178,33 @@
                   </dd>
                   {% endif %}
                 </dl>
-                {% if object.completed or object.not_accepted  %}
-                <form action="{% url 'tasks:open_task' object.id %}" method="post">
+                {% if task.completed or task.not_accepted  %}
+                <form action="{% url 'tasks:open_task' task.task_user_id %}" method="post">
                   {% csrf_token %}
                   <button type="submit" class="w-full inline-flex justify-center rounded-lg bg-indigo-700 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-300 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">Open</button>
 
                 </form>
                 {% else %}
-                <form action="{% url 'tasks:complete_task' object.id %}" method="post">
+                <form action="{% url 'tasks:complete_task' task.task_user_id %}" method="post">
                   {% csrf_token %}
                   <button type="submit" class="w-full inline-flex justify-center rounded-lg bg-green-700 px-3 py-2 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-blue-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Complete</button>
 
                 </form>
                 {% endif %}
-                  <button id="dropdownTask{{object.id}}Button" data-dropdown-toggle="dropdownTask{{object.id}}" class="w-full inline-flex justify-center rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700" type="button">
+                  <button id="dropdownTask{{task.id}}Button" data-dropdown-toggle="dropdownTask{{task.id}}" class="w-full inline-flex justify-center rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700" type="button">
                   Details
                   </button>
-                  <div id="dropdownTask{{object.id}}" class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                  <div id="dropdownTask{{task.id}}" class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                         aria-labelledby="dropdownMenuIconHorizontalButton">
 
                         <li>
-                          <a href="{% url 'tasks:detail_task' object.id %}"
+                          <a href="{% url 'tasks:detail_task' task.id %}"
                                 class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-center">Detail</a>
                         </li>
-                        {% if object.creator %}
+                        {% if task.is_creator %}
                         <li>
-                          <form action="{% url 'tasks:delete_task' object.task.id %}" method="post">
+                          <form action="{% url 'tasks:delete_task' task.task_user_id %}" method="post">
                             {% csrf_token %}
                           <button type="submit" class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full " >
                             Delete
@@ -213,7 +213,7 @@
                         </li>
                         {% endif %}
                         <li>
-                          <form action="{% url 'tasks:not_accept_task' object.id %}" method="post">
+                          <form action="{% url 'tasks:not_accept_task' task.task_user_id %}" method="post">
                             {% csrf_token %}
                           <button type="submit" class="py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full " >
                             Not accept

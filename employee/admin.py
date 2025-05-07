@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 from .models import (StoreEmployee, OfficeEmployee, RetailEmployee,
                      Store, District, Region, OficeDepartmens,
+                     StorePositions, OfficePositions, RetailPositions
                      )
 
 
@@ -38,9 +39,11 @@ class RetailEmployeeAdmin(admin.ModelAdmin):
 
 admin.site.register(Store)
 admin.site.register(District)
-# admin.site.register(Region)
-# admin.site.register(OficeDepartmens)
-
+admin.site.register(Region)
+admin.site.register(OficeDepartmens)
+admin.site.register(StorePositions)
+admin.site.register(RetailPositions)
+admin.site.register(OfficePositions)
 
 
 

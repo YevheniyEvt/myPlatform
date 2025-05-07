@@ -1,0 +1,44 @@
+name: myPLatform_2
+services:
+  db:
+    image: postgres:16
+    env_file: .env
+    environment:
+      POSTGRES_DB: ${DATABASES_NAME}
+      POSTGRES_USER: ${DATABASES_USER}
+      POSTGRES_PASSWORD: ${DATABASES_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
+  django-web:
+    build: .
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py collectstatic --noinput &&
+             python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/usr/src/app
+      - ./static:/app/static/
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    env_file:
+      - .env
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./static:/static:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+    depends_on:
+      - django-web
+
+volumes:
+  pgdata:
