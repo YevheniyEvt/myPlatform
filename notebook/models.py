@@ -18,7 +18,6 @@ class Topic(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(
         max_length=200,
-        unique=True,
         validators=[MinLengthValidator(2, 'Must be more then 2 characters')],
         )
     short_description = models.TextField(blank=True, null=True)
@@ -31,7 +30,7 @@ class Topic(models.Model):
 class Section(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
-    title = models.CharField(max_length=150, unique=True)
+    title = models.CharField(max_length=150)
     description = models.TextField(blank=True, null=True, default=None) 
     add_date = models.DateTimeField(auto_now_add=True)
 
@@ -42,14 +41,14 @@ class Section(models.Model):
 class Code(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     section = models.ForeignKey(Section, on_delete=models.CASCADE)
-    content = models.TextField(unique=True)
+    content = models.TextField()
     add_date = models.DateTimeField(auto_now_add=True)
 
 
 class Article(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     section = models.ForeignKey(Section, on_delete=models.CASCADE)
-    content = models.TextField(unique=True)
+    content = models.TextField()
     add_date = models.DateTimeField(auto_now_add=True)
 
 
@@ -87,7 +86,7 @@ class Image(models.Model):
 
 class Links(models.Model):
     section = models.ForeignKey(Section, on_delete=models.CASCADE)
-    name = models.CharField(max_length=150, unique=True)
+    name = models.CharField(max_length=150)
     content = models.TextField(blank=True, null=True)
     url = models.URLField()
     add_date = models.DateTimeField(auto_now_add=True)

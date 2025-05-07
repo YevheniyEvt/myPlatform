@@ -81,7 +81,7 @@ class TopicDetailCreateSectionView(LoginRequiredMixin, DetailView, BaseCreateVie
                              kwargs={"pk": self.get_object().id})
 
 
-class SectionDetailCreateView(LoginRequiredMixin, DetailView, BaseCreateView):
+class SectionDetailCreateView(LoginRequiredMixin, BaseCreateView, DetailView):
     """ Base class of CodeSectionView, ArticleSectionView, LinksSectionView ,
         ImageSectionView. Have same logic for this classes"""
     model = Section

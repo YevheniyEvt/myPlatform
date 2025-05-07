@@ -32,7 +32,7 @@ class PermissionChoise(models.TextChoices):
 
 class Articke(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=150, unique=True)
+    title = models.CharField(max_length=150)
     content = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)
     is_local = models.BooleanField(default=True)
