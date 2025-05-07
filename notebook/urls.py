@@ -12,6 +12,8 @@ urlpatterns = [
 
     path('delete-section/<int:pk>/', views.SectionDeleteView.as_view(), name='delete_section'),
 
+    path('change-section-topic/<int:section_pk>/', views.change_section_topic, name='change_topic'),
+
     path('detail-section/<int:pk>/code/', views.CodeSectionView.as_view(template_name = 'notebook/section_detail.html') ,name='show_cod'),
     path('delete-code/<int:pk>/', views.CodeSectionDeleteView.as_view(), name='code_delete'),
 
