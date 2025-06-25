@@ -172,4 +172,5 @@ static
 cloudinary
 
 .env
+.env_develop
 docker-compose-develop.yml
