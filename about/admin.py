@@ -34,7 +34,6 @@ class ProjectsLinksInLine(admin.TabularInline):
 
 class TagInLine(admin.TabularInline):
     model = Tag
-    inlines = [DescriptionInLine]
     extra = 0
 
 @admin.register(Projects)
@@ -42,6 +41,10 @@ class ProjectsAdmin(admin.ModelAdmin):
     inlines = [ProjectsLinksInLine, TagInLine]
     list_display  = ["name"]
     
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    inlines = [DescriptionInLine]
+
 
 class CourseInLine(admin.TabularInline):
     model = Course
@@ -58,7 +61,7 @@ class BookInLine(admin.TabularInline):
 @admin.register(Education)
 class EducationAdmin(admin.ModelAdmin):
     inlines = [CourseInLine, LectionInLine, BookInLine]
-    list_display  = ["descriptions"]
+
 
 
 class WorkFlownInLine(admin.TabularInline):
@@ -72,4 +75,6 @@ class InstrumentInLine(admin.TabularInline):
 @admin.register(Skills)
 class SkillsAdmin(admin.ModelAdmin):
     inlines = [WorkFlownInLine, InstrumentInLine]
-    list_display  = ["descriptions"]
+
+
+

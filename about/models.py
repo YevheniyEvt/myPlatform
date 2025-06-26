@@ -8,6 +8,9 @@ class AboutMe(models.Model):
     short_description = models.CharField(blank=True, null=True)
     email = models.EmailField()
 
+    def __str__(self):
+        return self.first_name
+
 class Address(models.Model):
     city = models.CharField()
     country = models.CharField()
@@ -18,10 +21,16 @@ class Projects(models.Model):
     name = models.CharField()
     descriptions = models.TextField()
     instruments = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
     
 class Tag(models.Model):
     name = models.CharField()
     project = models.ForeignKey(to=Projects, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.name} (Проєкт: {self.project})"
 
 class Description(models.Model):
     text = models.TextField()
@@ -37,6 +46,9 @@ class Links(models.Model):
 
 class Education(models.Model):
     descriptions = models.TextField()
+
+    def __str__(self):
+        return f"{self.descriptions[:25]}..."
 
 class Course(models.Model):
     name = models.CharField()
@@ -56,6 +68,9 @@ class Book(models.Model):
 
 class Skills(models.Model):
     descriptions = models.TextField()
+    
+    def __str__(self):
+        return f"{self.descriptions[:25]}..."
 
 class WorkFlow(models.Model):
     name = models.TextField()
@@ -68,6 +83,9 @@ class Instrument(models.Model):
     
 class Hobbies(models.Model):
     descriptions = models.TextField()
+
+    def __str__(self):
+        return f"{self.descriptions[:25]}..."
 
 
 
