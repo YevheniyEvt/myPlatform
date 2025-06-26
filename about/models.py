@@ -1,106 +1,72 @@
-# from django.db import models
+from django.db import models
 
-# # Create your models here.
+# Create your models here.
 
-# class BaseModel:
-#     pass
+class Address(models.Model):
+    city = models.CharField()
+    country = models.CharField()
 
-# class Document:
-#     pass
+class Links(models.Model):
+    name = models.CharField()
+    url = models.URLField()
 
-# class Links(BaseModel):
-#     name: str
-#     url: HttpUrl
-
-
-# class Tags(BaseModel):
-#     name: str
-#     description: str
-
-
-# class Projects(Document):
-#     name: str
-#     descriptions: str
-#     instruments: str
-#     tags: list[Tags] | None = []
-#     links: list[Links] | None = []
-
-#     class Settings:
-#         use_state_management = True
+class AboutMe(models.Model):
+    first_name = models.CharField()
+    second_name = models.CharField()
+    descriptions = models.TextField()
+    short_description = models.CharField(blank=True, null=True)
+    email = models.EmailField()
+    address = models.ForeignKey(to=Address, on_delete=models.CASCADE)
+    links = models.ForeignKey(to=Links, on_delete=models.CASCADE)
 
 
-# class Address(BaseModel):
-#     city: str | None = None
-#     country: str | None = None
+class Description(models.Model):
+    text = models.TextField()
+
+class Tags(models.Model):
+    name = models.CharField()
+    descriptions = models.ForeignKey(to=Description, on_delete=models.CASCADE)
+
+class Projects(models.Model):
+    name = models.CharField()
+    descriptions = models.TextField()
+    instruments = models.TextField(blank=True, null=True)
+    tags = models.ForeignKey(to=Tags, on_delete=models.CASCADE, blank=True, null=True)
+    links = models.ForeignKey(to=Links, on_delete=models.CASCADE, blank=True, null=True)
 
 
-# class AboutMe(Document):
-#     first_name:str
-#     second_name: str
-#     descriptions: str
-#     short_description: str
-#     email: EmailStr
-#     address: Address | None = None
-#     links: list[Links] | None = []
+class Course(models.Model):
+    name = models.CharField()
+    descriptions = models.TextField()
 
+class Lection(models.Model):
+    name = models.CharField()
+    descriptions = models.TextField()
 
-#     class Settings:
-#         use_state_management = True
-
-
-# class Course(BaseModel):
-#     name: str
-#     descriptions: str
-
-
-# class Lection(BaseModel):
-#     name: str
-#     descriptions: str
-
-
-# class Book(BaseModel):
-#     name: str
-#     author: str
+class Book(models.Model):
+    name = models.TextField()
+    author = models.CharField()
     
-    
-# class Education(Document):
-#     descriptions: str
-#     courses: list[Course] | None = []
-#     lections: list[Lection] | None = []
-#     books: list[Book] | None = []
-
-#     class Settings:
-#         use_state_management = True
+class Education(models.Model):
+    descriptions = models.TextField()
+    courses = models.ForeignKey(to=Course, on_delete=models.CASCADE, blank=True, null=True)
+    lections = models.ForeignKey(to=Lection, on_delete=models.CASCADE, blank=True, null=True)
+    books = models.ForeignKey(to=Book, on_delete=models.CASCADE, blank=True, null=True)
 
 
-# class WorkFlow(BaseModel):
-#     name: str
+class WorkFlow(models.Model):
+    name = models.TextField()
 
-# class Instrument(BaseModel):
-#     name: str
+class Instrument(models.Model):
+    name = models.CharField()
 
-# class Skills(Document):
-#     workflows: list[WorkFlow] | None = []
-#     instruments: list[Instrument] | None = []
-
-#     class Settings:
-#         use_state_management = True
+class Skills(models.Model):
+    workflows = models.ForeignKey(to=WorkFlow, on_delete=models.CASCADE, blank=True, null=True)
+    instruments = models.ForeignKey(to=Instrument, on_delete=models.CASCADE, blank=True, null=True)
 
 
-# class Hobbies(Document):
-#     descriptions: str
-
-#     class Settings:
-#         use_state_management = True
+class Hobbies(models.Model):
+    descriptions = models.TextField()
 
 
-# class User(Document):
-#     username: str
-#     about: AboutMe | None = None
-#     projects: list[Link[Projects]] | None = []
-#     education: Link[Education] | None = None
-#     skills: Link[Skills] | None = None
-#     hobbies: Link[Hobbies] | None = None
 
-#     class Settings:
-#         use_state_management = True
