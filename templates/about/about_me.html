@@ -1,0 +1,353 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Особистий сайт Python-розробника Євгенія Євтушенка. Pet-проєкти, навчання, навички та досвід." />
+        <meta name="author" content="Yevheniy Yevtushenko" />
+
+        <title>Yevgeniy Yevtushenko</title>
+        <link rel="icon" type="image/x-icon" href="{% static 'about/img/favicon.ico' %}" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'about/css/styles.css' %}" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">
+                <span class="d-block d-lg-none">Yevgeniy Yevtushenko</span>
+                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{% static 'about/img/profile.jpg' %}" alt="..." /></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Про себе</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#experience">Проєкти</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">Навчання</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Навички</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Інтереси</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- Page Content-->
+        <div class="container-fluid p-0">
+            <!-- About-->
+            <section class="resume-section" id="about">
+                <div class="resume-section-content">
+                    <h1 class="mb-0">
+                        Євгеній
+                        <span class="text-primary">Євтушенко</span>
+                    </h1>
+                    <div class="subheading mb-5">
+                        Київ · Україна ·
+                        <a href="mailto:name@email.com">genya421@gmail.com</a> 
+                    </div>
+                    <p class="lead mb-5">Привіт. Я Python-розробник початківець. Маю досвід роботи з Django, FastAPI, PostgreSQL Ubuntu, Docker. Люблю приймати нові виклики, вирішувати складні задачі. Наразі весь вільний час приділяю навчанню. Вивчаю python, алгоритми, нові інструменти для покращення своїх навичок програміста.</p>
+                    <p>Наразі активно шукаю роботу, хочу долучитись до реальних проєктів та навчатись у досвідчених колег. </p>
+                    <p>З моїм резюме можна ознайомитись за <a href="https://app.enhancv.com/share/2714938c/?utm_medium=growth&utm_campaign=share-resume&utm_source=dynamic">посиланням</a></p>
+                    <div class="social-icons">
+                        <a class="social-icon" href="https://www.linkedin.com/in/yevheniy-yevtushenko-660112319"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="social-icon" href="https://github.com/YevheniyEvt"><i class="fab fa-github"></i></a>
+                        <a class="social-icon" href="https://www.facebook.com/YevgeniyYevtushenk0"><i class="fab fa-facebook-f"></i></a>
+                        <a class="social-icon" href="https://leetcode.com/u/yevheniyevt/"><i class="fa-solid fa-code"></i></a>
+                        
+                    </div>
+                </div>
+            </section>
+            <hr class="m-0" />
+            <!-- Experience-->
+            <section class="resume-section" id="experience">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Pet проєкти</h2>
+                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">Django веб додаток</h3>
+                            <p>Додаток для комунікації працівників компанії (по прикладу myjysk).</p>
+                            <p>Основні ідеї: 
+                            </p>
+                            <ul>
+                                Новини компанії:
+                                <ul>
+                                    <li>
+                                        Працівники можуть читати новини про компанію, про змагання.
+                                        Новини можуть бути в рамках дістрікту/регіону, тобто спіробітник з іншого дістрікту не побачить цю новину.
+                                    </li>
+                                    <li>
+                                        Можуть залишати коментарі під кожною новиною.
+                                    </li>
+                                </ul>
+                            </ul>
+                            <ul>
+                                Завдання:
+                                <ul>
+                                    <li>
+                                        Працівники бачать свої завдання які були створені колегами конкретно для них та розподільчі завдання які створені на локацію (магазин/дістрікт/регіон/всі). І бачать завдання колег своєї локації
+                                        (наприклад якщо співробітки з магазину то завадння цього магазину, якщо співробіткик керує дістріктом - то завадання всього свого дістрікту).
+                                    </li>
+                                    <li>
+                                        Можуть свторювати індивідуальні або розподільчі (відразу на всю локацію в рамках своєї посади) завдання. Наприклад керівник магазину - 
+                                        створює завдання на весь магазин. Керівник дістрікту на всіх співробітників всіх магазинів в цьому дістрікту і т.д.
+                                    </li>
+                                    <li>
+                                        Деталі персональних і розподільчих завдань відображаються по різному. В розподільчих можна відслідковувати хто з працівників і коли переглянув завдання,
+                                        хто вже завершив, хто не завершив вчасно, хто відхилив як не виконане.
+                                    </li>
+                                    <li>
+                                        Зберігається та відображається історія хто і коли переглянув завдання, завершив, відкрив після завершення.
+                                    </li>
+                                    <li>
+                                        До завдань можна писати коментарі.
+                                    </li>
+                                </ul>
+                            </ul>
+                            <ul>
+                                Нотатки
+                                <ul>
+                                    <li>
+                                        Є розділ де можна залишати свої нотатки. Від себе ще додав розділ яким користуюсь сам - це створення різних секцій в яких можна записувати нотатки,
+                                        зберігати скріни, посилання, частини коду по відповідним темам. Ці секції можуть бачити всі співробітники не залежно від їх локацій.
+                                    </li>
+                                </ul>
+                            </ul>
+                            <ul>
+                                Інше:
+                                <ul>
+                                    <li>
+                                        В додатку розроблена можливість пошуку. Можна шукати новину по заголовку чи тексту в тілі новини. Шукати нотатки та секції по назвам чи по описам.
+                                    </li>
+                                    <li>
+                                        Відслідковується та зберігається в базу даних історія видалення новин та завдань. Хто, коли і що видалив.
+                                    </li>
+                                    <li>
+                                        Є скріпт який заповнює базу даних "Lorem ipsum" текстом та створює json файл для використання у тестах.
+                                    </li>
+                                </ul>
+                            </ul>
+                            <p></p>
+                            
+                            <p>Для розробки використовую Django. Для розгортання використовую AWS EC2, Docker, Nginx та PostgreSQL. Фото зберігаються в cloudinary. HTTPS сертифікат з certbot.
+                                Скрипт запускаєть за допомогою бібліотеки django-extensions. Тести з django test на основі бібліотки unittest.
+                                Реалізував CI/CD на основі GitHub Actions.  В залежності від гілки - запускаються різні робочі процеси. 
+                                Основний мій фокус - це розробка серверної частини, frontend створений в основному з готових класів tailwindcss.
+                            </p>
+                            <p> Наразі це є основним моїм проектом яким я займаюсь(переписую код, додаю щось нове).
+                                Посилання на <a href="https://github.com/YevheniyEvt/myPlatform.git">GitHub репозиторій</a>, де є детальний опис зі скрінами
+                                та на сам <a href="https://51.21.53.216.nip.io/">додаток</a>. Є можливість зайти тестовим користувачем.</p>
+                        </div>
+                        <div class="flex-shrink-0"><span class="text-primary"></span></div>
+                    </div>
+
+                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">API додаток</h3>
+                            <p>Додаток з даними працівників компанії. Надає інформацію по співробітнику, локації де працює (магазин, дістрікт, регіон, офіс) та відповідні дані по цим локаціям - назви, де знаходяться і т.д.</p>
+                            <p>Розроблений на основі фраємворкy FastAPI. Авторизація користувачів з OAuth2, хешуванням пароля. Впроваджена логіка JWT токена для ідентифікації користувача та надання дозволів.
+                                Взаємодія з базою даних та створення датакласів за допомогою SQLModel. Alembic створює таблиці в базі даних з моделей SQLModel. Тести на основі бібліотеки pytest.
+                            </p>
+                            <p>Посилання на <a href="https://github.com/YevheniyEvt/ApiLikeJysk.git">GitHub репозиторій</a> </p>
+                        </div>
+                        <div class="flex-shrink-0"><span class="text-primary"></span></div>
+                    </div>
+
+                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">Аналітика гравців Call of Dragons</h3>
+                            <p>Додаток складається з двoх частин:</p>
+                            <li>
+                                Cкрипт який робить скріншоти екран, отримує дані зі скріншоту, зберігає дані в базу даних. Деякі дані вставляються через буфер обміну.
+                                Інформація про дії скрипта виводиться в термінал. Посилання на <a href="https://github.com/YevheniyEvt/LoadCODData.git">GitHub репозиторій скрипта</a>
+                            </li>
+                            <li>Візуалізація даних за допомогою фрємворку streamlit. Для аналізу даних з таблиць використовється бібліотека pandas.
+                                В додатку є декілька розділів - інформація по гравцям, альянсам, серверам.
+                                За посилання на <a href="https://github.com/YevheniyEvt/StatisticsCOD-player.git">GitHub репозиторій додатку</a> можна побачити детальніший опис із скріншотами.
+                            </li>
+                            <p></p>
+                            <p>В додатку використовую такі бібліотеки: PyAutoGUI робить скріншот екрана, pytesseract розпізнає текст на скріншоті, pyperclip вставляє дані з буферу обміну.
+                                SQLAlchemy зберігає дані в базу даних PostgreSQL. Alembic створює таблиці в базі даних з моделей SQLAlchemy. Для розгортання візуалізації використовую фрємворк streamlit. Скрипт тестується за допомогою бібліотеки pytest.
+                                Реалізував CI/CD для скрипта на основі GitHub Actions. 
+                            </p>
+                        </div>
+                        <div class="flex-shrink-0"><span class="text-primary"></span></div>
+                    </div>
+                    
+                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">Гра тетріс</h3>
+                            <p>Мій перший проект.Гравець перетягує фігури мишею, щоб заповнити рядки або стовпчики та отримати очки.</p>
+                            <p>Гра зроблена за допомогою бібліотеки Pygame</p>
+                            <p>Посилання на <a href="https://github.com/YevheniyEvt/FirstGame.git">GitHub репозиторій</a> </p>
+                        </div>
+                        <div class="flex-shrink-0"><span class="text-primary"></span></div>
+                    </div>
+                    
+                </div>
+            </section>
+            <hr class="m-0" />
+            <!-- Education-->
+            <section class="resume-section" id="education">
+                <div class="resume-section-content">
+                    <h2 class="mb-3">Навчання</h2>
+                    <p>Маючи досвід у організації та проведені навчань у минулому. Я самостійно продумав та організував етапи свого навчання.
+                        Пишу завдання, веду щоденник, відслідковувую прогрес.
+                        В більшості використовував мало відомі персональні курси (по типу itproger, курс по django від dennis ivy).
+                         Більш відомі по типу freeCodeCamp, Django for Everybody by Charles Severance. Відеоуроки, книги, статті та доповіді на Pycon.
+                         Нижче представлена лише деяка частина.
+                    </p>
+                    <div class="d-flex flex-column flex-md-row justify-content-between">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">Курси</h3>
+                            <div><i class="fa-brands fa-free-code-camp"></i> freeCodeCamp</div>
+                            <div class="subheading mb-3">Python </div>
+                            <p></p>
+                        </div>
+                        <div class="flex-shrink-0"><span class="text-primary"></span></div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row justify-content-between">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">Лекції</h3>
+                            <div >Олександр Блажко. Доцент кафедри ІС Одеської політехніки</div>
+                            <div class="subheading mb-3">Дисципліна "Операційні системи"</div>
+                            <div >Олександр Марченко. Доцент кафедри Системного програмування  і спеціалізованих комп'ютерних систем КПІ</div>
+                            <div class="subheading mb-3">Дисципліна "Структури даних та алгоритми"</div>
+                            <p></p>
+                        </div>
+                        <div class="flex-shrink-0"><span class="text-primary"></span></div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row justify-content-between">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">Книги</h3>
+                            <div > Luciano Ramalho</div>
+                            <div class="subheading mb-0">Fluent Python, 2nd Edition</div>
+                            <div >Robert C. Martin</div>
+                            <div class="subheading mb-0">
+                                <p>Clean Code: A Handbook of Agile Software Craftsmanship</p>
+                                <p>Clean Architecture: A Craftsman's Guide to Software Structure and Design</p>
+                            </div>
+                            <div >Al Sweigart</div>
+                            <div class="subheading mb-0">
+                                <p>Beyond the Basic Stuff with Python</p>
+                                <p>Automate the Boring Stuff with Python</p>
+                            </div>
+                            <div >D. Beazley</div>
+                            <div class="subheading mb-0">
+                                <p>Python Cookbook</p>
+                            </div>
+                        </div>
+                        <div class="flex-shrink-0"><span class="text-primary"></span></div>
+                    </div>
+                </div>
+            </section>
+            <hr class="m-0" />
+            <!-- Skills-->
+            <section class="resume-section" id="skills">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Навички</h2>
+                    <div class="subheading mb-3">Мови програмування та інструменти</div>
+                    <ul class="list-inline dev-icons">
+                        <li class="list-inline-item"><i class="fab fa-python"></i></li>
+                        <li class="list-inline-item"><i class="fab fa-html5"></i></li>
+                        <li class="list-inline-item"><i class="fab fa-css3-alt"></i></li>
+                        <li class="list-inline-item"><i class="fab fa-docker"></i></li>
+                        <li class="list-inline-item"><i class="fa-brands fa-ubuntu"></i></li>
+                        <li class="list-inline-item"><i class="fa-solid fa-database"></i></li>
+                        <li class="list-inline-item"><i class="fa-brands fa-github"></i></li>
+                    </ul>
+                    <div class="subheading mb-3">Робочі процеси</div>
+                    <ul class="fa-ul mb-0">
+                        <li>
+                            <span class="fa-li"><i class="fas fa-check"></i></span>
+                            Планування задач у вигляді завдань з дедлайнами.
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-check"></i></span>
+                            Розробка функціоналу у відокремлених гілках Git + Pull Request.
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-check"></i></span>
+                            Тестування коду з pytest / unittest перед комітом.
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-check"></i></span>
+                            Автоматизація CI/CD за допомогою GitHub Actions.
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-check"></i></span>
+                            Використання Docker для ізоляції середовища.
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-check"></i></span>
+                            Документування коду та проєктів у README.md.
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <hr class="m-0" />
+            <!-- Interests-->
+            <section class="resume-section" id="interests">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Інтереси</h2>
+                    <p class="mb-0">Наразі більшість свого вільного часу я читаю та вивчаю програмування. Якщо хочу відволіктись то дивлюсь фільми або серіали.</p>
+                </div>
+            </section>
+            <hr class="m-0" />
+            <!-- Awards-->
+            <!-- <section class="resume-section" id="awards">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Awards & Certifications</h2>
+                    <ul class="fa-ul mb-0">
+                        <li>
+                            <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
+                            Google Analytics Certified Developer
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
+                            Mobile Web Specialist - Google Certification
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
+                            1
+                            <sup>st</sup>
+                            Place - University of Colorado Boulder - Emerging Tech Competition 2009
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
+                            1
+                            <sup>st</sup>
+                            Place - University of Colorado Boulder - Adobe Creative Jam 2008 (UI Design Category)
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
+                            2
+                            <sup>nd</sup>
+                            Place - University of Colorado Boulder - Emerging Tech Competition 2008
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
+                            1
+                            <sup>st</sup>
+                            Place - James Buchanan High School - Hackathon 2006
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
+                            3
+                            <sup>rd</sup>
+                            Place - James Buchanan High School - Hackathon 2005
+                        </li>
+                    </ul>
+                </div>
+            </section> -->
+        </div>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{% static 'about/js/scripts.js' %}"></script>
+    </body>
+</html>

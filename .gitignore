@@ -168,7 +168,7 @@ fabric.properties
 .idea
 .venv
 ..old_file
-static
+
 cloudinary
 
 .env

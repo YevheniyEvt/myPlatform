@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'tasks.apps.TasksConfig',
     'employee.apps.EmployeeConfig',
     'comunication.apps.ComunicationConfig',
+    'about.apps.AboutConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
