@@ -3,10 +3,11 @@ from .models import (Address, Links, AboutMe,
                      Description, Tag, Projects,
                      Course, Lection, Book, Education,
                      WorkFlow, Instrument, Skills,
-                     Hobbies)
+                     Hobbies, IconClass)
 # Register your models here.
 
 admin.site.register(Hobbies)
+admin.site.register(IconClass)
 
 class AboutMeLinksInLine(admin.TabularInline):
     model = Links

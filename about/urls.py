@@ -6,6 +6,6 @@ app_name = 'about'
 
 urlpatterns = [
     
-    path('', views.about, name='about'),
+    path('', views.about, name='about_page'),
 
 ]
