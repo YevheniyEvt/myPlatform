@@ -71,9 +71,12 @@ class Description(models.Model):
 class Links(models.Model):
     name = models.CharField()
     url = models.URLField()
-    icon = models.OneToOneField(to=IconClass, on_delete=models.CASCADE, blank=True, null=True)
+    icon = models.ForeignKey(to=IconClass, on_delete=models.CASCADE, blank=True, null=True)
     about = models.ForeignKey(to=AboutMe, on_delete=models.CASCADE, blank=True, null=True)
     project = models.ForeignKey(to=Projects, on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Education(models.Model):

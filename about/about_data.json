@@ -1,0 +1,601 @@
+[
+{
+  "model": "about.iconclass",
+  "pk": 1,
+  "fields": {
+    "name": "linkedin",
+    "css_class": "fab fa-linkedin-in"
+  }
+},
+{
+  "model": "about.iconclass",
+  "pk": 2,
+  "fields": {
+    "name": "github",
+    "css_class": "fab fa-github"
+  }
+},
+{
+  "model": "about.iconclass",
+  "pk": 3,
+  "fields": {
+    "name": "facebook",
+    "css_class": "fab fa-facebook-f"
+  }
+},
+{
+  "model": "about.iconclass",
+  "pk": 4,
+  "fields": {
+    "name": "code",
+    "css_class": "fa-solid fa-code"
+  }
+},
+{
+  "model": "about.iconclass",
+  "pk": 5,
+  "fields": {
+    "name": "python",
+    "css_class": "fab fa-python"
+  }
+},
+{
+  "model": "about.iconclass",
+  "pk": 6,
+  "fields": {
+    "name": "html5",
+    "css_class": "fab fa-html5"
+  }
+},
+{
+  "model": "about.iconclass",
+  "pk": 7,
+  "fields": {
+    "name": "css3",
+    "css_class": "fab fa-css3-alt"
+  }
+},
+{
+  "model": "about.iconclass",
+  "pk": 8,
+  "fields": {
+    "name": "docker",
+    "css_class": "fab fa-docker"
+  }
+},
+{
+  "model": "about.iconclass",
+  "pk": 9,
+  "fields": {
+    "name": "ubuntu",
+    "css_class": "fa-brands fa-ubuntu"
+  }
+},
+{
+  "model": "about.iconclass",
+  "pk": 10,
+  "fields": {
+    "name": "database",
+    "css_class": "fa-solid fa-database"
+  }
+},
+{
+  "model": "about.iconclass",
+  "pk": 11,
+  "fields": {
+    "name": "github2",
+    "css_class": "fa-brands fa-github"
+  }
+},
+{
+  "model": "about.aboutme",
+  "pk": 1,
+  "fields": {
+    "first_name": "Євгеній",
+    "second_name": "Євтушенко",
+    "descriptions": "Привіт. Я Python-розробник початківець. Маю досвід роботи з Django, FastAPI, PostgreSQL Ubuntu, Docker. Люблю приймати нові виклики, вирішувати складні задачі. Наразі весь вільний час приділяю навчанню. Вивчаю python, алгоритми, нові інструменти для покращення своїх навичок програміста.",
+    "short_description": "Наразі активно шукаю роботу, хочу долучитись до реальних проєктів та навчатись у досвідчених колег.",
+    "email": "genya421@gmail.com"
+  }
+},
+{
+  "model": "about.address",
+  "pk": 1,
+  "fields": {
+    "city": "Київ",
+    "country": "Україна",
+    "about": 1
+  }
+},
+{
+  "model": "about.projects",
+  "pk": 1,
+  "fields": {
+    "name": "Django веб додаток",
+    "descriptions": "Додаток для комунікації працівників компанії (по прикладу myjysk)",
+    "instruments": "Для розробки використовую Django. Для розгортання використовую AWS EC2, Docker, Nginx та PostgreSQL. Фото зберігаються в cloudinary. HTTPS сертифікат з certbot.\r\nСкрипт запускаєть за допомогою бібліотеки django-extensions. Тести з django test на основі бібліотки unittest. Реалізував CI/CD на основі GitHub Actions.  В залежності від гілки - запускаються різні робочі процеси.  Основний мій фокус - це розробка серверної частини, frontend створений в основному з готових класів tailwindcss."
+  }
+},
+{
+  "model": "about.projects",
+  "pk": 2,
+  "fields": {
+    "name": "API додаток",
+    "descriptions": "Додаток з даними працівників компанії. Надає інформацію по співробітнику, локації де працює (магазин, дістрікт, регіон, офіс) та відповідні дані по цим локаціям - назви, де знаходяться і т.д.\r\nРозроблений на основі фраємворкy FastAPI. Авторизація користувачів з OAuth2, хешуванням пароля. Впроваджена логіка JWT токена для ідентифікації користувача та надання дозволів.",
+    "instruments": "В додатку використовую такі бібліотеки: PyAutoGUI робить скріншот екрана, pytesseract розпізнає текст на скріншоті, pyperclip вставляє дані з буферу обміну. SQLAlchemy зберігає дані в базу даних PostgreSQL. Alembic створює таблиці в базі даних з моделей SQLAlchemy. Для розгортання візуалізації використовую фрємворк streamlit. Скрипт тестується за допомогою бібліотеки pytest.\r\nРеалізував CI/CD для скрипта на основі GitHub Actions."
+  }
+},
+{
+  "model": "about.projects",
+  "pk": 3,
+  "fields": {
+    "name": "Гра тетріс",
+    "descriptions": "Мій перший проект.Гравець перетягує фігури мишею, щоб заповнити рядки або стовпчики та отримати очки.",
+    "instruments": "Гра зроблена за допомогою бібліотеки Pygame"
+  }
+},
+{
+  "model": "about.tag",
+  "pk": 1,
+  "fields": {
+    "name": "Новини компанії:",
+    "project": 1
+  }
+},
+{
+  "model": "about.tag",
+  "pk": 2,
+  "fields": {
+    "name": "Завдання:",
+    "project": 1
+  }
+},
+{
+  "model": "about.tag",
+  "pk": 3,
+  "fields": {
+    "name": "Нотатки:",
+    "project": 1
+  }
+},
+{
+  "model": "about.tag",
+  "pk": 4,
+  "fields": {
+    "name": "Інше:",
+    "project": 1
+  }
+},
+{
+  "model": "about.tag",
+  "pk": 5,
+  "fields": {
+    "name": "Cкрипт",
+    "project": 2
+  }
+},
+{
+  "model": "about.tag",
+  "pk": 6,
+  "fields": {
+    "name": "Візуалізація",
+    "project": 2
+  }
+},
+{
+  "model": "about.description",
+  "pk": 1,
+  "fields": {
+    "text": "В додатку розроблена можливість пошуку. Можна шукати новину по заголовку чи тексту в тілі новини. Шукати нотатки та секції по назвам чи по описам.",
+    "tag": 4
+  }
+},
+{
+  "model": "about.description",
+  "pk": 2,
+  "fields": {
+    "text": "Відслідковується та зберігається в базу даних історія видалення новин та завдань. Хто, коли і що видалив.",
+    "tag": 4
+  }
+},
+{
+  "model": "about.description",
+  "pk": 3,
+  "fields": {
+    "text": "Є скріпт який заповнює базу даних \"Lorem ipsum\" текстом та створює json файл для використання у тестах.",
+    "tag": 4
+  }
+},
+{
+  "model": "about.description",
+  "pk": 4,
+  "fields": {
+    "text": "Є розділ де можна залишати свої нотатки. Від себе ще додав розділ яким користуюсь сам - це створення різних секцій в яких можна записувати нотатки,зберігати скріни, посилання, частини коду по відповідним темам. Ці секції можуть бачити всі співробітники не залежно від їх локацій.",
+    "tag": 3
+  }
+},
+{
+  "model": "about.description",
+  "pk": 5,
+  "fields": {
+    "text": "Працівники бачать свої завдання які були створені колегами конкретно для них та розподільчі завдання які створені на локацію (магазин/дістрікт/регіон/всі). І бачать завдання колег своєї локації\r\n(наприклад якщо співробітки з магазину то завадння цього магазину, якщо співробіткик керує дістріктом - то завадання всього свого дістрікту).",
+    "tag": 2
+  }
+},
+{
+  "model": "about.description",
+  "pk": 6,
+  "fields": {
+    "text": "Можуть свторювати індивідуальні або розподільчі (відразу на всю локацію в рамках своєї посади) завдання. Наприклад керівник магазину - створює завдання на весь магазин. Керівник дістрікту на всіх співробітників всіх магазинів в цьому дістрікту і т.д.",
+    "tag": 2
+  }
+},
+{
+  "model": "about.description",
+  "pk": 7,
+  "fields": {
+    "text": "Деталі персональних і розподільчих завдань відображаються по різному. В розподільчих можна відслідковувати хто з працівників і коли переглянув завдання,  хто вже завершив, хто не завершив вчасно, хто відхилив як не виконане.",
+    "tag": 2
+  }
+},
+{
+  "model": "about.description",
+  "pk": 8,
+  "fields": {
+    "text": "Зберігається та відображається історія хто і коли переглянув завдання, завершив, відкрив після завершення.",
+    "tag": 2
+  }
+},
+{
+  "model": "about.description",
+  "pk": 9,
+  "fields": {
+    "text": "До завдань можна писати коментарі.",
+    "tag": 2
+  }
+},
+{
+  "model": "about.description",
+  "pk": 10,
+  "fields": {
+    "text": "Працівники можуть читати новини про компанію, про змагання. Новини можуть бути в рамках дістрікту/регіону, тобто спіробітник з іншого дістрікту не побачить цю новину.",
+    "tag": 1
+  }
+},
+{
+  "model": "about.description",
+  "pk": 11,
+  "fields": {
+    "text": "Можуть залишати коментарі під кожною новиною.",
+    "tag": 1
+  }
+},
+{
+  "model": "about.description",
+  "pk": 12,
+  "fields": {
+    "text": "крипт який робить скріншоти екран, отримує дані зі скріншоту, зберігає дані в базу даних. Деякі дані вставляються через буфер обміну.\r\nІнформація про дії скрипта виводиться в термінал. Посилання на <a href=\"https://github.com/YevheniyEvt/LoadCODData.git\">GitHub репозиторій скрипта</a>",
+    "tag": 5
+  }
+},
+{
+  "model": "about.description",
+  "pk": 13,
+  "fields": {
+    "text": "Візуалізація даних за допомогою фрємворку streamlit. Для аналізу даних з таблиць використовється бібліотека pandas. В додатку є декілька розділів - інформація по гравцям, альянсам, серверам.\r\nЗа посилання на <a href=\"https://github.com/YevheniyEvt/StatisticsCOD-player.git\">GitHub репозиторій додатку</a> можна побачити детальніший опис із скріншотами.",
+    "tag": 6
+  }
+},
+{
+  "model": "about.links",
+  "pk": 1,
+  "fields": {
+    "name": "resume",
+    "url": "https://app.enhancv.com/share/2714938c/?utm_medium=growth&utm_campaign=share-resume&utm_source=dynamic",
+    "icon": null,
+    "about": 1,
+    "project": null
+  }
+},
+{
+  "model": "about.links",
+  "pk": 2,
+  "fields": {
+    "name": "linkedin",
+    "url": "https://www.linkedin.com/in/yevheniy-yevtushenko-660112319",
+    "icon": 1,
+    "about": 1,
+    "project": null
+  }
+},
+{
+  "model": "about.links",
+  "pk": 3,
+  "fields": {
+    "name": "github",
+    "url": "https://github.com/YevheniyEvt",
+    "icon": 2,
+    "about": 1,
+    "project": null
+  }
+},
+{
+  "model": "about.links",
+  "pk": 4,
+  "fields": {
+    "name": "facebook",
+    "url": "https://www.facebook.com/YevgeniyYevtushenk0",
+    "icon": 3,
+    "about": 1,
+    "project": null
+  }
+},
+{
+  "model": "about.links",
+  "pk": 5,
+  "fields": {
+    "name": "leetcode",
+    "url": "https://leetcode.com/u/yevheniyevt/",
+    "icon": 4,
+    "about": 1,
+    "project": null
+  }
+},
+{
+  "model": "about.links",
+  "pk": 6,
+  "fields": {
+    "name": "github",
+    "url": "https://github.com/YevheniyEvt/myPlatform.git",
+    "icon": null,
+    "about": null,
+    "project": 1
+  }
+},
+{
+  "model": "about.links",
+  "pk": 7,
+  "fields": {
+    "name": "github",
+    "url": "https://github.com/YevheniyEvt/LoadCODData.git",
+    "icon": null,
+    "about": null,
+    "project": 2
+  }
+},
+{
+  "model": "about.links",
+  "pk": 8,
+  "fields": {
+    "name": "github",
+    "url": "https://github.com/YevheniyEvt/StatisticsCOD-player.git",
+    "icon": null,
+    "about": null,
+    "project": 2
+  }
+},
+{
+  "model": "about.links",
+  "pk": 9,
+  "fields": {
+    "name": "github",
+    "url": "https://github.com/YevheniyEvt/FirstGame.git",
+    "icon": null,
+    "about": null,
+    "project": 3
+  }
+},
+{
+  "model": "about.education",
+  "pk": 1,
+  "fields": {
+    "descriptions": "Маючи досвід у організації та проведені навчань у минулому. Я самостійно продумав та організував етапи свого навчання.\r\nПишу завдання, веду щоденник, відслідковувую прогрес.\r\nВ більшості використовував мало відомі персональні курси (по типу itproger, курс по django від dennis ivy).\r\nБільш відомі по типу freeCodeCamp, Django for Everybody by Charles Severance. Відеоуроки, книги, статті та доповіді на Pycon.\r\nНижче представлена лише деяка частина."
+  }
+},
+{
+  "model": "about.course",
+  "pk": 1,
+  "fields": {
+    "name": "freeCodeCamp",
+    "descriptions": "Python",
+    "education": 1
+  }
+},
+{
+  "model": "about.lection",
+  "pk": 1,
+  "fields": {
+    "name": "Дисципліна \"Операційні системи\"",
+    "descriptions": "Олександр Блажко. Доцент кафедри ІС Одеської політехніки",
+    "education": 1
+  }
+},
+{
+  "model": "about.lection",
+  "pk": 2,
+  "fields": {
+    "name": "Дисципліна \"Структури даних та алгоритми\"",
+    "descriptions": "Олександр Марченко. Доцент кафедри Системного програмування  і спеціалізованих комп'ютерних систем КПІ",
+    "education": 1
+  }
+},
+{
+  "model": "about.book",
+  "pk": 1,
+  "fields": {
+    "name": "Fluent Python, 2nd Edition",
+    "author": "Luciano Ramalho",
+    "education": 1
+  }
+},
+{
+  "model": "about.book",
+  "pk": 2,
+  "fields": {
+    "name": "Clean Code: A Handbook of Agile Software Craftsmanship",
+    "author": "Robert C. Martin",
+    "education": 1
+  }
+},
+{
+  "model": "about.book",
+  "pk": 3,
+  "fields": {
+    "name": "Clean Architecture: A Craftsman's Guide to Software Structure and Design",
+    "author": "Robert C. Martin",
+    "education": 1
+  }
+},
+{
+  "model": "about.book",
+  "pk": 4,
+  "fields": {
+    "name": "Beyond the Basic Stuff with Python",
+    "author": "Al Sweigart",
+    "education": 1
+  }
+},
+{
+  "model": "about.book",
+  "pk": 5,
+  "fields": {
+    "name": "Automate the Boring Stuff with Python",
+    "author": "Al Sweigart",
+    "education": 1
+  }
+},
+{
+  "model": "about.book",
+  "pk": 6,
+  "fields": {
+    "name": "Python Cookbook",
+    "author": "D. Beazley",
+    "education": 1
+  }
+},
+{
+  "model": "about.skills",
+  "pk": 1,
+  "fields": {
+    "descriptions": "Мови програмування та інструменти"
+  }
+},
+{
+  "model": "about.workflow",
+  "pk": 1,
+  "fields": {
+    "name": "ланування задач у вигляді завдань з дедлайнами.",
+    "skills": 1
+  }
+},
+{
+  "model": "about.workflow",
+  "pk": 2,
+  "fields": {
+    "name": "озробка функціоналу у відокремлених гілках Git + Pull Request.",
+    "skills": 1
+  }
+},
+{
+  "model": "about.workflow",
+  "pk": 3,
+  "fields": {
+    "name": "Тестування коду з pytest / unittest перед комітом.",
+    "skills": 1
+  }
+},
+{
+  "model": "about.workflow",
+  "pk": 4,
+  "fields": {
+    "name": "Автоматизація CI/CD за допомогою GitHub Actions.",
+    "skills": 1
+  }
+},
+{
+  "model": "about.workflow",
+  "pk": 5,
+  "fields": {
+    "name": "Використання Docker для ізоляції середовища.",
+    "skills": 1
+  }
+},
+{
+  "model": "about.workflow",
+  "pk": 6,
+  "fields": {
+    "name": "Документування коду та проєктів у README.md.",
+    "skills": 1
+  }
+},
+{
+  "model": "about.instrument",
+  "pk": 1,
+  "fields": {
+    "name": "python",
+    "icon": 5,
+    "skills": 1
+  }
+},
+{
+  "model": "about.instrument",
+  "pk": 2,
+  "fields": {
+    "name": "html5",
+    "icon": 6,
+    "skills": 1
+  }
+},
+{
+  "model": "about.instrument",
+  "pk": 3,
+  "fields": {
+    "name": "css3",
+    "icon": 7,
+    "skills": 1
+  }
+},
+{
+  "model": "about.instrument",
+  "pk": 4,
+  "fields": {
+    "name": "docker",
+    "icon": 8,
+    "skills": 1
+  }
+},
+{
+  "model": "about.instrument",
+  "pk": 5,
+  "fields": {
+    "name": "ubuntu",
+    "icon": 9,
+    "skills": 1
+  }
+},
+{
+  "model": "about.instrument",
+  "pk": 6,
+  "fields": {
+    "name": "database",
+    "icon": 10,
+    "skills": 1
+  }
+},
+{
+  "model": "about.instrument",
+  "pk": 7,
+  "fields": {
+    "name": "github",
+    "icon": 11,
+    "skills": 1
+  }
+},
+{
+  "model": "about.hobbies",
+  "pk": 1,
+  "fields": {
+    "descriptions": "Наразі більшість свого вільного часу я читаю та вивчаю програмування. Якщо хочу відволіктись то дивлюсь фільми або серіали."
+  }
+}
+]
