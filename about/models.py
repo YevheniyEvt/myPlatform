@@ -8,7 +8,12 @@ class IconClass(models.Model):
 
     def __str__(self):
         return self.name
-    
+
+
+class LanguageChoices(models.TextChoices):
+    ENGLISH = "EN", "english"
+    UKRAINE = "UA", "ukraine"
+
 
 class AboutMe(models.Model):
     first_name = models.CharField()
@@ -16,6 +21,7 @@ class AboutMe(models.Model):
     descriptions = models.TextField()
     short_description = models.CharField(blank=True, null=True)
     email = models.EmailField()
+    language = models.CharField(choices=LanguageChoices, default=LanguageChoices.UKRAINE)
 
     def __str__(self):
         return self.first_name
@@ -39,8 +45,11 @@ class Projects(models.Model):
     name = models.CharField()
     descriptions = models.TextField()
     instruments = models.TextField(blank=True, null=True)
+    order = models.IntegerField(default=0)
+    about = models.OneToOneField(to=AboutMe, on_delete=models.CASCADE)
 
-
+    class Meta:
+        ordering = ['-order']
 
     def __str__(self):
         return self.name
@@ -65,6 +74,7 @@ class Tag(models.Model):
     def descriptions(self):
         return self.description_set.all()
 
+
 class Description(models.Model):
     text = models.TextField()
     tag = models.ForeignKey(to=Tag, on_delete=models.CASCADE)
@@ -83,6 +93,7 @@ class Links(models.Model):
 
 class Education(models.Model):
     descriptions = models.TextField()
+    about = models.OneToOneField(to=AboutMe, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.descriptions[:25]}..."
@@ -104,10 +115,12 @@ class Course(models.Model):
     descriptions = models.TextField()
     education = models.ForeignKey(to=Education, on_delete=models.CASCADE)
 
+
 class Lection(models.Model):
     name = models.CharField()
     descriptions = models.TextField()
     education = models.ForeignKey(to=Education, on_delete=models.CASCADE)
+
 
 class Book(models.Model):
     name = models.TextField()
@@ -117,6 +130,7 @@ class Book(models.Model):
 
 class Skills(models.Model):
     descriptions = models.TextField()
+    about = models.OneToOneField(to=AboutMe, on_delete=models.CASCADE)
     
     def __str__(self):
         return f"{self.descriptions[:25]}..."
@@ -129,9 +143,11 @@ class Skills(models.Model):
     def instruments(self):
         return self.instrument_set.all()
 
+
 class WorkFlow(models.Model):
     name = models.TextField()
     skills = models.ForeignKey(to=Skills, on_delete=models.CASCADE, blank=True, null=True)
+
 
 class Instrument(models.Model):
     name = models.CharField()
@@ -141,9 +157,7 @@ class Instrument(models.Model):
     
 class Hobbies(models.Model):
     descriptions = models.TextField()
+    about = models.OneToOneField(to=AboutMe, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.descriptions[:25]}..."
-
-
-
