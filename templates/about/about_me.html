@@ -50,7 +50,8 @@
                         {{about.address.city}} · {{about.address.country}} ·
                         <a href="mailto:name@email.com">{{about.email}}</a> 
                     </div>
-                    <p class="lead mb-5">{{about.descriptions}}</p>
+                    <p class="lead mb-5">{{about.descriptions|linebreaksbr}}</p>
+                    
                     <p>{{about.short_description}} </p>
                     <p>З моїм резюме можна ознайомитись за <a href="{{about.resume_url}}">посиланням</a></p>
                     <div class="social-icons">
@@ -64,19 +65,19 @@
             <!-- Experience-->
             <section class="resume-section" id="experience">
                 <div class="resume-section-content">
-                    <h2 class="mb-5">Pet проєкти</h2>
+                    <h2 class="mb-5 text-primary">Проєкти</h2>
                     {% for project in projects %}
                     <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                         <div class="flex-grow-1">
                             <h3 class="mb-0">{{project.name}}</h3>
-                            <p>{{project.descriptions}}</p>
+                            <p>{{project.descriptions|linebreaksbr}}</p>
                             {% for tag in project.tags %}
                             <ul>
                                 {{tag.name}}
                                 <ul>
                                     {% for description in tag.descriptions %}
                                     <li>
-                                       {{description.text}}
+                                       {{description.text|linebreaksbr}}
                                     </li>
                                     {% endfor %}
                                 </ul>
@@ -84,11 +85,12 @@
                             {% endfor %}
                             <p></p>
                             
-                            <p>{{project.instruments}}</p>
+                            <p>{{project.instruments|linebreaksbr}}</p>
                             <p>Посилання на <a href="{{project.github_url}}">GitHub репозиторій</a></p>
                         </div>
                         <div class="flex-shrink-0"><span class="text-primary"></span></div>
                     </div>
+                    <hr class="m-2" />
                     {% endfor %}
                 </div>
             </section>
@@ -96,36 +98,42 @@
             <!-- Education-->
             <section class="resume-section" id="education">
                 <div class="resume-section-content">
-                    <h2 class="mb-3">Навчання</h2>
-                    <p>{{education.descriptions}}</p>
+                    <h2 class="mb-3 text-primary">Навчання</h2>
+                    <p>{{education.descriptions|linebreaksbr}}</p>
                     <div class="d-flex flex-column flex-md-row justify-content-between">
                         <div class="flex-grow-1">
-                            <h3 class="mb-0">Курси</h3>
+                            <h3 class="mb-3">Курси</h3>
                             {% for course in education.courses %}
+                            {% if course.name == 'freeCodeCamp' %}
                             <div><i class="fa-brands fa-free-code-camp"></i>{{course.name}}</div>
-                            <div class="subheading mb-3">{{course.descriptions}}</div>
+                            {% else %}
+                            <div>{{course.name}}</div>
+                            {% endif %}
+                            <div class="subheading mb-0">{{course.descriptions|linebreaksbr}}</div>
                             {% endfor %}
                             <p></p>
                         </div>
                         <div class="flex-shrink-0"><span class="text-primary"></span></div>
                     </div>
+                    <hr class="m-2" />
                     <div class="d-flex flex-column flex-md-row justify-content-between">
                         <div class="flex-grow-1">
-                            <h3 class="mb-0">Лекції</h3>
+                            <h3 class="mb-3">Лекції</h3>
                             {% for lection in education.lections %}
                             <div >{{lection.name}}</div>
-                            <div class="subheading mb-3">{{lection.descriptions}}</div>
+                            <div class="subheading mb-3">{{lection.descriptions|linebreaksbr}}</div>
                             {% endfor %}
                             <p></p>
                         </div>
                         <div class="flex-shrink-0"><span class="text-primary"></span></div>
                     </div>
+                    <hr class="m-2" />
                     <div class="d-flex flex-column flex-md-row justify-content-between">
                         <div class="flex-grow-1">
-                            <h3 class="mb-0">Книги</h3>
+                            <h3 class="mb-3">Книги</h3>
                             {% for book in education.books %}
-                            <div >{{book.author}}</div>
-                            <div class="subheading mb-0">{{book.name}}</div>
+                            <div >{{book.author|linebreaksbr}}</div>
+                            <div class="subheading mb-3">{{book.name|linebreaksbr}}</div>
                             {% endfor %}
                         </div>
                         <div class="flex-shrink-0"><span class="text-primary"></span></div>
@@ -136,7 +144,7 @@
             <!-- Skills-->
             <section class="resume-section" id="skills">
                 <div class="resume-section-content">
-                    <h2 class="mb-5">Навички</h2>
+                    <h2 class="mb-5 text-primary">Навички</h2>
                     <p>{{skills.descriptions}}</p>
                     <div class="subheading mb-3">Мови програмування та інструменти</div>
                     <ul class="list-inline dev-icons">
@@ -159,7 +167,7 @@
             <!-- Interests-->
             <section class="resume-section" id="interests">
                 <div class="resume-section-content">
-                    <h2 class="mb-5">Інтереси</h2>
+                    <h2 class="mb-5 text-primary">Інтереси</h2>
                     <p class="mb-0">{{hobbies.descriptions}}</p>
                 </div>
             </section>
