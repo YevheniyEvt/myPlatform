@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.core.validators import MinLengthValidator
 from django.utils.text import slugify
 
+
 from cloudinary.models import CloudinaryField
 # Create your models here.
 

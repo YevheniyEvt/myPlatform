@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'tasks.apps.TasksConfig',
     'employee.apps.EmployeeConfig',
     'comunication.apps.ComunicationConfig',
+    'about.apps.AboutConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -159,7 +160,9 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'static'
 
-CLOUDINARY_URL = config('CLOUDINARY_URL')
+
+# cloudinary.config(cloudinary_url=config('CLOUDINARY_URL'))
+# CLOUDINARY_URL = config('CLOUDINARY_URL')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
