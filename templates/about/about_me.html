@@ -22,6 +22,7 @@
     <body id="page-top">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+            
             <a class="navbar-brand js-scroll-trigger" href="#page-top">
                 <span class="d-block d-lg-none">Yevgeniy Yevtushenko</span>
                 <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{% static 'about/img/profile.jpg' %}" alt="..." /></span>
@@ -33,15 +34,17 @@
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#experience">Проєкти</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">Навчання</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Навички</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Інтереси</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Хобі</a></li>
                 </ul>
             </div>
         </nav>
         <!-- Page Content-->
         <div class="container-fluid p-0">
+            
             <!-- About-->
             <section class="resume-section" id="about">
                 <div class="resume-section-content">
+                    <p>"Your power to choose can never be taken from you. It can be neglected and it can be ignored. But if used, it can make all the difference." ― Steve Goodier</p>
                     <h1 class="mb-0">
                         {{about.first_name}}
                         <span class="text-primary">{{about.second_name}}</span>
@@ -145,8 +148,8 @@
             <section class="resume-section" id="skills">
                 <div class="resume-section-content">
                     <h2 class="mb-5 text-primary">Навички</h2>
-                    <p>{{skills.descriptions}}</p>
-                    <div class="subheading mb-3">Мови програмування та інструменти</div>
+                    <p></p>
+                    <div class="subheading mb-1">{{skills.descriptions|linebreaksbr}}</div>
                     <ul class="list-inline dev-icons">
                         {% for instrument in skills.instruments %}
                         <li class="list-inline-item"><i class="{{instrument.icon.css_class}}"></i></li>
@@ -167,8 +170,8 @@
             <!-- Interests-->
             <section class="resume-section" id="interests">
                 <div class="resume-section-content">
-                    <h2 class="mb-5 text-primary">Інтереси</h2>
-                    <p class="mb-0">{{hobbies.descriptions}}</p>
+                    <h2 class="mb-5 text-primary">Хобі</h2>
+                    <p class="mb-0">{{hobbies.descriptions|linebreaksbr}}</p>
                 </div>
             </section>
             <hr class="m-0" />
