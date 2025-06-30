@@ -39,6 +39,8 @@ class Projects(models.Model):
     name = models.CharField()
     descriptions = models.TextField()
     instruments = models.TextField(blank=True, null=True)
+    order = models.BigIntegerField(default=0)
+
 
     def __str__(self):
         return self.name
