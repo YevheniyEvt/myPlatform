@@ -8,10 +8,10 @@ class AboutContextInHTML(TestCase):
 
     def setUp(self):
         self.about = create_test_data_about()
-        self.education = create_test_data_education()
-        self.projects = create_test_data_projects()
-        self.skills = create_test_data_skills()
-        self.hobbies = create_test_data_hobbies()
+        self.education = create_test_data_education(self.about)
+        self.projects = create_test_data_projects(self.about)
+        self.skills = create_test_data_skills(self.about)
+        self.hobbies = create_test_data_hobbies(self.about)
 
     def test_about_context(self):
         response = self.client.get(reverse('about:about_page'))

@@ -22,6 +22,7 @@ class AboutMe(models.Model):
     short_description = models.CharField(blank=True, null=True)
     email = models.EmailField()
     language = models.CharField(choices=LanguageChoices, default=LanguageChoices.UKRAINE)
+    
 
     def __str__(self):
         return self.first_name
@@ -46,10 +47,11 @@ class Projects(models.Model):
     descriptions = models.TextField()
     instruments = models.TextField(blank=True, null=True)
     order = models.IntegerField(default=0)
-    about = models.OneToOneField(to=AboutMe, on_delete=models.CASCADE)
+    about = models.ForeignKey(to=AboutMe, on_delete=models.CASCADE)
+    
 
     class Meta:
-        ordering = ['-order']
+        ordering = ['order']
 
     def __str__(self):
         return self.name
@@ -93,7 +95,7 @@ class Links(models.Model):
 
 class Education(models.Model):
     descriptions = models.TextField()
-    about = models.OneToOneField(to=AboutMe, on_delete=models.CASCADE)
+    about = models.ForeignKey(to=AboutMe, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.descriptions[:25]}..."
@@ -130,7 +132,8 @@ class Book(models.Model):
 
 class Skills(models.Model):
     descriptions = models.TextField()
-    about = models.OneToOneField(to=AboutMe, on_delete=models.CASCADE)
+    about = models.ForeignKey(to=AboutMe, on_delete=models.CASCADE)
+    
     
     def __str__(self):
         return f"{self.descriptions[:25]}..."
@@ -157,7 +160,8 @@ class Instrument(models.Model):
     
 class Hobbies(models.Model):
     descriptions = models.TextField()
-    about = models.OneToOneField(to=AboutMe, on_delete=models.CASCADE)
+    about = models.ForeignKey(to=AboutMe, on_delete=models.CASCADE)
+    
 
     def __str__(self):
         return f"{self.descriptions[:25]}..."
