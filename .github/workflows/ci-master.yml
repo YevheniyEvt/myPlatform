@@ -1,8 +1,6 @@
 name: Deploy CI
 
 on:
-  # push:
-  #   branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
 
@@ -68,6 +66,7 @@ jobs:
         script: |
           cd /home/ubuntu/deploy/myplatform/src
           git pull origin master
+          sudo docker compose restart 
           
         # source .venv /bin/activate
         # git fetch origin master
