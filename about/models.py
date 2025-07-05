@@ -154,7 +154,7 @@ class WorkFlow(models.Model):
 
 class Instrument(models.Model):
     name = models.CharField()
-    icon = models.OneToOneField(to=IconClass, on_delete=models.CASCADE)
+    icon = models.ForeignKey(to=IconClass, on_delete=models.CASCADE)
     skills = models.ForeignKey(to=Skills, on_delete=models.CASCADE, blank=True, null=True)
 
     
