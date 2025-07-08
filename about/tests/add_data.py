@@ -2,7 +2,7 @@ from about.models import (Address, Links, AboutMe,
                      Description, Tag, Projects,
                      Course, Lection, Book, Education,
                      WorkFlow, Instrument, Skills,
-                     Hobbies, IconClass)
+                     Hobbies, IconClass, LanguageChoices)
 
 
 def create_test_data_about() -> AboutMe:
@@ -13,6 +13,7 @@ def create_test_data_about() -> AboutMe:
         descriptions='Test descriptions AboutMe '*4,
         short_description='Test short description AboutMe',
         email='Test@mail.com',
+        language=LanguageChoices.ENGLISH
     )
     Address.objects.create(
         city='City',
@@ -37,11 +38,12 @@ def create_test_data_about() -> AboutMe:
         )
     return about
 
-def create_test_data_projects() -> Projects:
+def create_test_data_projects(about) -> Projects:
     project = Projects.objects.create(
         name='Test Projects',
         descriptions='Test descriptions Projects '*3,
-        instruments='Test instruments Projects '*2
+        instruments='Test instruments Projects '*2,
+        about=about
 
     )
     Links.objects.create(
@@ -61,9 +63,10 @@ def create_test_data_projects() -> Projects:
             )
     return project
 
-def create_test_data_education() -> Education:
+def create_test_data_education(about) -> Education:
     education = Education.objects.create(
-        descriptions='Test descriptions Education'
+        descriptions='Test descriptions Education',
+        about=about
     )
     Course.objects.create(
         name='Test name Course',
@@ -82,9 +85,10 @@ def create_test_data_education() -> Education:
     )
     return education
 
-def create_test_data_skills() -> Skills:
+def create_test_data_skills(about) -> Skills:
     skills = Skills.objects.create(
-        descriptions='Test descriptions Skills'
+        descriptions='Test descriptions Skills',
+        about=about
     )
     
     for i in range(3):
@@ -103,8 +107,9 @@ def create_test_data_skills() -> Skills:
         )
     return skills
 
-def create_test_data_hobbies() -> Hobbies:
+def create_test_data_hobbies(about) -> Hobbies:
     hobbies = Hobbies.objects.create(
-        descriptions='Test Hobbies '*2
+        descriptions='Test Hobbies '*2,
+        about=about
     )
     return hobbies
