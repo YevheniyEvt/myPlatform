@@ -97,8 +97,8 @@
   "fields": {
     "first_name": "Yevgeniy",
     "second_name": "Yevtushenko",
-    "descriptions": "Hello! On this page I tell you about my path in programming - about my studies, my own projects and achievements.\r\nI am 37 years old, of which 15 I devoted to working in retail: I started as a salesperson and reached the position of store manager. Having made a career and reached another peak, I realized that this work is not what I would like to do further and I decided that I want to get a different profession.\r\n\r\nThe words of Robert Martin from his book \"Pure Agile\" are very apt here:\r\n\"Work is what we do, but it is not part of our essence. On the other hand, a profession is a part of our personality, in which we want to improve our skills, we want to acquire more skills.\"\r\n\r\nAlmost a year ago I wrote my first print('Hello, World') - and from that moment on, programming has been dragging me down. Most importantly, I really like it. Every day I learn something new, improve my “soft skills”, understand the principles of architecture, systems and code.\r\nMy main language is Python. I have practical experience with the Django and FastAPI frameworks, PostgreSQL and MongoDB databases, Docker tools, GitHub Actions, AWS, as well as the Ubuntu operating system.\r\n\r\nWhat I enjoy most is creating something new, understanding how it works, debugging logic, and ultimately making the program work exactly as it should.",
-    "short_description": "I am currently actively looking for a job, I want to get involved in real projects and learn from experienced colleagues.",
+    "descriptions": "Hello! On this page I tell you about my path in programming - about my studies, my own projects and achievements.\r\nI am 37 years old, of which 15 I devoted to working in retail: I started as a salesperson and reached the position of store manager. Having made a career and reached another peak, I realized that this work is not what I would like to do further and I decided that I want to get a different profession.\r\n\r\nThe words of Robert Martin from his book \"Clean Agile: Back to Basics\" are very apt here:\r\n\"Work is what we do, but it is not part of our essence. On the other hand, a profession is a part of our personality, in which we want to improve our skills, we want to acquire more skills.\"\r\n\r\nAlmost a year ago, I wrote my first line of code: print('Hello, World'). Since that moment, programming has completely drawn me in—and most importantly, I genuinely enjoy it. Every day, I learn something new, improve my soft skills, and deepen my understanding of software architecture, systems, and clean code principles.\r\n\r\nMy main programming language is Python. I have practical experience with the Django and FastAPI frameworks, PostgreSQL and MongoDB databases, Docker, GitHub Actions, AWS, and the Ubuntu operating system.\r\n\r\nWhat I enjoy most is creating something new, understanding its inner workings, debugging the logic, and finally bringing the program to life, with it\r\nfunctioning exactly as intended.",
+    "short_description": "I'm currently actively looking for a job, where I hope to get involved in real-world projects and learn from experienced colleagues.",
     "email": "Genya421@gmail.com",
     "language": "EN"
   }
@@ -540,7 +540,7 @@
   "pk": 1,
   "fields": {
     "name": "resume",
-    "url": "https://app.enhancv.com/share/2714938c/?utm_medium=growth&utm_campaign=share-resume&utm_source=dynamic",
+    "url": "https://app.enhancv.com/share/541df2d2/?utm_medium=growth&utm_campaign=share-resume&utm_source=dynamic",
     "icon": null,
     "about": 1,
     "project": null
@@ -650,7 +650,7 @@
   "pk": 12,
   "fields": {
     "name": "resume",
-    "url": "https://app.enhancv.com/share/2714938c/?utm_medium=growth&utm_campaign=share-resume&utm_source=dynamic",
+    "url": "https://app.enhancv.com/share/1a94b62d/?utm_medium=growth&utm_campaign=share-resume&utm_source=dynamic",
     "icon": null,
     "about": 2,
     "project": null
@@ -767,7 +767,7 @@
   "model": "about.education",
   "pk": 2,
   "fields": {
-    "descriptions": "Having experience in organizing and conducting training in the past. I independently thought out and organized the stages of my training.\r\nI write tasks, keep a diary, track progress.\r\n\r\nI took personal courses (itproger, a course on django by dennis ivy), and publicly available ones - freeCodeCamp, Django for Everybody by Charles Severance.\r\nCurrently, I study according to the 20\\80 principle (20% theory and 80% practice). I read books, library documentation, sometimes watch videos on YouTube.",
+    "descriptions": "Having experience in organizing and conducting training in the past, I independently planned and structured my own learning process.\r\nI create tasks, keep a study diary, and track my progress regularly.\r\n\r\nI’ve completed personal courses, including ItProger and a Django course by Dennis Ivy, as well as publicly available ones like freeCodeCamp and Django for Everybody by Charles Severance.\r\n\r\nCurrently, I follow the 80/20 principle in my studies—focusing 80% on practice and 20% on theory. I read books, explore library documentation, and occasionally watch educational videos on YouTube.",
     "about": 2
   }
 },
@@ -1131,6 +1131,60 @@
     "name": "database",
     "icon": 10,
     "skills": 1
+  }
+},
+{
+  "model": "about.instrument",
+  "pk": 7,
+  "fields": {
+    "name": "python",
+    "icon": 5,
+    "skills": 2
+  }
+},
+{
+  "model": "about.instrument",
+  "pk": 8,
+  "fields": {
+    "name": "html5",
+    "icon": 6,
+    "skills": 2
+  }
+},
+{
+  "model": "about.instrument",
+  "pk": 9,
+  "fields": {
+    "name": "css3",
+    "icon": 7,
+    "skills": 2
+  }
+},
+{
+  "model": "about.instrument",
+  "pk": 10,
+  "fields": {
+    "name": "docker",
+    "icon": 8,
+    "skills": 2
+  }
+},
+{
+  "model": "about.instrument",
+  "pk": 11,
+  "fields": {
+    "name": "ubuntu",
+    "icon": 9,
+    "skills": 2
+  }
+},
+{
+  "model": "about.instrument",
+  "pk": 12,
+  "fields": {
+    "name": "database",
+    "icon": 10,
+    "skills": 2
   }
 },
 {
